@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { staggerContainer, fadeUp } from '../../lib/animations';
+import ThemeToggle from '../ui/ThemeToggle';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -85,13 +86,16 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Desktop Login Button */}
-        <Link
-          to="/login"
-          className="hidden lg:flex items-center gap-2 px-4 py-2 text-sm font-mono font-medium text-cyan-400 border border-cyan-500/30 rounded-button hover:bg-cyan-500/10 hover:border-cyan-400/50 transition-all duration-200"
-        >
-          MEMBER LOGIN
-        </Link>
+        {/* Desktop Controls */}
+        <div className="hidden lg:flex items-center gap-4">
+          <ThemeToggle />
+          <Link
+            to="/login"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-mono font-medium text-cyan-400 border border-cyan-500/30 rounded-button hover:bg-cyan-500/10 hover:border-cyan-400/50 transition-all duration-200"
+          >
+            MEMBER LOGIN
+          </Link>
+        </div>
 
         {/* Mobile Hamburger */}
         <button
@@ -136,7 +140,8 @@ export default function Navbar() {
                   </motion.div>
                 );
               })}
-              <motion.div variants={fadeUp} className="mt-6">
+              <motion.div variants={fadeUp} className="mt-6 flex flex-col items-center gap-6">
+                <ThemeToggle />
                 <Link
                   to="/login"
                   onClick={() => setMobileOpen(false)}

@@ -8,11 +8,11 @@
 
 :root {
   /* Backgrounds */
-  --bg-void:      #020408;
-  --bg-deep:      #080D14;
-  --bg-surface:   #0D1520;
-  --bg-elevated:  #141E2E;
-  --bg-border:    #1E2D42;
+  --bg-void:      #f8fafc;
+  --bg-deep:      #f1f5f9;
+  --bg-surface:   #ffffff;
+  --bg-elevated:  #e2e8f0;
+  --bg-border:    #cbd5e1;
 
   /* Primary Accent — Cyan */
   --cyan-500:     #06B6D4;
@@ -31,10 +31,10 @@
   --purple-glow:  rgba(124, 58, 237, 0.3);
 
   /* Text */
-  --text-primary:   #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-muted:     #475569;
-  --text-accent:    #22D3EE;
+  --text-primary:   #0f172a;
+  --text-secondary: #334155;
+  --text-muted:     #64748b;
+  --text-accent:    #06B6D4;
 
   /* Semantic */
   --success: #10B981;
@@ -46,14 +46,31 @@
   --radius-button: 8px;
   --radius-badge:  4px;
 
-  --shadow-card:        0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px var(--bg-border);
-  --shadow-glow-cyan:   0 0 30px var(--cyan-glow);
-  --shadow-glow-amber:  0 0 30px var(--amber-glow);
-  --shadow-glow-purple: 0 0 30px var(--purple-glow);
+  --shadow-card:        0 4px 15px rgba(0,0,0,0.05), 0 0 0 1px var(--bg-border);
+  --shadow-glow-cyan:   0 0 20px var(--cyan-glow);
+  --shadow-glow-amber:  0 0 20px var(--amber-glow);
+  --shadow-glow-purple: 0 0 20px var(--purple-glow);
 
   --transition-fast:   150ms ease;
   --transition-normal: 250ms ease;
   --transition-slow:   400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root.dark {
+  /* Backgrounds */
+  --bg-void:      #020408;
+  --bg-deep:      #080D14;
+  --bg-surface:   #0D1520;
+  --bg-elevated:  #141E2E;
+  --bg-border:    #1E2D42;
+
+  /* Text */
+  --text-primary:   #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted:     #475569;
+  --text-accent:    #22D3EE;
+
+  --shadow-card:        0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px var(--bg-border);
 }
 
 /* ============================================
@@ -236,6 +253,15 @@
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background: var(--cyan-500);
+  }
+
+  /* Hollow text stroke for Hero */
+  .text-stroke-hollow {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(15, 23, 42, 0.4);
+  }
+  .dark .text-stroke-hollow {
+    -webkit-text-stroke: 2px rgba(241, 245, 249, 0.3);
   }
 }
 

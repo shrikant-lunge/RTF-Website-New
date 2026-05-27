@@ -88,7 +88,7 @@ function AppContent() {
       <LoadingScreen show={isLoading} message={loadingMessage} />
 
       {/* Main Content */}
-      <div className="relative min-h-screen bg-deep text-text-primary" style={{ overflowX: 'clip' }}>
+      <div className="relative min-h-screen bg-deep text-text-primary transition-colors duration-300" style={{ overflowX: 'clip' }}>
         <Navbar />
         <AnimatedRoutes />
         <Footer />
@@ -118,10 +118,14 @@ function AppContent() {
 /**
  * App — Root component with Loading Provider wrapper
  */
+import { ThemeProvider } from './context/ThemeContext';
+
 export default function App() {
   return (
-    <LoadingProvider>
-      <AppContent />
-    </LoadingProvider>
+    <ThemeProvider>
+      <LoadingProvider>
+        <AppContent />
+      </LoadingProvider>
+    </ThemeProvider>
   );
 }
