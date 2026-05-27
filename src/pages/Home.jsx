@@ -6,6 +6,7 @@ import FeaturedProjects from '../components/sections/FeaturedProjects';
 import SponsorShowcase from '../components/sections/SponsorShowcase';
 import ParallaxImage from '../components/ui/ParallaxImage';
 import TerminalContact from '../components/sections/TerminalContact';
+// import CyberpunkHero from '../components/sections/CyberpunkHero';
 import roboconWorkshopImage from '../assets/img/Robocon 2025/20250713_183423 - Copy.webp';
 import collegeWorkshopImage from '../assets/img/College Programs/20241012_085453.webp';
 
@@ -28,7 +29,9 @@ export default function Home() {
         {/* Parallax break — workshop / lab image */}
         <ParallaxImage
           src={roboconWorkshopImage}
-          images={[roboconWorkshopImage, collegeWorkshopImage]}
+          // images={[roboconWorkshopImage, collegeWorkshopImage]}
+          images={[roboconWorkshopImage]}
+
           alt="Robotics workshop"
           overlay="We don't just study engineering — we live it."
           height={95}
@@ -45,6 +48,9 @@ export default function Home() {
           overlay="From breadboards to national stages — built by students."
           height={95}
         />
+
+        {/* Cyberpunk Hero — futuristic forum showcase */}
+        {/* <CyberpunkHero /> */}
 
         {/* Terminal contact form */}
         <TerminalContact />

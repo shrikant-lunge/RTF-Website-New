@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,11 +9,11 @@ export default {
     extend: {
       colors: {
         // Backgrounds
-        void: '#020408',
-        deep: '#080D14',
-        surface: '#0D1520',
-        elevated: '#141E2E',
-        border: '#1E2D42',
+        void: 'var(--bg-void)',
+        deep: 'var(--bg-deep)',
+        surface: 'var(--bg-surface)',
+        elevated: 'var(--bg-elevated)',
+        border: 'var(--bg-border)',
 
         // Primary — Cyan
         cyan: {
@@ -37,10 +38,10 @@ export default {
         },
 
         // Text
-        'text-primary': '#F1F5F9',
-        'text-secondary': '#94A3B8',
-        'text-muted': '#475569',
-        'text-accent': '#22D3EE',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+        'text-accent': 'var(--text-accent)',
 
         // Semantic
         success: '#10B981',

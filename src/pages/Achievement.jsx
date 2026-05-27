@@ -73,7 +73,7 @@ const achievements = [
 export default function Achievement() {
   const wrapperRef = useRef(null);
   const nodeRefs   = useRef([]);
-  const [svgPath, setSvgPath] = useState('');
+  const [segments, setSegments] = useState([]);
   const [svgSize, setSvgSize] = useState({ w: 0, h: 0 });
 
   /* inject float CSS */
@@ -104,37 +104,51 @@ export default function Achievement() {
         };
       });
 
-      // Build smooth S-curve Bezier that snakes through each node
-      let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      const newSegments = [];
       for (let i = 1; i < pts.length; i++) {
         const prev = pts[i - 1];
         const curr = pts[i];
-        // Control points: keep x of respective point, share midpoint y
         const cpY1 = prev.y + (curr.y - prev.y) * 0.45;
         const cpY2 = prev.y + (curr.y - prev.y) * 0.55;
-        d += ` C ${prev.x.toFixed(1)} ${cpY1.toFixed(1)}, ${curr.x.toFixed(1)} ${cpY2.toFixed(1)}, ${curr.x.toFixed(1)} ${curr.y.toFixed(1)}`;
+        const d = `M ${prev.x.toFixed(1)} ${prev.y.toFixed(1)} C ${prev.x.toFixed(1)} ${cpY1.toFixed(1)}, ${curr.x.toFixed(1)} ${cpY2.toFixed(1)}, ${curr.x.toFixed(1)} ${curr.y.toFixed(1)}`;
+        
+        newSegments.push({
+          id: `seg-${i}`,
+          d,
+          start: prev.y / wRect.height,
+          end: curr.y / wRect.height,
+        });
       }
 
-      setSvgPath(d);
+      setSegments(newSegments);
       setSvgSize({ w: wRect.width, h: wRect.height });
     };
 
-    // Run after paint
-    const raf = requestAnimationFrame(() => setTimeout(build, 200));
-    window.addEventListener('resize', build);
+    // Use ResizeObserver to reliably catch any layout shifts (fonts, images, wrapping)
+    let rafId;
+    const resizeObserver = new ResizeObserver(() => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(build);
+    });
+
+    if (wrapperRef.current) {
+      resizeObserver.observe(wrapperRef.current);
+    }
+    
+    // Initial build
+    build();
+
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', build);
+      resizeObserver.disconnect();
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
   /* ── Framer Motion scroll-linked pathLength ── */
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
-    offset: ['start 60%', 'end 45%'],
+    offset: ['start center', 'end center'],
   });
-  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.05, 1], [0, 0.7, 0.7]);
 
   return (
     <motion.main
@@ -164,46 +178,13 @@ export default function Achievement() {
       <div ref={wrapperRef} className="relative max-w-6xl mx-auto px-4 sm:px-6 pb-40">
 
         {/* Neon SVG Wire */}
-        {svgPath && (
+        {segments.length > 0 && (
           <svg
             className="absolute top-0 left-0 pointer-events-none z-[5]"
             width={svgSize.w}
             height={svgSize.h}
             style={{ overflow: 'visible' }}
           >
-            {/* Dim background trace so user sees where the wire goes */}
-            <path
-              d={svgPath}
-              fill="none"
-              stroke="rgba(34,211,238,0.06)"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-
-            {/* Glow layer */}
-            <motion.path
-              d={svgPath}
-              fill="none"
-              stroke="#22d3ee"
-              strokeWidth="4"
-              strokeLinecap="round"
-              style={{
-                pathLength,
-                opacity: glowOpacity,
-                filter: 'drop-shadow(0 0 6px #22d3ee) drop-shadow(0 0 14px #22d3ee) drop-shadow(0 0 28px rgba(34,211,238,0.4))',
-              }}
-            />
-
-            {/* Crisp bright wire */}
-            <motion.path
-              d={svgPath}
-              fill="none"
-              stroke="url(#neonGrad)"
-              strokeWidth="2"
-              strokeLinecap="round"
-              style={{ pathLength }}
-            />
-
             <defs>
               <linearGradient id="neonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%"   stopColor="#22d3ee" />
@@ -212,6 +193,10 @@ export default function Achievement() {
                 <stop offset="100%" stopColor="#a78bfa" />
               </linearGradient>
             </defs>
+            
+            {segments.map((seg) => (
+              <PathSegment key={seg.id} segment={seg} scrollYProgress={scrollYProgress} />
+            ))}
           </svg>
         )}
 
@@ -242,8 +227,16 @@ export default function Achievement() {
    Single timeline item — card + node
    ───────────────────────────────────────────────────── */
 function TimelineItem({ item, index, isLeft, nodeRef }) {
-  const cardRef = useRef(null);
-  const isInView = useInView(cardRef, { once: false, amount: 0.35 });
+  const localNodeRef = useRef(null);
+  
+  // Combine internal ref with parent's nodeRef
+  const setRefs = (el) => {
+    localNodeRef.current = el;
+    if (typeof nodeRef === 'function') nodeRef(el);
+  };
+
+  // Trigger when node hits center of the screen
+  const isInView = useInView(localNodeRef, { margin: "0px 0px -50% 0px" });
   const Icon = item.icon;
 
   return (
@@ -254,7 +247,6 @@ function TimelineItem({ item, index, isLeft, nodeRef }) {
     >
       {/* ── Card ── */}
       <motion.div
-        ref={cardRef}
         className={`card-float w-full md:w-[calc(50%-48px)] will-change-transform ${
           isLeft ? 'md:pr-2' : 'md:pl-2'
         }`}
@@ -320,7 +312,7 @@ function TimelineItem({ item, index, isLeft, nodeRef }) {
 
       {/* ── Centre Node ── */}
       <div
-        ref={nodeRef}
+        ref={setRefs}
         className="relative z-20 w-24 flex flex-col items-center justify-center shrink-0"
       >
         <motion.div
@@ -358,5 +350,51 @@ function TimelineItem({ item, index, isLeft, nodeRef }) {
       {/* Spacer */}
       <div className="hidden md:block w-[calc(50%-48px)]" />
     </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────
+   Path Segment for drawing piecewise SVG
+   ───────────────────────────────────────────────────── */
+function PathSegment({ segment, scrollYProgress }) {
+  // To avoid useTransform issues if start == end
+  const safeEnd = segment.end > segment.start ? segment.end : segment.start + 0.001;
+  const pathLength = useTransform(scrollYProgress, [segment.start, safeEnd], [0, 1]);
+  // Only glow when fully drawn (or while drawing)
+  const opacity = useTransform(scrollYProgress, [segment.start - 0.05, segment.start], [0, 1]);
+
+  return (
+    <>
+      {/* Dim trace */}
+      <path
+        d={segment.d}
+        fill="none"
+        stroke="rgba(34,211,238,0.06)"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      {/* Glow layer */}
+      <motion.path
+        d={segment.d}
+        fill="none"
+        stroke="#22d3ee"
+        strokeWidth="4"
+        strokeLinecap="round"
+        style={{
+          pathLength,
+          opacity,
+          filter: 'drop-shadow(0 0 6px #22d3ee) drop-shadow(0 0 14px #22d3ee) drop-shadow(0 0 28px rgba(34,211,238,0.4))',
+        }}
+      />
+      {/* Crisp wire */}
+      <motion.path
+        d={segment.d}
+        fill="none"
+        stroke="url(#neonGrad)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        style={{ pathLength, opacity }}
+      />
+    </>
   );
 }
