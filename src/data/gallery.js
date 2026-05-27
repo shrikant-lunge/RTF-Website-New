@@ -1,6 +1,17 @@
 /**
  * RTF Gallery Data
  * Photo gallery for The Robo-Tech Forum, GCoEA Amravati.
+ *
+ * How to update this file:
+ * 1. Gallery photos are imported from the local src/assets folders below.
+ * 2. To add a new local photo, place it inside src/assets, then add a new import
+ *    line like: import newPhoto from '../assets/img/folder/photo.jpg';
+ * 3. In galleryItems, copy one full block, paste it below, give it a new id,
+ *    and set image: newPhoto.
+ * 4. Keep title, category, and date inside quotes.
+ * 5. Use category values already listed in galleryCategories.
+ * 6. If you prefer using an online photo instead of a local file, you can write:
+ *    image: 'https://example.com/gallery-photo.jpg'
  */
 
 import collegeProgram1 from '../assets/img/College Programs/IMG-20250831-WA0254.webp';
@@ -52,6 +63,9 @@ import result2 from '../assets/img/event results/Screenshot 2024-01-20 102514.pn
 import rtfBanner from '../assets/img/indexbanner.jpg';
 
 export const galleryItems = [
+  // Each block below is one photo card on the gallery page.
+  // To add a photo, copy a full block, update id/title/category/image/date,
+  // and make sure image points to either an import name or a public image link.
   {
     id: 1,
     title: 'RTF Workshop Floor',

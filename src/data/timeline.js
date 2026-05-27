@@ -1,6 +1,16 @@
 /**
  * RTF Timeline Milestones
  * History of The Robo-Tech Forum, GCoEA Amravati
+ *
+ * How to update this file:
+ * 1. Each block between { and } is one timeline item shown on the website.
+ * 2. To add a new item, copy one full block, paste it below, and edit the text.
+ * 3. Give every item a new unique id number.
+ * 4. Keep year, title, description, and category inside quotes.
+ * 5. Use category values like MILESTONE, PROJECT, COMPETITION, or ACHIEVEMENT.
+ * 6. For images, paste a public image link in image, for example:
+ *    image: 'https://example.com/timeline-photo.jpg'
+ *    Keep image: null if there is no image yet.
  */
 
 export const milestones = [

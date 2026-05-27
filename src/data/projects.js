@@ -2,6 +2,18 @@
  * RTF Projects Data
  * Real projects from The Robo-Tech Forum, GCoEA Amravati
  * Source: therobotechforum.in
+ *
+ * How to update this file:
+ * 1. Each block between { and } is one project shown on the website.
+ * 2. To add a project, copy one full block, paste it below, and edit the values.
+ * 3. Give every project a new unique id number.
+ * 4. Keep text inside quotes. Numbers like teamSize and year do not need quotes.
+ * 5. techStack, images, and achievements are lists. Add each item inside quotes.
+ * 6. For project photos, paste public image links inside images, for example:
+ *    images: ['https://example.com/project-photo.jpg']
+ *    Add more photos by separating links with commas.
+ * 7. For github and demo, paste the full link or use null if not available.
+ * 8. Set featured: true to show a project in featured sections, or false to hide it.
  */
 
 export const projects = [

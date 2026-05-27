@@ -1,6 +1,12 @@
 /**
  * RTF Club Statistics
  * Key metrics for The Robo-Tech Forum, GCoEA Amravati
+ *
+ * How to update this file:
+ * 1. Change only the values after the colon.
+ * 2. Numbers do not need quotes, for example members: 120.
+ * 3. Text links must stay inside quotes.
+ * 4. If a link or logo is not ready, write null without quotes.
  */
 
 export const stats = {
@@ -10,7 +16,13 @@ export const stats = {
   founded: 2017,
 };
 
-/** Competitions RTF participates in — scraped from therobotechforum.in */
+/**
+ * Competitions RTF participates in.
+ *
+ * How to add a competition:
+ * Copy one full competition block, paste it below, give it a new id, and update
+ * name, organizer, description, and year.
+ */
 export const competitions = [
   {
     id: 1,
@@ -62,7 +74,13 @@ export const competitions = [
   },
 ];
 
-/** Current sponsors */
+/**
+ * Current sponsors
+ *
+ * For sponsor logos, paste a public image link in logo, for example:
+ * logo: 'https://example.com/sponsor-logo.png'
+ * Keep logo: null if the logo is not ready.
+ */
 export const sponsors = [
   {
     id: 1,
@@ -71,9 +89,21 @@ export const sponsors = [
     tier: 'gold',
     website: 'https://mathworks.com',
   },
+   {
+    id: 2,
+    name: 'idle Robotics',
+    logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAa0lEQVR4AWMYaWDu/99Q8H8uhuTC/3CwEENy8qc3bz79/w8iJ2M1uuj//2zsdv749OnH//8gElPnUiQ7SZMs2rl168X//y9u3bqzCENSVFVJtOf//x5RJVVRfMYuJS0QKo8dhIJjlSMt6QAAT4xwzo8wJywAAAAASUVORK5CYII=',
+    tier: 'gold',
+    website: 'https://idlerobotics.com/',
+  },
 ];
 
-/** Social media links */
+/**
+ * Social media links
+ *
+ * Paste the full public profile link inside quotes. If a profile does not
+ * exist yet, use null without quotes.
+ */
 export const socials = {
   facebook: 'https://www.facebook.com/robotechforum',
   instagram: 'https://www.instagram.com/the_robo_tech_forum_gcoea/',
@@ -82,7 +112,12 @@ export const socials = {
   website: 'https://therobotechforum.in',
 };
 
-/** Contact info */
+/**
+ * Contact info
+ *
+ * Update the text inside quotes. Keep email, address, college, and hours names
+ * unchanged because the website reads these exact names.
+ */
 export const contactInfo = {
   email: 'robotechforum@gcoea.ac.in',
   address: 'Government College of Engineering, Amravati, Maharashtra 444604, India',

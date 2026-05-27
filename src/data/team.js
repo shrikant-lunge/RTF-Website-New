@@ -2,72 +2,127 @@
  * RTF Team Members Data
  * Real members from The Robo-Tech Forum, GCoEA Amravati
  * Source: therobotechforum.in
+ *
+ * How to update this file:
+ * 1. To add a new person, copy one full block between { and }, paste it below,
+ *    then change the values inside quotes.
+ * 2. Give every person a new unique id number.
+ * 3. Keep text values inside quotes, for example name: 'New Name'.
+ * 4. If a value is not available, write null without quotes.
+ * 5. For photos, paste a public image link in photo, for example:
+ *    photo: 'https://example.com/person-photo.jpg'
+ *    You can also keep photo: null until a photo is ready.
+ * 6. For LinkedIn, paste the full profile link in linkedin.
  */
 
 export const teamMembers = [
   // ── Faculty Advisors ──
-  {
-    id: 1,
-    name: 'Prof. R. S. Deshmukh',
-    role: 'Faculty Advisor',
-    department: 'Electronics & Telecommunication',
+{
+  id: 1,
+  name: 'Dr. A. M. Mahalle',
+  role: 'Chief Patron \n Principal \n Govt. College of Engg., Amravati',
+  department: 'Mechanical Department',
+  type: 'faculty',
+  photo: 'https://gcoea.ac.in/media/persons/Principal%20Sir.jpg',
+  linkedin: null,
+  year: null,
+},
+   {
+    id: 2,
+    name: 'Dr P R Deshmukh',
+    role: 'Faculty Co-Advisor',
+    department: 'Electronics and Telecommunication Engineering',
     type: 'faculty',
     photo: null,
     linkedin: null,
     year: null,
   },
   {
-    id: 2,
-    name: 'Prof. A. M. Kale',
+    id: 3,
+    name: 'Prof. A. M. Shah',
     role: 'Faculty Co-Advisor',
-    department: 'Mechanical Engineering',
+    department: 'Electronics and Telecommunication Engineering',
+    type: 'faculty',
+    photo: null,
+    linkedin: null,
+    year: null,
+  },
+   {
+    id: 4,
+    name: 'Dr. Rajesh B. Sharma',
+    role: 'Faculty Mentor',
+    department: 'Electrical Engineering',
     type: 'faculty',
     photo: null,
     linkedin: null,
     year: null,
   },
 
+
   // ── Leadership Team ──
   {
-    id: 3,
+    id: 4,
     name: 'Umang Fule',
-    role: 'Team Captain & Coordinator',
+    role: 'Student Lead',
+    // add same text style or and size 
+    // Team Captain - DD ROBOCON 2026
+    // Team Lead - ISRO Robotics Challenge (IRoC-U 2026)
     department: 'Information Technology',
     type: 'lead',
     photo: null,
     linkedin: 'https://linkedin.com/in/',
     year: '3rd Year',
   },
-  // {
-  //   id: 4,
-  //   name: 'Vedant Raut',
-  //   role: 'Former Captain & Coordinator',
-  //   department: 'Mechanical Engineering',
-  //   type: 'lead',
-  //   photo: null,
-  //   linkedin: 'https://linkedin.com/in/',
-  //   year: '4th Year',
-  // },
-  // {
-  //   id: 5,
-  //   name: 'Mehul Dhakne',
-  //   role: 'Technical Lead — Software',
-  //   department: 'Computer Science & Engineering',
-  //   type: 'lead',
-  //   photo: null,
-  //   linkedin: 'https://linkedin.com/in/',
-  //   year: '3rd Year',
-  // },
-  // {
-  //   id: 6,
-  //   name: 'Hitesh Nagpure',
-  //   role: 'Technical Lead — Web & Design',
-  //   department: 'Computer Science & Engineering',
-  //   type: 'lead',
-  //   photo: null,
-  //   linkedin: 'https://linkedin.com/in/',
-  //   year: '3rd Year',
-  // },
+  {
+    id: 4,
+    name: 'Omkar Tikekar',
+    role: 'Student Coordinator',
+    department: 'Electronics and Telecommunication Engineering',
+    type: 'lead',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '3rd Year',
+  },
+  {
+    id: 5,
+    name: 'Harshal Gawande',
+    role: 'Student Co-Coordinator',
+    department: 'Electrical Engineering',
+    type: 'lead',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '3rd Year',
+  },
+  {
+    id: 6,
+    name: 'Swarup Bhelkar ',
+    role: 'Mechanical Head',
+    department: 'Mechanical Engineering',
+    type: 'lead',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '3rd Year',
+  },
+    {
+    id: 6,
+    name: 'Om Vishwakarma ',
+    role: 'Designing Lead',
+    department: 'Mechanical Engineering',
+    type: 'lead',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '3rd Year',
+  },
+  {
+    id: 6,
+    name: 'Soham Pathak ',
+    role: 'Manufacturing Lead',
+    department: 'Mechanical Engineering',
+    type: 'lead',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '3rd Year',
+  },
 
   // // ── Core Members ──
   // {
@@ -175,7 +230,13 @@ export const teamMembers = [
 /** Get team members by type */
 export const getTeamByType = (type) => teamMembers.filter((m) => m.type === type);
 
-/** Testimonials from real RTF members */
+/**
+ * Testimonials from real RTF members
+ *
+ * How to add a testimonial:
+ * Copy one testimonial block, paste it below, give it a new id, and update
+ * quote, author, and role. Keep the quote text inside quotes.
+ */
 export const testimonials = [
   {
     id: 1,
