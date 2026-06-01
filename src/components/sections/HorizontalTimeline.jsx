@@ -84,7 +84,7 @@ const timelineData = [
   {
     year: '2017',
     date: 'Foundation',
-    title: 'Genesis of Robo-Tech Forum',
+    title: 'Genesis of The Robo-Tech Forum',
     description:
       'A small group of passionate engineers laid the foundation for what would become GCoEA\'s most decorated technical club.',
     image:

@@ -54,7 +54,7 @@ export default function Navbar() {
             <span className="font-display font-bold text-cyan-400 text-sm">RTF</span>
           </div>
           <span className="font-display font-semibold text-text-primary text-lg hidden sm:block">
-            Robo-Tech Forum
+            The Robo-Tech Forum
           </span>
         </Link>
 

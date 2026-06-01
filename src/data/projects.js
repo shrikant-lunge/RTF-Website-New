@@ -1,6 +1,6 @@
 /**
  * RTF Projects Data
- * Real projects from The Robo-Tech Forum, GCoEA Amravati
+ * Real projects from The The Robo-Tech Forum, GCoEA Amravati
  * Source: therobotechforum.in
  *
  * How to update this file:

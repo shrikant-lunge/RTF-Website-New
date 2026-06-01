@@ -1,18 +1,51 @@
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { pageTransition } from '../lib/animations';
 import {
   Trophy, Rocket, Flag, Award, Cpu, Zap,
   MapPin, Users, Calendar,
 } from 'lucide-react';
 
-/* ─── Keyframes (injected once) ─────────────────────── */
-const FLOAT_CSS = `
+/* ─── Keyframes & Vanilla Classes (injected once) ─── */
+const TIMELINE_CSS = `
 @keyframes antigravityFloat {
   0%, 100% { transform: translateY(0px) }
   50%      { transform: translateY(-10px) }
 }
 .card-float { animation: antigravityFloat 5s ease-in-out infinite; }
+
+.timeline-item-hidden {
+  opacity: 0.1;
+  transform: scale(0.88);
+  filter: blur(8px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.timeline-item-visible {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0px);
+}
+
+.timeline-node-hidden {
+  border-color: rgba(34,211,238,0.15);
+  box-shadow: 0 0 0px rgba(34,211,238,0);
+  transition: all 0.5s ease;
+}
+.timeline-node-visible {
+  border-color: rgba(34,211,238,0.6);
+  box-shadow: 0 0 20px rgba(34,211,238,0.35), 0 0 40px rgba(34,211,238,0.1);
+}
+
+.timeline-dot-hidden {
+  transform: scale(0.3);
+  opacity: 0.2;
+  box-shadow: 0 0 0px rgba(34,211,238,0);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.timeline-dot-visible {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(34,211,238,0.7);
+}
 `;
 
 /* ─── Achievement Data ──────────────────────────────── */
@@ -59,7 +92,7 @@ const achievements = [
   },
   {
     year: '2017', date: 'Foundation Year',
-    title: 'Genesis of Robo-Tech Forum',
+    title: 'Genesis of The Robo-Tech Forum',
     description: "Passionate engineers at GCoEA laid the foundation for the college's most decorated technical club.",
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800',
     icon: Flag, venue: 'GCoEA Amravati', teamSize: '12',
@@ -73,18 +106,37 @@ const achievements = [
 export default function Achievement() {
   const wrapperRef = useRef(null);
   const nodeRefs   = useRef([]);
-  const [segments, setSegments] = useState([]);
+  const [pathData, setPathData] = useState("");
   const [svgSize, setSvgSize] = useState({ w: 0, h: 0 });
+  const [clipHeight, setClipHeight] = useState(0);
 
-  /* inject float CSS */
+  /* inject CSS */
   useEffect(() => {
-    const id = 'antigravity-float-css';
+    const id = 'timeline-vanilla-css';
     if (!document.getElementById(id)) {
       const s = document.createElement('style');
       s.id = id;
-      s.textContent = FLOAT_CSS;
+      s.textContent = TIMELINE_CSS;
       document.head.appendChild(s);
     }
+  }, []);
+
+  /* ── Track Scroll for ClipPath ── */
+  useEffect(() => {
+      if (!wrapperRef.current) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      const centerView = window.innerHeight / 2;
+      const progressY = centerView - rect.top;
+      setClipHeight(Math.max(0, progressY));
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    handleScroll(); // initial measurement
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   /* ── Measure node positions → build SVG Bezier path ── */
@@ -104,23 +156,33 @@ export default function Achievement() {
         };
       });
 
-      const newSegments = [];
+      // Start path exactly at the first node to eliminate any straight line from the top
+      let d = `M ${pts[0].x} ${pts[0].y}`;
+      
       for (let i = 1; i < pts.length; i++) {
         const prev = pts[i - 1];
         const curr = pts[i];
-        const cpY1 = prev.y + (curr.y - prev.y) * 0.45;
-        const cpY2 = prev.y + (curr.y - prev.y) * 0.55;
-        const d = `M ${prev.x.toFixed(1)} ${prev.y.toFixed(1)} C ${prev.x.toFixed(1)} ${cpY1.toFixed(1)}, ${curr.x.toFixed(1)} ${cpY2.toFixed(1)}, ${curr.x.toFixed(1)} ${curr.y.toFixed(1)}`;
         
-        newSegments.push({
-          id: `seg-${i}`,
-          d,
-          start: prev.y / wRect.height,
-          end: curr.y / wRect.height,
-        });
+        // Alternating sweep for zig-zag curve
+        // i=1 (card on right), sweep left. i=2 (card on left), sweep right.
+        const isRightCard = i % 2 !== 0; 
+        const sweep = isRightCard ? -120 : 120;
+        
+        // On mobile, keep it mostly straight or small curve
+        const actualSweep = window.innerWidth < 768 ? (isRightCard ? -30 : 30) : sweep;
+        const cx = prev.x + actualSweep;
+        
+        const midY = prev.y + (curr.y - prev.y) / 2;
+        const hQ = (curr.y - prev.y) / 4;
+        
+        // Two cubic beziers for a perfect S-curve with vertical tangents at both ends
+        // Curve 1: From previous node to the midpoint (bulging out)
+        d += ` C ${prev.x} ${prev.y + hQ}, ${cx} ${midY - hQ}, ${cx} ${midY}`;
+        // Curve 2: From midpoint to current node (coming back)
+        d += ` C ${cx} ${midY + hQ}, ${curr.x} ${curr.y - hQ}, ${curr.x} ${curr.y}`;
       }
 
-      setSegments(newSegments);
+      setPathData(d);
       setSvgSize({ w: wRect.width, h: wRect.height });
     };
 
@@ -144,20 +206,8 @@ export default function Achievement() {
     };
   }, []);
 
-  /* ── Framer Motion scroll-linked pathLength ── */
-  const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ['start center', 'end center'],
-  });
-
   return (
-    <motion.main
-      variants={pageTransition}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      className="bg-deep text-text-primary min-h-screen"
-    >
+    <main className="bg-deep text-text-primary min-h-screen">
       {/* ── Header ── */}
       <div className="pt-32 pb-16 text-center px-6">
         <span className="text-cyan-400 font-mono text-xs tracking-[0.3em] uppercase block mb-4">
@@ -178,7 +228,7 @@ export default function Achievement() {
       <div ref={wrapperRef} className="relative max-w-6xl mx-auto px-4 sm:px-6 pb-40">
 
         {/* Neon SVG Wire */}
-        {segments.length > 0 && (
+        {pathData && (
           <svg
             className="absolute top-0 left-0 pointer-events-none z-[5]"
             width={svgSize.w}
@@ -192,11 +242,42 @@ export default function Achievement() {
                 <stop offset="70%"  stopColor="#818cf8" />
                 <stop offset="100%" stopColor="#a78bfa" />
               </linearGradient>
+              <clipPath id="scroll-clip">
+                <rect x="-200" y="0" width={svgSize.w + 400} height={clipHeight} />
+              </clipPath>
             </defs>
             
-            {segments.map((seg) => (
-              <PathSegment key={seg.id} segment={seg} scrollYProgress={scrollYProgress} />
-            ))}
+            {/* Dim trace of entire path */}
+            <path
+              d={pathData}
+              fill="none"
+              stroke="rgba(34,211,238,0.06)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            
+            {/* Scrolled lit path */}
+            <g clipPath="url(#scroll-clip)">
+              {/* Glow layer */}
+              <path
+                d={pathData}
+                fill="none"
+                stroke="#22d3ee"
+                strokeWidth="4"
+                strokeLinecap="round"
+                style={{
+                  filter: 'drop-shadow(0 0 6px #22d3ee) drop-shadow(0 0 14px #22d3ee) drop-shadow(0 0 28px rgba(34,211,238,0.4))',
+                }}
+              />
+              {/* Crisp wire */}
+              <path
+                d={pathData}
+                fill="none"
+                stroke="url(#neonGrad)"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </g>
           </svg>
         )}
 
@@ -219,7 +300,7 @@ export default function Achievement() {
           })}
         </div>
       </div>
-    </motion.main>
+    </main>
   );
 }
 
@@ -228,15 +309,33 @@ export default function Achievement() {
    ───────────────────────────────────────────────────── */
 function TimelineItem({ item, index, isLeft, nodeRef }) {
   const localNodeRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
   
-  // Combine internal ref with parent's nodeRef
   const setRefs = (el) => {
     localNodeRef.current = el;
     if (typeof nodeRef === 'function') nodeRef(el);
   };
 
-  // Trigger when node hits center of the screen
-  const isInView = useInView(localNodeRef, { margin: "0px 0px -50% 0px" });
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      },
+      // Trigger exactly when the center of the node hits the center of the screen
+      { rootMargin: "0px 0px -50% 0px" }
+    );
+    
+    if (localNodeRef.current) {
+      observer.observe(localNodeRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, []);
+
   const Icon = item.icon;
 
   return (
@@ -246,18 +345,11 @@ function TimelineItem({ item, index, isLeft, nodeRef }) {
       }`}
     >
       {/* ── Card ── */}
-      <motion.div
+      <div
         className={`card-float w-full md:w-[calc(50%-48px)] will-change-transform ${
           isLeft ? 'md:pr-2' : 'md:pl-2'
-        }`}
+        } ${isVisible ? 'timeline-item-visible' : 'timeline-item-hidden'}`}
         style={{ animationDelay: `${index * -0.8}s` }}
-        initial={{ opacity: 0.1, scale: 0.88, filter: 'blur(8px)' }}
-        animate={
-          isInView
-            ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
-            : { opacity: 0.1, scale: 0.88, filter: 'blur(8px)' }
-        }
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="group rounded-2xl bg-black/40 border border-cyan-500/15 backdrop-blur-lg overflow-hidden hover:border-cyan-400/50 hover:shadow-[0_0_50px_rgba(34,211,238,0.12)] transition-all duration-700">
           {/* Image */}
@@ -308,40 +400,24 @@ function TimelineItem({ item, index, isLeft, nodeRef }) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ── Centre Node ── */}
       <div
         ref={setRefs}
         className="relative z-20 w-24 flex flex-col items-center justify-center shrink-0"
       >
-        <motion.div
-          className="relative w-14 h-14 rounded-full border-2 border-cyan-500/15 flex items-center justify-center bg-deep/90 backdrop-blur-sm"
-          initial={{ borderColor: 'rgba(34,211,238,0.15)', boxShadow: 'none' }}
-          animate={
-            isInView
-              ? {
-                  borderColor: 'rgba(34,211,238,0.6)',
-                  boxShadow: '0 0 20px rgba(34,211,238,0.35), 0 0 40px rgba(34,211,238,0.1)',
-                }
-              : {
-                  borderColor: 'rgba(34,211,238,0.15)',
-                  boxShadow: '0 0 0px rgba(34,211,238,0)',
-                }
-          }
-          transition={{ duration: 0.5 }}
+        <div
+          className={`relative w-14 h-14 rounded-full border-2 flex items-center justify-center bg-deep/90 backdrop-blur-sm ${
+            isVisible ? 'timeline-node-visible' : 'timeline-node-hidden'
+          }`}
         >
-          <motion.div
-            className="w-5 h-5 rounded-full bg-cyan-400"
-            initial={{ scale: 0.3, opacity: 0.2 }}
-            animate={
-              isInView
-                ? { scale: 1, opacity: 1, boxShadow: '0 0 12px rgba(34,211,238,0.7)' }
-                : { scale: 0.3, opacity: 0.2, boxShadow: '0 0 0px rgba(34,211,238,0)' }
-            }
-            transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+          <div
+            className={`w-5 h-5 rounded-full bg-cyan-400 ${
+              isVisible ? 'timeline-dot-visible' : 'timeline-dot-hidden'
+            }`}
           />
-        </motion.div>
+        </div>
         <span className="mt-2 text-xs font-mono font-bold text-cyan-400/70 tracking-widest">
           {item.year}
         </span>
@@ -350,51 +426,5 @@ function TimelineItem({ item, index, isLeft, nodeRef }) {
       {/* Spacer */}
       <div className="hidden md:block w-[calc(50%-48px)]" />
     </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────
-   Path Segment for drawing piecewise SVG
-   ───────────────────────────────────────────────────── */
-function PathSegment({ segment, scrollYProgress }) {
-  // To avoid useTransform issues if start == end
-  const safeEnd = segment.end > segment.start ? segment.end : segment.start + 0.001;
-  const pathLength = useTransform(scrollYProgress, [segment.start, safeEnd], [0, 1]);
-  // Only glow when fully drawn (or while drawing)
-  const opacity = useTransform(scrollYProgress, [segment.start - 0.05, segment.start], [0, 1]);
-
-  return (
-    <>
-      {/* Dim trace */}
-      <path
-        d={segment.d}
-        fill="none"
-        stroke="rgba(34,211,238,0.06)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      {/* Glow layer */}
-      <motion.path
-        d={segment.d}
-        fill="none"
-        stroke="#22d3ee"
-        strokeWidth="4"
-        strokeLinecap="round"
-        style={{
-          pathLength,
-          opacity,
-          filter: 'drop-shadow(0 0 6px #22d3ee) drop-shadow(0 0 14px #22d3ee) drop-shadow(0 0 28px rgba(34,211,238,0.4))',
-        }}
-      />
-      {/* Crisp wire */}
-      <motion.path
-        d={segment.d}
-        fill="none"
-        stroke="url(#neonGrad)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        style={{ pathLength, opacity }}
-      />
-    </>
   );
 }

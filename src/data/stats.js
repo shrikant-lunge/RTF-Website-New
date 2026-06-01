@@ -1,6 +1,6 @@
 /**
  * RTF Club Statistics
- * Key metrics for The Robo-Tech Forum, GCoEA Amravati
+ * Key metrics for The The Robo-Tech Forum, GCoEA Amravati
  *
  * How to update this file:
  * 1. Change only the values after the colon.
@@ -95,6 +95,13 @@ export const sponsors = [
     logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAa0lEQVR4AWMYaWDu/99Q8H8uhuTC/3CwEENy8qc3bz79/w8iJ2M1uuj//2zsdv749OnH//8gElPnUiQ7SZMs2rl168X//y9u3bqzCENSVFVJtOf//x5RJVVRfMYuJS0QKo8dhIJjlSMt6QAAT4xwzo8wJywAAAAASUVORK5CYII=',
     tier: 'gold',
     website: 'https://idlerobotics.com/',
+  },
+   {
+    id: 3,
+    name: 'Solidworks',
+    logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAa0lEQVR4AWMYaWDu/99Q8H8uhuTC/3CwEENy8qc3bz79/w8iJ2M1uuj//2zsdv749OnH//8gElPnUiQ7SZMs2rl168X//y9u3bqzCENSVFVJtOf//x5RJVVRfMYuJS0QKo8dhIJjlSMt6QAAT4xwzo8wJywAAAAASUVORK5CYII=',
+    tier: 'gold',
+    website: 'https://solidworks.com/',
   },
 ];
 

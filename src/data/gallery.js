@@ -1,6 +1,6 @@
 /**
  * RTF Gallery Data
- * Photo gallery for The Robo-Tech Forum, GCoEA Amravati.
+ * Photo gallery for The The Robo-Tech Forum, GCoEA Amravati.
  *
  * How to update this file:
  * 1. Gallery photos are imported from the local src/assets folders below.

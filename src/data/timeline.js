@@ -1,6 +1,6 @@
 /**
  * RTF Timeline Milestones
- * History of The Robo-Tech Forum, GCoEA Amravati
+ * History of The The Robo-Tech Forum, GCoEA Amravati
  *
  * How to update this file:
  * 1. Each block between { and } is one timeline item shown on the website.
@@ -19,7 +19,7 @@ export const milestones = [
     year: '2017',
     title: 'RTF Founded',
     description:
-      'The Robo-Tech Forum was established at Government College of Engineering, Amravati by a small group of passionate engineering students determined to bring hands-on robotics culture to campus.',
+      'The The Robo-Tech Forum was established at Government College of Engineering, Amravati by a small group of passionate engineering students determined to bring hands-on robotics culture to campus.',
     category: 'MILESTONE',
     image: null,
   },

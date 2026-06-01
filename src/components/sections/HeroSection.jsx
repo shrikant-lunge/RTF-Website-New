@@ -32,7 +32,7 @@ export default function HeroSection() {
               <h1 className="text-[clamp(3rem,8vw,8rem)] font-display font-black leading-[0.9]
                              tracking-tight text-text-primary uppercase mb-6"
                   style={{ letterSpacing: '-0.02em' }}>
-                ROBO
+                THE ROBO
                 <span className="block text-stroke-hollow">
                   TECH
                 </span>

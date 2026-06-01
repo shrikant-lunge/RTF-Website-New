@@ -1,6 +1,6 @@
 /**
  * RTF Team Members Data
- * Real members from The Robo-Tech Forum, GCoEA Amravati
+ * Real members from The The Robo-Tech Forum, GCoEA Amravati
  * Source: therobotechforum.in
  *
  * How to update this file:
@@ -23,7 +23,7 @@ export const teamMembers = [
   role: 'Chief Patron \n Principal \n Govt. College of Engg., Amravati',
   department: 'Mechanical Department',
   type: 'faculty',
-  photo: 'https://gcoea.ac.in/media/persons/Principal%20Sir.jpg',
+  photo: 'src/assets/img/faculty/PrincipalSir.jpg',
   linkedin: null,
   year: null,
 },
@@ -33,7 +33,7 @@ export const teamMembers = [
     role: 'Faculty Co-Advisor',
     department: 'Electronics and Telecommunication Engineering',
     type: 'faculty',
-    photo: null,
+    photo: 'src/assets/img/faculty/deshmukhsir.png',
     linkedin: null,
     year: null,
   },
@@ -43,7 +43,7 @@ export const teamMembers = [
     role: 'Faculty Co-Advisor',
     department: 'Electronics and Telecommunication Engineering',
     type: 'faculty',
-    photo: null,
+    photo: 'src/assets/img/faculty/shahsir.png',
     linkedin: null,
     year: null,
   },
@@ -53,7 +53,7 @@ export const teamMembers = [
     role: 'Faculty Mentor',
     department: 'Electrical Engineering',
     type: 'faculty',
-    photo: null,
+    photo: "src/assets/img/faculty/sharmasir.png",
     linkedin: null,
     year: null,
   },
@@ -79,7 +79,7 @@ export const teamMembers = [
     role: 'Student Coordinator',
     department: 'Electronics and Telecommunication Engineering',
     type: 'lead',
-    photo: null,
+    photo: 'https://drive.google.com/u/1/drive-viewer/AKGpihY5uEZ70_JoFTNaOJ5bL4lwGeJbgyebzORvm-nvo7lTRUghZis0iSCihdMB3UM2PeQ1W_Uz3BEPo7HsZpIwmB9F3nHfLJY09GE=s1600-rw-v1?auditContext=forDisplay',
     linkedin: 'https://linkedin.com/in/',
     year: '3rd Year',
   },
@@ -124,27 +124,27 @@ export const teamMembers = [
     year: '3rd Year',
   },
 
-  // // ── Core Members ──
-  // {
-  //   id: 7,
-  //   name: 'Ayush Patorkar',
-  //   role: 'Former Team Leader & Overall Coordinator',
-  //   department: 'Mechanical Engineering',
-  //   type: 'core',
-  //   photo: null,
-  //   linkedin: 'https://linkedin.com/in/',
-  //   year: 'Alumni',
-  // },
-  // {
-  //   id: 8,
-  //   name: 'Piyush Kale',
-  //   role: 'Former Vice Captain & Electronics Head',
-  //   department: 'Electronics & Telecommunication',
-  //   type: 'core',
-  //   photo: null,
-  //   linkedin: 'https://linkedin.com/in/',
-  //   year: 'Alumni',
-  // },
+  // ── Core Members ──
+  {
+    id: 7,
+    name: 'Piyush Atkari',
+    role: 'Electronics And PCB',
+    department: 'Electronics and Telecommunication Engineering',
+    type: 'core',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '2nd YR ENTC',
+  },
+  {
+    id: 8,
+    name: 'Animesh Ubhad',
+    role: 'Mechanical Domain',
+    department: 'Mechanical Engineerning',
+    type: 'core',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/',
+    year: '2nd YR Mech',
+  },
   // {
   //   id: 9,
   //   name: 'Gaurav Vishrojwar',
@@ -255,7 +255,7 @@ export const testimonials = [
   {
     id: 3,
     quote:
-      'The Robo-Tech Forum is the only place in our college where theory meets practice — where real engineering happens. We work days and nights, pushing our limits. We fail, we learn from mistakes, and we come back stronger — until we win.',
+      'The The Robo-Tech Forum is the only place in our college where theory meets practice — where real engineering happens. We work days and nights, pushing our limits. We fail, we learn from mistakes, and we come back stronger — until we win.',
     author: 'Ayush Patorkar',
     role: 'Former Team Leader & Overall Coordinator',
   },
