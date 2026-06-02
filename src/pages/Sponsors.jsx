@@ -85,13 +85,13 @@ export default function Sponsors() {
       <div className="px-6 mb-20">
         <SectionHeader
           label="// PARTNERSHIP PROPOSAL"
-          title="Partner With The Robo-Tech Forum"
+          title="Partner With The The Robo-Tech Forum"
           subtitle="We don't just build robots — we build India's next generation of engineers. Here's why industry leaders choose to back RTF."
         />
 
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-body text-text-secondary leading-relaxed mb-4">
-            The Robo-Tech Forum at Government College of Engineering, Amravati is a student-driven 
+            The The Robo-Tech Forum at Government College of Engineering, Amravati is a student-driven 
             technical club competing at <strong className="text-text-primary">IIT Delhi, IIT Bombay, ISRO, 
             and VNIT Nagpur</strong>. We've trained 120+ engineers, built 50+ real-world projects, and 
             represented our college at every major national robotics competition since 2017.

@@ -31,7 +31,7 @@ export default function SponsorCTA() {
           {'// SPONSORSHIP'}
         </span>
         <h2 className="text-h1 text-text-primary mb-4">
-          Partner With Robo-Tech Forum
+          Partner With The Robo-Tech Forum
         </h2>
         <p className="text-body text-text-secondary max-w-xl mx-auto mb-10">
           Your investment fuels real engineering innovation. Sponsor a team that competes at IIT

@@ -57,7 +57,7 @@ export default function Footer() {
         <div className="bg-surface/80 backdrop-blur-xl border border-cyan-500/20 rounded-card p-6 sm:p-10 lg:p-12 shadow-card">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.5fr] lg:gap-16">
             <div>
-              <Link to="/" className="group inline-flex items-center gap-3 mb-6" aria-label="Robo-Tech Forum home">
+              <Link to="/" className="group inline-flex items-center gap-3 mb-6" aria-label="The Robo-Tech Forum home">
                 <div className="w-11 h-11 rounded-button bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center transition-all duration-300 group-hover:bg-cyan-500/25 group-hover:shadow-glow-cyan">
                   <span className="font-display font-bold text-cyan-300 text-sm">
                     RTF
@@ -65,7 +65,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <span className="block font-display font-semibold text-text-primary text-xl leading-tight">
-                    Robo-Tech Forum
+                    The Robo-Tech Forum
                   </span>
                   <span className="block text-xs text-text-muted">
                     Government College of Engineering, Amravati
@@ -158,7 +158,7 @@ export default function Footer() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-xs text-text-muted">
-                © {new Date().getFullYear()} The Robo-Tech Forum. All rights reserved.
+                © {new Date().getFullYear()} The The Robo-Tech Forum. All rights reserved.
               </p>
               <p className="mt-1 text-xs text-text-muted">
                 Founded in {stats.founded}. Built by students, for builders.

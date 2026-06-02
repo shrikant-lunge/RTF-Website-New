@@ -8,9 +8,7 @@ import lineFollowerRobots  from '../assets/achievements/line_follower_robots.png
 import gecaLineFollower    from '../assets/achievements/geca_line_follower.png';
 import carvaanTrophy       from '../assets/achievements/carvaan_trophy.png';
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   GLOBAL STYLES
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* GLOBAL STYLES */
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
@@ -37,10 +35,10 @@ const STYLES = `
 
   *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 
-  /* â”€â”€ DARK MODE bg â”€â”€ */
+  /*  DARK MODE bg  */
   .hex-bg { background-color: #010912; }
 
-  /* â”€â”€ WHITE MODE bg â”€â”€ */
+  /*  WHITE MODE bg  */
   .hex-bg-light {
     background:
       radial-gradient(circle at 50% 18%, rgba(14,165,233,0.15) 0%, rgba(14,165,233,0.07) 31%, transparent 58%),
@@ -63,7 +61,7 @@ const STYLES = `
     mask-image: linear-gradient(180deg, black 0%, rgba(0,0,0,0.75) 56%, transparent 100%);
   }
 
-  /* â”€â”€ Shimmer skeleton â”€â”€ */
+  /*  Shimmer skeleton  */
   .img-skeleton {
     background: linear-gradient(90deg,rgba(34,211,238,0.03) 0%,rgba(34,211,238,0.09) 50%,rgba(34,211,238,0.03) 100%);
     background-size:600px 100%;
@@ -74,7 +72,7 @@ const STYLES = `
     background-size:600px 100%;
   }
 
-  /* â”€â”€ Tag badge â”€â”€ */
+  /*  Tag badge  */
   .badge {
     display:inline-flex; align-items:center;
     padding:3px 10px; font-family:'DM Sans',sans-serif;
@@ -83,7 +81,7 @@ const STYLES = `
     color:rgba(34,211,238,0.88); background:rgba(34,211,238,0.06); white-space:nowrap;
   }
 
-  /* â”€â”€ Achievement card - DARK â”€â”€ */
+  /*  Achievement card - DARK  */
   .ach-card {
     position: relative;
     background: linear-gradient(150deg,rgba(6,14,28,0.97) 0%,rgba(3,8,18,0.99) 100%);
@@ -103,7 +101,7 @@ const STYLES = `
     box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(251,191,36,0.08), inset 0 1px 0 rgba(251,191,36,0.1);
   }
 
-  /* â”€â”€ Achievement card - WHITE overrides â”€â”€ */
+  /*  Achievement card - WHITE overrides  */
   .light .ach-card {
     background: linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(248,253,255,0.98) 100%);
     box-shadow: 0 18px 46px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.96);
@@ -124,14 +122,14 @@ const STYLES = `
     box-shadow: 0 24px 58px rgba(15,23,42,0.12), 0 0 34px rgba(245,158,11,0.14), inset 0 1px 0 rgba(255,255,255,1);
   }
 
-  /* â”€â”€ meta row â”€â”€ */
+  /*  meta row  */
   .meta-item {
     display:flex; align-items:center; gap:5px;
     font-family:'DM Sans'; font-size:11px; color:rgba(148,163,184,0.6);
   }
   .light .meta-item { color: rgba(71,85,105,0.7); }
 
-  /* â”€â”€ scan line texture (only dark) â”€â”€ */
+  /*  scan line texture (only dark)  */
   .scanlines {
     background-image: repeating-linear-gradient(
       0deg,
@@ -144,7 +142,7 @@ const STYLES = `
   }
   .light .scanlines { background-image: none; }
 
-  /* â”€â”€ Stat card - DARK â”€â”€ */
+  /*  Stat card - DARK  */
   .stat-card {
     background:rgba(34,211,238,0.03); border:1px solid rgba(34,211,238,0.09);
     border-radius:14px; padding:22px 16px; text-align:center;
@@ -168,7 +166,7 @@ const STYLES = `
     transform:translateY(-3px);
   }
 
-  /* â”€â”€ Left vertical timeline â”€â”€ */
+  /*  Left vertical timeline  */
   .vtl-sidebar {
     position: fixed;
     left: 20px;
@@ -322,9 +320,7 @@ const STYLES = `
   }
 `;
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   DATA
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* DATA */
 const achievements = [
   {
     featured: true, rank: 'JOINT AIR-1',
@@ -378,9 +374,7 @@ const achievements = [
   },
 ];
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   LAZY IMAGE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* LAZY IMAGE */
 function LazyImage({ src, alt, style }) {
   const [loaded, setLoaded] = useState(false);
   const [err, setErr] = useState(false);
@@ -397,9 +391,7 @@ function LazyImage({ src, alt, style }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   TILT WRAPPER
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* TILT WRAPPER */
 function TiltCard({ className, style, children }) {
   const ref = useRef(null);
   const onMove = useCallback(e => {
@@ -421,9 +413,7 @@ function TiltCard({ className, style, children }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SINGLE ACHIEVEMENT CARD
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* SINGLE ACHIEVEMENT CARD */
 function AchCard({ item, index, isLight }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
@@ -446,7 +436,7 @@ function AchCard({ item, index, isLight }) {
       <TiltCard className={cardCls}>
         <div style={{ display: 'grid', gridTemplateColumns: '45% 55%', minHeight: 340 }}>
 
-          {/* â”€â”€ LEFT: image â”€â”€ */}
+          {/* LEFT: image */}
           <div style={{ position: 'relative', minHeight: 300 }}>
             <LazyImage
               src={item.image} alt={item.title}
@@ -457,7 +447,7 @@ function AchCard({ item, index, isLight }) {
                   : 'brightness(0.82) saturate(1.2)',
               }}
             />
-            {/* Right-fade overlay (soft white) */}
+            {/* Right-fade overlay */}
             <div style={{
               position: 'absolute', inset: 0,
               background: isLight
@@ -491,7 +481,7 @@ function AchCard({ item, index, isLight }) {
             }}>{item.year}</div>
           </div>
 
-          {/* â”€â”€ RIGHT: body â”€â”€ */}
+          {/* RIGHT: body */}
           <div style={{
             padding: '36px 36px 32px 32px',
             display: 'flex', flexDirection: 'column', justifyContent: 'center',
@@ -580,9 +570,7 @@ function AchCard({ item, index, isLight }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   LEFT VERTICAL TIMELINE SIDEBAR
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* LEFT VERTICAL TIMELINE SIDEBAR */
 function VerticalTimeline({ activeIndex, onSelect, isLight }) {
   return (
     <div className="vtl-sidebar">
@@ -632,9 +620,7 @@ function VerticalTimeline({ activeIndex, onSelect, isLight }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STATS ROW
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* STATS ROW */
 const STATS = [
   { val: '5+',   label: 'Events Won (Mar)'  },
   { val: '7',    label: 'AIR-1 Titles'      },
@@ -670,9 +656,7 @@ function StatsRow({ isLight }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   ROOT COMPONENT
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ROOT COMPONENT */
 export default function Achievement({ lightMode }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [detectedLightMode, setDetectedLightMode] = useState(false);

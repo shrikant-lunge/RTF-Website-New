@@ -53,14 +53,14 @@ export default function About() {
       {/* Hero */}
       <SectionHeader
         label="// ABOUT US"
-        title="The Robo-Tech Forum"
+        title="The The Robo-Tech Forum"
         subtitle="The premier robotics club at Government College of Engineering, Amravati — where theory meets practice and real engineering happens."
       />
 
       {/* Mission statement */}
       <div className="max-w-3xl mx-auto text-center mb-20">
         <p className="text-body text-text-secondary leading-relaxed">
-          Founded in 2017, The Robo-Tech Forum (RTF) is a student-driven technical club dedicated
+          Founded in 2017, The The Robo-Tech Forum (RTF) is a student-driven technical club dedicated
           to fostering innovation through hands-on robotics, embedded systems, and aero engineering.
           We've built 50+ projects, competed at national-level events across India — from DD Robocon
           at IIT Delhi to ISRO's IRoC-U challenge — and trained hundreds of engineers who now work
