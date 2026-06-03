@@ -141,6 +141,16 @@ export const teamMembers = [
     linkedin: 'https://linkedin.com/in/',
     year: '2nd YR Mech',
   },
+   {
+    id: 3,
+    name: 'Daksh R Titarmare ',
+    role: 'Website and IT Maintainer',
+    department: 'Information Technology',
+    type: 'core',
+    photo: null,
+    linkedin: 'https://linkedin.com/in/dakshtitarmare',
+    year: '2nd Year',
+  },
   // {
   //   id: 9,
   //   name: 'Gaurav Vishrojwar',

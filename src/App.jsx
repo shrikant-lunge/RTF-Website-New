@@ -24,10 +24,67 @@ import Login from './pages/Login';
 
 function AnimatedRoutes() {
   const location = useLocation();
+  const { showLoader, hideLoader } = useLoading();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+
+    // Only apply the loader logic to routes that are known to be asset/image-heavy
+    const imageHeavyRoutes = ['/gallery', '/team', '/projects', '/achievement', '/sponsors'];
+    const requiresLoader = imageHeavyRoutes.some(route => location.pathname.startsWith(route));
+
+    if (!requiresLoader) return;
+
+    let isMounted = true;
+    let loaderShown = false;
+
+    // Small delay to allow React to paint the DOM with new <img> tags
+    const mountTimer = setTimeout(() => {
+      if (!isMounted) return;
+
+      const images = Array.from(document.querySelectorAll('img'));
+      const incompleteImages = images.filter(img => !img.complete);
+
+      if (incompleteImages.length === 0) {
+        // No incomplete images (cached or absent), don't show the loader
+        return;
+      }
+
+      // There are images to load, so show the loader
+      loaderShown = true;
+      showLoader("Loading assets...");
+
+      let loadedCount = 0;
+      let hasEnded = false;
+
+      // Fallback to ensure we never get stuck indefinitely
+      const fallbackTimer = setTimeout(() => {
+        hasEnded = true;
+        if (isMounted && loaderShown) hideLoader();
+      }, 1500);
+
+      const checkDone = () => {
+        if (hasEnded) return;
+        loadedCount++;
+        if (loadedCount >= incompleteImages.length) {
+          hasEnded = true;
+          clearTimeout(fallbackTimer);
+          if (isMounted && loaderShown) hideLoader();
+        }
+      };
+
+      incompleteImages.forEach(img => {
+        img.addEventListener('load', checkDone, { once: true });
+        img.addEventListener('error', checkDone, { once: true });
+      });
+    }, 50);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(mountTimer);
+      if (loaderShown) hideLoader(); // Cleanup safely only if we showed it
+    };
+  }, [location.pathname, showLoader, hideLoader]);
 
   return (
     <AnimatePresence mode="wait">

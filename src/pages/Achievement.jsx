@@ -884,6 +884,79 @@ function updateStackCardVisuals() {
       el.style.transform = `scale(${Math.max(0.9, baseScale - covered * 0.07)})`;
       el.style.opacity = String(Math.max(0.78, 1 - covered * 0.22));
       return;
+];
+
+/* LAZY IMAGE */
+function LazyImage({ src, alt, style }) {
+  const [loaded, setLoaded] = useState(false);
+  const [err, setErr] = useState(false);
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {!loaded && !err && <div className="img-skeleton" style={{ position: 'absolute', inset: 0 }} />}
+      <img
+        src={src} alt={alt} loading="lazy" decoding="async"
+        onLoad={() => setLoaded(true)}
+        onError={() => { setErr(true); setLoaded(true); }}
+        style={{ ...style, opacity: loaded ? 1 : 0, transition: 'opacity 0.55s ease' }}
+      />
+    </div>
+  );
+}
+
+/* TILT WRAPPER */
+function TiltCard({ className, style, children, onClick, onKeyDown, tabIndex, role, ariaLabel }) {
+  const ref = useRef(null);
+  
+  const onMove = useCallback(e => {
+    const el = ref.current; 
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    el.style.transform = `perspective(1100px) rotateY(${x * 5}deg) rotateX(${-y * 4}deg) translateY(-4px)`;
+  }, []);
+
+  const onLeave = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = `perspective(1100px) rotateY(0deg) rotateX(0deg) translateY(0)`;
+  }, []);
+
+  return (
+    <div ref={ref} className={className}
+      style={{ ...style, transition: 'transform 0.12s ease, box-shadow 0.4s ease, border-color 0.4s ease' }}
+      onMouseMove={onMove} onMouseLeave={onLeave}
+      onClick={onClick} onKeyDown={onKeyDown} tabIndex={tabIndex} role={role} aria-label={ariaLabel}>
+      {children}
+    </div>
+  );
+}
+
+/* SINGLE ACHIEVEMENT CARD */
+function AchCard({ item, index, isLight }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+  const Icon = item.icon;
+  const isGold = !!item.featured;
+  const cardCls = `ach-card ${isGold ? 'ach-card-gold' : 'ach-card-cyan'}`;
+  const cardNum = String(index + 1).padStart(2, '0');
+
+  const titleColor   = isLight ? '#0b1224' : '#f1f5f9';
+  const descColor    = isLight ? '#334155' : 'rgba(148,163,184,0.78)';
+  const subtitleClr  = isLight ? '#047fa8' : `${item.accent}cc`;
+  const metaClr      = isLight ? '#52637a' : 'rgba(148,163,184,0.6)';
+  const canOpenResult = Boolean(item.resultFile);
+
+  const openResultFile = useCallback(() => {
+    if (!item.resultFile || typeof window === 'undefined') return;
+    window.open(item.resultFile, '_blank', 'noopener,noreferrer');
+  }, [item.resultFile]);
+
+  const onCardKeyDown = useCallback((event) => {
+    if (!canOpenResult) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openResultFile();
     }
 
     el.style.transform = `scale(${baseScale})`;
