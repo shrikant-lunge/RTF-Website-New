@@ -80,7 +80,7 @@ export default function Timeline() {
       <SectionHeader
         label="// OUR JOURNEY"
         title="Timeline"
-        subtitle="From a small group of passionate students to a nationally recognized robotics club — trace every milestone since 2017."
+        subtitle="From a small group of passionate students to a nationally recognized robotics club — trace every milestone since 2014."
       />
 
       <div className="relative max-w-5xl mx-auto">

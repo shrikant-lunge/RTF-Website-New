@@ -16,7 +16,7 @@
 export const milestones = [
   {
     id: 1,
-    year: '2017',
+    year: '2014',
     title: 'RTF Founded',
     description:
       'The The Robo-Tech Forum was established at Government College of Engineering, Amravati by a small group of passionate engineering students determined to bring hands-on robotics culture to campus.',

@@ -6,11 +6,13 @@ import { FaGithub } from 'react-icons/fa';
 import { pageTransition, staggerContainer, slideInRight } from '../lib/animations';
 import SectionHeader from '../components/ui/SectionHeader';
 import ProjectCard from '../components/ui/ProjectCard';
-import { useProjects } from '../hooks/useProjects';
+import { projects } from '../data/projects';
 import { getDetailImage } from '../lib/cloudinary';
 
 export default function Projects() {
-  const { projects, loading, error, refetch } = useProjects();
+  const loading = false;
+  const error = null;
+  const refetch = () => {};
   const [activeCategory, setActiveCategory] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -264,52 +266,56 @@ export default function Projects() {
         </div>
       )}
 
-      {/* ─── Detail Modal (slide-in panel from right) ─── */}
+      {/* ─── Detail Modal (Centered Premium Dialog) ─── */}
       <AnimatePresence>
         {selectedProject && (
-          <>
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-12">
             {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 z-50 bg-[#060B12]/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-[#060B12]/80 backdrop-blur-md"
             />
 
-            {/* Panel */}
-            <motion.aside
-              variants={slideInRight}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="fixed top-0 right-0 z-50 h-full w-full max-w-xl bg-[#0D1520] border-l border-[#1E2D42] overflow-y-auto"
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-5xl max-h-[90vh] bg-[#0D1520]/90 backdrop-blur-2xl border border-cyan-500/20 rounded-2xl shadow-[0_0_50px_rgba(34,211,238,0.15)] overflow-hidden flex flex-col md:flex-row z-10"
             >
               {/* Close button */}
               <button
                 onClick={() => setSelectedProject(null)}
                 aria-label="Close project details"
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-lg bg-[rgba(15,23,42,0.6)] backdrop-blur-md border border-[#1E2D42] flex items-center justify-center text-[#94A3B8] hover:text-[#22D3EE] hover:border-[rgba(34,211,238,0.4)] transition-all"
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-[#0D1520]/80 backdrop-blur-md border border-[#1E2D42] flex items-center justify-center text-[#94A3B8] hover:text-[#22D3EE] hover:border-[#22D3EE]/40 transition-all hover:bg-[#22D3EE]/10 group"
               >
-                <X size={18} />
+                <X size={18} className="group-hover:rotate-90 transition-transform duration-300" />
               </button>
 
-              {/* Image Gallery */}
-              <div className="relative h-64 sm:h-80 bg-[#141E2E] overflow-hidden">
+              {/* Left Column: Image Gallery */}
+              <div className="relative w-full md:w-1/2 h-72 md:h-auto min-h-[300px] bg-[#060B12] overflow-hidden shrink-0 group">
                 <AnimatePresence mode="wait">
                   {selectedProject.images && selectedProject.images.length > 0 ? (
                     <motion.img
                       key={imageIndex}
                       src={getDetailImage(selectedProject.images[imageIndex])}
                       alt={`${selectedProject.title} image ${imageIndex + 1}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.4 }}
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#0D1520] to-[#141E2E]" />
+                    <div className="w-full h-full bg-gradient-to-br from-[#0D1520] to-[#141E2E] flex items-center justify-center">
+                      <div className="text-cyan-500/20">
+                         <Search size={48} />
+                      </div>
+                    </div>
                   )}
                 </AnimatePresence>
 
@@ -317,41 +323,46 @@ export default function Projects() {
                 {selectedProject.images && selectedProject.images.length > 1 && (
                   <>
                     <button
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setImageIndex((i) =>
                           i === 0 ? selectedProject.images.length - 1 : i - 1
-                        )
-                      }
+                        );
+                      }}
                       aria-label="Previous image"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[rgba(6,11,18,0.6)] backdrop-blur-sm border border-[#1E2D42] flex items-center justify-center text-[#94A3B8] hover:text-[#22D3EE] transition-colors"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-[#22D3EE] hover:border-[#22D3EE]/50 hover:bg-black/60 transition-all opacity-0 group-hover:opacity-100"
                     >
-                      <ChevronLeft size={18} />
+                      <ChevronLeft size={20} />
                     </button>
                     <button
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation();
                         setImageIndex((i) =>
                           i === selectedProject.images.length - 1 ? 0 : i + 1
-                        )
-                      }
+                        );
+                      }}
                       aria-label="Next image"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[rgba(6,11,18,0.6)] backdrop-blur-sm border border-[#1E2D42] flex items-center justify-center text-[#94A3B8] hover:text-[#22D3EE] transition-colors"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-[#22D3EE] hover:border-[#22D3EE]/50 hover:bg-black/60 transition-all opacity-0 group-hover:opacity-100"
                     >
-                      <ChevronRight size={18} />
+                      <ChevronRight size={20} />
                     </button>
                   </>
                 )}
 
                 {/* Dot navigation */}
                 {selectedProject.images && selectedProject.images.length > 1 && (
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/40 backdrop-blur-md px-3 py-2 rounded-full border border-white/10">
                     {selectedProject.images.map((_, i) => (
                       <button
                         key={i}
-                        onClick={() => setImageIndex(i)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setImageIndex(i);
+                        }}
                         aria-label={`Go to image ${i + 1}`}
-                        className={`w-2 h-2 rounded-full transition-all ${i === imageIndex
-                          ? 'bg-[#22D3EE] w-5'
-                          : 'bg-[#475569]/60 hover:bg-[#475569]'
+                        className={`h-2 rounded-full transition-all duration-300 ${i === imageIndex
+                          ? 'bg-[#22D3EE] w-6 shadow-[0_0_10px_rgba(34,211,238,0.5)]'
+                          : 'bg-white/40 w-2 hover:bg-white/70'
                           }`}
                       />
                     ))}
@@ -359,44 +370,46 @@ export default function Projects() {
                 )}
               </div>
 
-              {/* Content */}
-              <div className="p-6 sm:p-8">
+              {/* Right Column: Content */}
+              <div className="p-8 md:p-10 w-full md:w-1/2 flex flex-col overflow-y-auto custom-scrollbar bg-[#0D1520]">
                 {/* Category + Year */}
-                <div className="flex flex-wrap items-center gap-3 mb-3">
-                  <span className="px-2.5 py-1 text-[10px] font-mono font-semibold tracking-wider uppercase bg-[rgba(34,211,238,0.15)] text-[#22D3EE] border border-[rgba(34,211,238,0.3)] rounded">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.1)]">
                     {selectedProject.category}
                   </span>
-                  <span className="text-xs font-mono text-[#475569]">
+                  <span className="text-xs font-mono text-slate-400 px-3 py-1 bg-white/5 rounded-full border border-white/5">
                     {selectedProject.year}
                   </span>
                   {String(selectedProject.status).toUpperCase() === 'ONGOING' && (
-                    <span className="px-2.5 py-1 text-[10px] font-mono font-semibold tracking-wider uppercase bg-[rgba(245,158,11,0.15)] text-[#F59E0B] border border-[rgba(245,158,11,0.3)] rounded flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-pulse" />
+                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
                       ONGOING
                     </span>
                   )}
                   {String(selectedProject.status).toUpperCase() === 'PROTOTYPE' && (
-                    <span className="px-2.5 py-1 text-[10px] font-mono font-semibold tracking-wider uppercase bg-[rgba(100,116,139,0.15)] text-[#94A3B8] border border-[rgba(100,116,139,0.3)] rounded">
+                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-slate-500/10 text-slate-400 border border-slate-500/30 rounded-full">
                       PROTOTYPE
                     </span>
                   )}
                 </div>
 
-                <h2 className="font-['Space_Grotesk'] text-[28px] font-bold text-[#F1F5F9] mb-4">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-6 drop-shadow-lg">
                   {selectedProject.title}
                 </h2>
 
-                <p className="font-['Inter'] text-[15px] text-[#94A3B8] leading-[1.7] mb-6">
+                <p className="font-sans text-base text-slate-300 leading-relaxed mb-8">
                   {selectedProject.description}
                 </p>
 
                 {/* Achievements */}
                 {selectedProject.achievements && selectedProject.achievements.length > 0 && (
-                  <div className="mb-6 flex flex-col gap-2">
+                  <div className="mb-8 flex flex-col gap-3">
                     {selectedProject.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-3 p-3.5 bg-[rgba(34,211,238,0.05)] border border-[rgba(34,211,238,0.15)] rounded-lg">
-                        <Trophy size={16} className="text-[#22D3EE] mt-0.5 shrink-0" />
-                        <p className="text-sm text-[#22D3EE] font-mono">
+                      <div key={idx} className="flex items-start gap-4 p-4 bg-cyan-500/5 border border-cyan-500/20 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 transition-colors">
+                        <div className="p-2 bg-cyan-500/10 rounded-lg shrink-0">
+                          <Trophy size={18} className="text-cyan-400" />
+                        </div>
+                        <p className="text-sm text-cyan-100 font-medium leading-relaxed mt-1">
                           {achievement}
                         </p>
                       </div>
@@ -406,13 +419,17 @@ export default function Projects() {
 
                 {/* Tech Stack */}
                 {selectedProject.techStack && selectedProject.techStack.length > 0 && (
-                  <div className="mb-6">
-                    <h4 className="text-[11px] font-mono font-bold tracking-wider text-[#475569] mb-3 uppercase">TECH STACK</h4>
-                    <div className="flex flex-wrap gap-2">
+                  <div className="mb-8">
+                    <h4 className="text-xs font-mono font-bold tracking-widest text-slate-500 mb-4 uppercase flex items-center gap-2">
+                      <div className="w-4 h-[1px] bg-slate-500/50"></div>
+                      TECH STACK
+                      <div className="flex-grow h-[1px] bg-slate-500/20"></div>
+                    </h4>
+                    <div className="flex flex-wrap gap-2.5">
                       {selectedProject.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs font-mono text-[#94A3B8] bg-[#141E2E] border border-[#1E2D42] rounded"
+                          className="px-3.5 py-1.5 text-[13px] font-mono font-medium text-cyan-300 bg-cyan-900/20 border border-cyan-800/50 rounded-lg hover:bg-cyan-900/40 hover:border-cyan-500/50 transition-colors cursor-default"
                         >
                           {tech}
                         </span>
@@ -421,42 +438,44 @@ export default function Projects() {
                   </div>
                 )}
 
-                {/* Team Size */}
-                <div className="flex items-center gap-2 mb-8 text-[#94A3B8]">
-                  <Users size={16} />
-                  <span className="text-sm font-mono">
-                    {selectedProject.teamSize} team members
-                  </span>
-                </div>
+                <div className="mt-auto">
+                  {/* Team Size */}
+                  <div className="flex items-center gap-3 mb-8 text-slate-400 bg-white/5 w-fit px-4 py-2 rounded-xl border border-white/5">
+                    <Users size={18} className="text-slate-300" />
+                    <span className="text-sm font-medium">
+                      Built by <span className="text-cyan-400">{selectedProject.teamSize}</span> team members
+                    </span>
+                  </div>
 
-                {/* Links */}
-                <div className="flex flex-wrap gap-3 mt-8 pt-6 border-t border-[#1E2D42]">
-                  {selectedProject.github && (
-                    <a
-                      href={selectedProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-mono font-semibold tracking-wider text-[#F1F5F9] bg-[#141E2E] border border-[#1E2D42] rounded hover:border-[rgba(34,211,238,0.4)] hover:text-[#22D3EE] hover:bg-[rgba(34,211,238,0.05)] transition-all"
-                    >
-                      <FaGithub size={16} />
-                      VIEW SOURCE
-                    </a>
-                  )}
-                  {selectedProject.demo && (
-                    <a
-                      href={selectedProject.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-mono font-semibold tracking-wider text-[#060B12] bg-[#22D3EE] border border-transparent rounded hover:bg-[#06B6D4] shadow-[0_0_20px_rgba(34,211,238,0.3)] transition-all"
-                    >
-                      <ExternalLink size={16} />
-                      LIVE DEMO
-                    </a>
-                  )}
+                  {/* Links */}
+                  <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10">
+                    {selectedProject.demo && (
+                      <a
+                        href={selectedProject.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-[#060B12] bg-cyan-400 border border-transparent rounded-xl hover:bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.4)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] transition-all transform hover:-translate-y-0.5"
+                      >
+                        <ExternalLink size={18} />
+                        LIVE DEMO
+                      </a>
+                    )}
+                    {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-slate-200 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-slate-800 transition-all transform hover:-translate-y-0.5"
+                      >
+                        <FaGithub size={18} />
+                        SOURCE
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </motion.aside>
-          </>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </motion.main>

@@ -466,10 +466,10 @@ const achievements = [
     tags: ['Line Follower', 'AIR-1', 'AIR-2', 'CARVAAN'], accent: '#34d399',
   },
   {
-    rank: '2017', year: '2017', date: 'Foundation Year',
-    title: 'Genesis of RTF', subtitle: 'Where it all began',
-    description: "Passionate engineers at GCoEA, Amravati laid the foundation for the college's most decorated technical club — the Robo-Tech Forum. From a garage dream to national glory, every block a milestone and every year a battle won.",
-    image: roboconTeamPhoto,
+    year: '2014', date: 'Foundation Year',
+    title: 'Genesis of The Robo-Tech Forum',
+    description: "Passionate engineers at GCoEA laid the foundation for the college's most decorated technical club.",
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800',
     icon: Flag, venue: 'GCoEA Amravati', teamSize: '12',
     tags: ['Foundation', 'Legacy'], accent: '#94a3b8',
   },
@@ -502,8 +502,24 @@ function TiltCard({ className, style, children, onClick, onKeyDown, tabIndex, ro
     const y = (e.clientY - r.top)  / r.height - 0.5;
     el.style.transform = `perspective(1100px) rotateY(${x * 5}deg) rotateX(${-y * 4}deg) translateY(-4px)`;
   }, []);
-  const onLeave = useCallback(() => {
-    if (ref.current) ref.current.style.transform = '';
+
+  /* ── Track Scroll for ClipPath ── */
+  useEffect(() => {
+        const handleScroll = () => { // <--- ADDED THIS LINE
+      if (!wrapperRef.current) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      const centerView = window.innerHeight / 2;
+      const progressY = centerView - rect.top;
+      setClipHeight(Math.max(0, progressY));
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    handleScroll(); // initial measurement
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
   return (
     <div ref={ref} className={className}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { projects as fallbackProjects } from '../data/projects';
 
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1Xfkn0g41BRKiutGca0_0Xb23k4_D9S_oq8czXLt4EX8/export?format=csv&gid=1394685927';
+const SHEET_URL = '';
 const CACHE_KEY = 'rtf_projects_cache';
 const CACHE_TTL = 300000; // 5 minutes
 

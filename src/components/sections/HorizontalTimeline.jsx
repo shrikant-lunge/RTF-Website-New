@@ -82,7 +82,7 @@ const timelineData = [
     tags: ['E-Yantra', 'IIT Bombay'],
   },
   {
-    year: '2017',
+    year: '2014',
     date: 'Foundation',
     title: 'Genesis of The Robo-Tech Forum',
     description:

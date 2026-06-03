@@ -94,7 +94,7 @@ export default function Sponsors() {
             The The Robo-Tech Forum at Government College of Engineering, Amravati is a student-driven 
             technical club competing at <strong className="text-text-primary">IIT Delhi, IIT Bombay, ISRO, 
             and VNIT Nagpur</strong>. We've trained 120+ engineers, built 50+ real-world projects, and 
-            represented our college at every major national robotics competition since 2017.
+            represented our college at every major national robotics competition since 2014.
           </p>
           <p className="text-sm text-text-muted font-mono">
             Your support doesn't just fund a club — it fuels innovation that competes on national stages.

@@ -7,7 +7,9 @@ import SponsorShowcase from '../components/sections/SponsorShowcase';
 import ParallaxImage from '../components/ui/ParallaxImage';
 import TerminalContact from '../components/sections/TerminalContact';
 // import CyberpunkHero from '../components/sections/CyberpunkHero';
-import roboconWorkshopImage from '../assets/img/Robocon 2025/20250713_183423 - Copy.webp';
+// import roboconWorkshopImage from '../assets/img/Robocon 2025/20250713_183423 - Copy.webp';
+import rtfteam from '../assets/img/College Programs/IMG-20250831-WA0252.webp';
+
 import collegeWorkshopImage from '../assets/img/College Programs/20241012_085453.webp';
 
 const MotionMain = motion.main;
@@ -28,9 +30,9 @@ export default function Home() {
 
         {/* Parallax break — workshop / lab image */}
         <ParallaxImage
-          src={roboconWorkshopImage}
+          src={rtfteam}
           // images={[roboconWorkshopImage, collegeWorkshopImage]}
-          images={[roboconWorkshopImage]}
+          images={[rtfteam]}
 
           alt="Robotics workshop"
           overlay="We don't just study engineering — we live it."
