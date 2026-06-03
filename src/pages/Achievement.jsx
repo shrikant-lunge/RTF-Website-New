@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Trophy, Rocket, Flag, Award, Cpu, Zap, MapPin, Users, Calendar } from 'lucide-react';
 
-import roboconTeamPhoto    from '../assets/achievements/robocon_results_table.png';
+import roboconResultFile   from '../assets/docs/Final Result of  DD-Robocon 2026 Stage -II .pdf';
+import roboconTeamPhoto    from '../assets/img/robocon2026Result.png';
 import iitIndoreTeam       from '../assets/achievements/iit_indore_team.png';
 import lineFollowerRobots  from '../assets/achievements/line_follower_robots.png';
 import gecaLineFollower    from '../assets/achievements/geca_line_follower.png';
@@ -141,30 +142,6 @@ const STYLES = `
     pointer-events:none;
   }
   .light .scanlines { background-image: none; }
-
-  /*  Stat card - DARK  */
-  .stat-card {
-    background:rgba(34,211,238,0.03); border:1px solid rgba(34,211,238,0.09);
-    border-radius:14px; padding:22px 16px; text-align:center;
-    transition:background 0.3s, border-color 0.3s, transform 0.3s;
-  }
-  .stat-card:hover {
-    background:rgba(34,211,238,0.07); border-color:rgba(34,211,238,0.25);
-    transform:translateY(-3px);
-  }
-  /* WHITE stat card */
-  .light .stat-card {
-    background: rgba(255,255,255,0.88);
-    border: 1px solid rgba(14,165,233,0.2);
-    box-shadow: 0 12px 30px rgba(15,23,42,0.055), inset 0 1px 0 rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-  }
-  .light .stat-card:hover {
-    background: rgba(240,253,254,0.94);
-    border-color: rgba(6,182,212,0.48);
-    box-shadow: 0 18px 40px rgba(15,23,42,0.09), 0 0 24px rgba(14,165,233,0.12);
-    transform:translateY(-3px);
-  }
 
   /*  Left vertical timeline  */
   .vtl-sidebar {
@@ -318,15 +295,139 @@ const STYLES = `
     border-color: rgba(14,165,233,0.3);
     box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   }
+
+  .achievement-toolbar {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .achievement-toolbar-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .achievement-toolbar-kicker {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+  }
+  .achievement-toolbar-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(14px, 1.8vw, 18px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .achievement-year-picker {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .achievement-year-chip {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+  .achievement-year-chip:hover {
+    transform: translateY(-1px);
+  }
+  .achievement-year-chip.is-active {
+    transform: translateY(-1px);
+  }
+  .achievement-year-chip-count {
+    margin-left: 6px;
+    opacity: 0.75;
+  }
+  .achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .achievement-empty {
+    padding: 28px 20px;
+    border-radius: 20px;
+    border: 1px dashed rgba(14,165,233,0.24);
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(148,163,184,0.9);
+  }
+  .light .achievement-empty {
+    border-color: rgba(14,165,233,0.22);
+    color: #475569;
+    background: rgba(255,255,255,0.58);
+  }
+
+  .ach-card-layout {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    min-height: 340px;
+    overflow: hidden;
+  }
+  .ach-card-media {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(34,211,238,0.16) 0%, transparent 58%),
+      linear-gradient(145deg, rgba(3,8,18,0.85) 0%, rgba(8,15,28,0.96) 100%);
+  }
+  .ach-card-body {
+    padding: 36px 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    gap: 0;
+  }
+  @media (max-width: 1024px) {
+    .vtl-sidebar {
+      display: none;
+    }
+  }
+  @media (max-width: 900px) {
+    .achievement-toolbar {
+      align-items: flex-start;
+    }
+    .achievement-year-picker {
+      justify-content: flex-start;
+    }
+    .ach-card-layout {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .ach-card-media {
+      min-height: 260px;
+      padding: 14px;
+    }
+    .ach-card-body {
+      padding: 28px 24px 30px;
+    }
+  }
 `;
 
 /* DATA */
 const achievements = [
   {
     featured: true, rank: 'JOINT AIR-1',
-    year: '2026', date: 'March 2026',
-    title: 'DD Robocon 2026', subtitle: 'Stage 1 — All India Rank 1',
-    description: 'Secured Joint AIR-1 in Stage 1 of DD Robocon 2026 — "Kung Fu Quest" — by submitting detailed design documents for two coordinated robots (manual & autonomous) complete with CAD models and simulations for weapon assembly, KFS collection, and Tic-Tac-Toe arena placement.',
+    year: '2026', date: 'May 2026',
+    title: 'DD Robocon 2026', subtitle: 'Stage 1 & 2 — All India Rank 1',
+    description: 'Secured Joint AIR-1 in Stage 1 & 2 of DD Robocon 2026 — "Kung Fu Quest" — by submitting detailed design documents & Working Video for two coordinated robots (manual & autonomous) complete with CAD models and simulations for weapon assembly, KFS collection, and Tic-Tac-Toe arena placement.',
+    resultFile: roboconResultFile,
     image: roboconTeamPhoto,
     icon: Trophy, venue: 'National Level', teamSize: '30+',
     tags: ['DD Robocon', 'AIR-1', 'Autonomous', 'National'], accent: '#fbbf24',
@@ -392,7 +493,7 @@ function LazyImage({ src, alt, style }) {
 }
 
 /* TILT WRAPPER */
-function TiltCard({ className, style, children }) {
+function TiltCard({ className, style, children, onClick, onKeyDown, tabIndex, role, ariaLabel }) {
   const ref = useRef(null);
   const onMove = useCallback(e => {
     const el = ref.current; if (!el) return;
@@ -407,7 +508,8 @@ function TiltCard({ className, style, children }) {
   return (
     <div ref={ref} className={className}
       style={{ ...style, transition: 'transform 0.12s ease, box-shadow 0.4s ease, border-color 0.4s ease' }}
-      onMouseMove={onMove} onMouseLeave={onLeave}>
+      onMouseMove={onMove} onMouseLeave={onLeave}
+      onClick={onClick} onKeyDown={onKeyDown} tabIndex={tabIndex} role={role} aria-label={ariaLabel}>
       {children}
     </div>
   );
@@ -426,6 +528,20 @@ function AchCard({ item, index, isLight }) {
   const descColor    = isLight ? '#334155' : 'rgba(148,163,184,0.78)';
   const subtitleClr  = isLight ? '#047fa8' : `${item.accent}cc`;
   const metaClr      = isLight ? '#52637a' : 'rgba(148,163,184,0.6)';
+  const canOpenResult = Boolean(item.resultFile);
+
+  const openResultFile = useCallback(() => {
+    if (!item.resultFile || typeof window === 'undefined') return;
+    window.open(item.resultFile, '_blank', 'noopener,noreferrer');
+  }, [item.resultFile]);
+
+  const onCardKeyDown = useCallback((event) => {
+    if (!canOpenResult) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openResultFile();
+    }
+  }, [canOpenResult, openResultFile]);
 
   return (
     <motion.div ref={ref}
@@ -433,28 +549,42 @@ function AchCard({ item, index, isLight }) {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
     >
-      <TiltCard className={cardCls}>
-        <div style={{ display: 'grid', gridTemplateColumns: '45% 55%', minHeight: 340 }}>
+      <TiltCard
+        className={cardCls}
+        onClick={canOpenResult ? openResultFile : undefined}
+        onKeyDown={canOpenResult ? onCardKeyDown : undefined}
+        tabIndex={canOpenResult ? 0 : undefined}
+        role={canOpenResult ? 'button' : undefined}
+        ariaLabel={canOpenResult ? `${item.title} result document` : undefined}
+        style={canOpenResult ? { cursor: 'pointer' } : undefined}
+      >
+        <div className="ach-card-layout">
 
           {/* LEFT: image */}
-          <div style={{ position: 'relative', minHeight: 300 }}>
+          <div className="ach-card-media">
             <LazyImage
               src={item.image} alt={item.title}
               style={{
-                width: '100%', height: '100%', objectFit: 'cover',
+                width: '100%', height: '100%', objectFit: 'contain',
+                objectPosition: 'center center',
                 filter: isLight
-                  ? 'brightness(1) saturate(1.05)'
-                  : 'brightness(0.82) saturate(1.2)',
+                  ? 'brightness(1.03) saturate(1.06)'
+                  : 'brightness(0.95) saturate(1.08)',
+                borderRadius: 16,
+                boxShadow: isLight
+                  ? '0 10px 22px rgba(15,23,42,0.08)'
+                  : '0 12px 26px rgba(0,0,0,0.24)',
               }}
             />
-            {/* Right-fade overlay */}
+            {/* Subtle read-through overlay */}
             <div style={{
               position: 'absolute', inset: 0,
               background: isLight
-                ? 'linear-gradient(90deg, transparent 18%, rgba(248,253,255,0.56) 58%, rgba(255,255,255,0.96) 100%)'
-                : 'linear-gradient(90deg, transparent 45%, rgba(3,8,18,0.98) 100%)',
+                ? 'linear-gradient(90deg, rgba(248,253,255,0.10) 0%, transparent 34%, transparent 66%, rgba(255,255,255,0.14) 100%)'
+                : 'linear-gradient(90deg, rgba(3,8,18,0.08) 0%, transparent 34%, transparent 66%, rgba(3,8,18,0.18) 100%)',
+              borderRadius: 20,
             }} />
-            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg, ${item.accent}18 0%, transparent 55%)` }} />
+            <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(135deg, ${item.accent}10 0%, transparent 58%)`, borderRadius: 20 }} />
             <div className="scanlines" style={{ position: 'absolute', inset: 0 }} />
 
             {item.hallLabel && (
@@ -482,11 +612,7 @@ function AchCard({ item, index, isLight }) {
           </div>
 
           {/* RIGHT: body */}
-          <div style={{
-            padding: '36px 36px 32px 32px',
-            display: 'flex', flexDirection: 'column', justifyContent: 'center',
-            position: 'relative', gap: 0,
-          }}>
+          <div className="ach-card-body">
             <div style={{
               fontFamily: "'Orbitron',sans-serif", fontWeight: 900,
               fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
@@ -524,6 +650,27 @@ function AchCard({ item, index, isLight }) {
               color: subtitleClr, letterSpacing: '0.08em',
               textTransform: 'uppercase', marginBottom: 16,
             }}>{item.subtitle}</p>
+
+            {canOpenResult && (
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                width: 'fit-content',
+                marginBottom: 14,
+                padding: '5px 10px',
+                borderRadius: 999,
+                fontFamily: 'DM Sans',
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                border: `1px solid ${item.accent}44`,
+                background: `${item.accent}12`,
+                color: item.accent,
+              }}>
+                View Result File
+              </span>
+            )}
 
             <p style={{
               fontFamily: 'DM Sans', fontSize: 14,
@@ -571,11 +718,11 @@ function AchCard({ item, index, isLight }) {
 }
 
 /* LEFT VERTICAL TIMELINE SIDEBAR */
-function VerticalTimeline({ activeIndex, onSelect, isLight }) {
+function VerticalTimeline({ activeIndex, onSelect, isLight, items = achievementsByYear }) {
   return (
     <div className="vtl-sidebar">
       <div className={isLight ? 'vtl-line light' : 'vtl-line'} />
-      {achievements.map((a, i) => {
+      {items.map((a, i) => {
         const isActive = activeIndex === i;
         const isGold   = !!a.featured;
         const getShadow = () => {
@@ -620,45 +767,19 @@ function VerticalTimeline({ activeIndex, onSelect, isLight }) {
   );
 }
 
-/* STATS ROW */
-const STATS = [
-  { val: '5+',   label: 'Events Won (Mar)'  },
-  { val: '7',    label: 'AIR-1 Titles'      },
-  { val: '3',    label: 'Venues Swept'      },
-  { val: '30+',  label: 'Team Members'      },
-];
+const achievementsByYear = [...achievements].sort((left, right) => {
+  const yearDiff = Number(right.year) - Number(left.year);
+  if (yearDiff !== 0) return yearDiff;
+  if (left.featured !== right.featured) return left.featured ? -1 : 1;
+  return right.date.localeCompare(left.date);
+});
 
-function StatsRow({ isLight }) {
-  const ref    = useRef(null);
-  const inView = useInView(ref, { once: true });
-  return (
-    <div ref={ref} style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 14, marginBottom: 64 }}>
-      {STATS.map((s, i) => (
-        <motion.div key={s.label} className="stat-card"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: i * 0.1 + 0.2, duration: 0.55 }}
-        >
-          <div style={{
-            fontFamily: "'Orbitron',sans-serif", fontWeight: 900,
-            fontSize: 'clamp(22px,2.8vw,32px)',
-            color: isLight ? '#0284c7' : '#22d3ee',
-            lineHeight: 1, marginBottom: 6,
-          }}>{s.val}</div>
-          <div style={{
-            fontFamily: 'DM Sans', fontSize: 10.5,
-            color: isLight ? '#475569' : 'rgba(148,163,184,0.5)',
-            letterSpacing: '0.1em', textTransform: 'uppercase',
-          }}>{s.label}</div>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
+const achievementYears = ['All', ...new Set(achievementsByYear.map((achievement) => achievement.year))];
 
 /* ROOT COMPONENT */
 export default function Achievement({ lightMode }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [selectedYear, setSelectedYear] = useState('All');
   const [detectedLightMode, setDetectedLightMode] = useState(false);
 
   const readLightMode = useCallback(() => {
@@ -690,11 +811,22 @@ export default function Achievement({ lightMode }) {
   const isLight = typeof lightMode === 'boolean' ? lightMode : detectedLightMode;
 
   const cardRefs = useRef([]);
+  const visibleAchievements = useMemo(() => (
+    selectedYear === 'All'
+      ? achievementsByYear
+      : achievementsByYear.filter((achievement) => achievement.year === selectedYear)
+  ), [selectedYear]);
+
   const handleSelect = (i) => {
     setActiveIdx(i);
     const el = cardRefs.current[i];
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
+
+  useEffect(() => {
+    setActiveIdx(0);
+    cardRefs.current = [];
+  }, [selectedYear]);
 
   useEffect(() => {
     const syncMode = () => setDetectedLightMode(readLightMode());
@@ -725,9 +857,12 @@ export default function Achievement({ lightMode }) {
       },
       { threshold: 0.5 }
     );
-    cardRefs.current.forEach(el => el && obs.observe(el));
+    visibleAchievements.forEach((_, index) => {
+      const el = cardRefs.current[index];
+      if (el) obs.observe(el);
+    });
     return () => obs.disconnect();
-  }, []);
+  }, [visibleAchievements]);
 
   const bgClass   = isLight ? 'hex-bg-light' : 'hex-bg';
   const modeClass = isLight ? 'light' : '';
@@ -749,7 +884,7 @@ export default function Achievement({ lightMode }) {
           }} />
         )}
 
-        <VerticalTimeline activeIndex={activeIdx} onSelect={handleSelect} isLight={isLight} />
+        <VerticalTimeline activeIndex={activeIdx} onSelect={handleSelect} isLight={isLight} items={visibleAchievements} />
 
         <div style={{ position: 'relative', zIndex: 2 }}>
           <div style={{ textAlign: 'center', padding: '112px 24px 60px' }}>
@@ -816,13 +951,63 @@ export default function Achievement({ lightMode }) {
           </div>
 
           <div style={{ maxWidth: 1180, margin: '0 auto', padding: '0 24px 110px' }}>
-            <StatsRow isLight={isLight} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-              {achievements.map((item, i) => (
-                <div key={item.title} ref={el => cardRefs.current[i] = el}>
+            <div className="achievement-toolbar">
+              <div className="achievement-toolbar-copy">
+                <span className="achievement-toolbar-kicker" style={{ color: taglineColor }}>FILTER BY YEAR</span>
+                <div className="achievement-toolbar-title" style={{ color: isLight ? '#0f172a' : '#e2e8f0' }}>
+                  {selectedYear === 'All' ? 'Latest to Oldest' : `${selectedYear} achievements`}
+                </div>
+              </div>
+              <div className="achievement-year-picker" role="tablist" aria-label="Achievement year filter">
+                {achievementYears.map((year) => {
+                  const active = year === selectedYear;
+                  const count = year === 'All'
+                    ? achievementsByYear.length
+                    : achievementsByYear.filter((achievement) => achievement.year === year).length;
+                  return (
+                    <button
+                      key={year}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      className={`achievement-year-chip${active ? ' is-active' : ''}`}
+                      onClick={() => setSelectedYear(year)}
+                      style={{
+                        color: active ? (isLight ? '#ffffff' : '#00111a') : (isLight ? '#334155' : 'rgba(226,232,240,0.8)'),
+                        background: active
+                          ? (isLight ? 'linear-gradient(135deg,#0891b2 0%,#4f46e5 100%)' : 'linear-gradient(135deg,#22d3ee 0%,#a78bfa 100%)')
+                          : (isLight ? 'rgba(255,255,255,0.74)' : 'rgba(15,23,42,0.55)'),
+                        borderColor: active
+                          ? 'transparent'
+                          : (isLight ? 'rgba(14,165,233,0.18)' : 'rgba(34,211,238,0.16)'),
+                        boxShadow: active
+                          ? (isLight ? '0 14px 28px rgba(14,165,233,0.18)' : '0 14px 28px rgba(34,211,238,0.12)')
+                          : 'none',
+                      }}
+                    >
+                      {year}
+                      <span className="achievement-year-chip-count">{count}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div style={{ marginBottom: 18, fontFamily: 'DM Sans', fontSize: 12, color: subtitleClr, lineHeight: 1.7 }}>
+              Showing {visibleAchievements.length} achievement{visibleAchievements.length === 1 ? '' : 's'}.
+            </div>
+
+            <div className="achievement-list">
+              {visibleAchievements.map((item, i) => (
+                <div key={`${item.year}-${item.title}`} ref={(el) => { cardRefs.current[i] = el; }}>
                   <AchCard item={item} index={i} isLight={isLight} />
                 </div>
               ))}
+              {visibleAchievements.length === 0 && (
+                <div className="achievement-empty">
+                  No achievements found for the selected year.
+                </div>
+              )}
             </div>
           </div>
         </div>
