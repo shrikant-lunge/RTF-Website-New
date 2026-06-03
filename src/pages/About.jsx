@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import { pageTransition, fadeUp, staggerContainer } from '../lib/animations';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import SectionHeader from '../components/ui/SectionHeader';
-import HoloCard from '../components/ui/HoloCard';
 import NeoButton from '../components/ui/NeoButton';
 import StatCounter from '../components/ui/StatCounter';
 import { Cpu, Wrench, GraduationCap, Target, Trophy, Rocket } from 'lucide-react';
@@ -36,6 +34,14 @@ const domains = [
   { icon: Trophy, name: 'Software & AI', description: 'ROS/ROS2, Python, OpenCV, path planning, SLAM, inverse kinematics' },
 ];
 
+function MinimalCard({ children, className = '' }) {
+  return (
+    <div className={`p-8 h-full bg-[#0D1520]/50 border border-slate-800 rounded-2xl hover:bg-[#141E2E]/80 hover:border-slate-700 transition-all duration-300 flex flex-col ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 export default function About() {
   const [valuesRef, valuesInView] = useScrollAnimation();
   const [domainsRef, domainsInView] = useScrollAnimation();
@@ -48,129 +54,147 @@ export default function About() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="pt-28 pb-24 px-6"
+      className="pt-28 pb-24 px-6 md:px-12 max-w-6xl mx-auto"
     >
       {/* Hero */}
-      <SectionHeader
-        label="// ABOUT US"
-        title="The The Robo-Tech Forum"
-        subtitle="The premier robotics club at Government College of Engineering, Amravati — where theory meets practice and real engineering happens."
-      />
-
-      {/* Mission statement */}
-      <div className="max-w-3xl mx-auto text-center mb-20">
-        <p className="text-body text-text-secondary leading-relaxed">
-          Founded in 2017, The The Robo-Tech Forum (RTF) is a student-driven technical club dedicated
-          to fostering innovation through hands-on robotics, embedded systems, and aero engineering.
-          We've built 50+ projects, competed at national-level events across India — from DD Robocon
-          at IIT Delhi to ISRO's IRoC-U challenge — and trained hundreds of engineers who now work
-          at top companies and research labs.
-        </p>
+      <div className="text-center max-w-4xl mx-auto mb-20 mt-10">
+        <motion.span 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-block px-4 py-1.5 text-xs font-mono tracking-widest text-slate-400 bg-slate-800/50 border border-slate-700 rounded-full mb-6"
+        >
+          ABOUT RTF
+        </motion.span>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-100 mb-8 tracking-tight"
+        >
+          Where Theory Meets Practice
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-lg md:text-xl text-slate-400 leading-relaxed font-light"
+        >
+          Founded in 2014, The Robo-Tech Forum (RTF) is the premier robotics club at Government College of Engineering, Amravati. We are a student-driven technical club dedicated to fostering innovation through hands-on robotics, embedded systems, and aero engineering.
+        </motion.p>
       </div>
 
       {/* Stats */}
-      <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 mb-24">
-        <StatCounter end={stats.members} label="Active Members" suffix="+" />
-        <StatCounter end={stats.projects} label="Projects Built" suffix="+" />
-        <StatCounter end={stats.competitions} label="Competitions" suffix="+" />
-        <StatCounter end={new Date().getFullYear() - stats.founded} label="Years Strong" suffix="+" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-32">
+        <div className="text-center p-6 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+          <StatCounter end={stats.members} label="Active Members" suffix="+" />
+        </div>
+        <div className="text-center p-6 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+          <StatCounter end={stats.projects} label="Projects Built" suffix="+" />
+        </div>
+        <div className="text-center p-6 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+          <StatCounter end={stats.competitions} label="Competitions" suffix="+" />
+        </div>
+        <div className="text-center p-6 bg-slate-900/40 rounded-2xl border border-slate-800/50">
+          <StatCounter end={new Date().getFullYear() - stats.founded} label="Years Strong" suffix="+" />
+        </div>
       </div>
 
-      {/* Values — We Learn, We Create, We Teach */}
-      <SectionHeader
-        label="// OUR PHILOSOPHY"
-        title="We Learn. We Create. We Teach."
-      />
-
-      <motion.div
-        ref={valuesRef}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={valuesInView ? 'visible' : 'hidden'}
-        className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-24"
-      >
-        {values.map((v) => (
-          <motion.div key={v.title} variants={fadeUp}>
-            <HoloCard glow="cyan" className="p-8 h-full">
-              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-5">
-                <v.icon size={22} className="text-cyan-400" />
-              </div>
-              <h3 className="font-display font-semibold text-text-primary text-lg mb-3">
-                {v.title}
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">{v.description}</p>
-            </HoloCard>
-          </motion.div>
-        ))}
-      </motion.div>
+      {/* Values */}
+      <div className="mb-32">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-slate-100 mb-4">Our Philosophy</h2>
+          <p className="text-slate-400 font-light">The core principles that drive our community.</p>
+        </div>
+        <motion.div
+          ref={valuesRef}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={valuesInView ? 'visible' : 'hidden'}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {values.map((v) => (
+            <motion.div key={v.title} variants={fadeUp} className="h-full">
+              <MinimalCard>
+                <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 text-slate-300">
+                  <v.icon size={22} />
+                </div>
+                <h3 className="font-display font-semibold text-slate-200 text-xl mb-3">
+                  {v.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed font-light">{v.description}</p>
+              </MinimalCard>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
 
       {/* Technical Domains */}
-      <SectionHeader
-        label="// EXPERTISE"
-        title="Technical Domains"
-        subtitle="Our members work across four core engineering domains."
-      />
+      <div className="mb-32">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-slate-100 mb-4">Technical Domains</h2>
+          <p className="text-slate-400 font-light">Our expertise spans across four core engineering areas.</p>
+        </div>
+        <motion.div
+          ref={domainsRef}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={domainsInView ? 'visible' : 'hidden'}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+        >
+          {domains.map((d) => (
+            <motion.div key={d.name} variants={fadeUp} className="h-full">
+              <MinimalCard className="flex-row items-start gap-5 p-6">
+                <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 text-slate-300">
+                  <d.icon size={20} />
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-slate-200 text-lg mb-2">
+                    {d.name}
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed font-light">{d.description}</p>
+                </div>
+              </MinimalCard>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
 
-      <motion.div
-        ref={domainsRef}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={domainsInView ? 'visible' : 'hidden'}
-        className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 mb-24"
-      >
-        {domains.map((d) => (
-          <motion.div key={d.name} variants={fadeUp}>
-            <HoloCard glow="purple" className="p-6 h-full flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0">
-                <d.icon size={18} className="text-purple-400" />
-              </div>
-              <div>
-                <h3 className="font-display font-semibold text-text-primary text-base mb-1">
-                  {d.name}
+      {/* Competitions */}
+      <div className="mb-32">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-slate-100 mb-4">National Competitions</h2>
+          <p className="text-slate-400 font-light">Where we put our skills to the test.</p>
+        </div>
+        <motion.div
+          ref={compRef}
+          variants={staggerContainer}
+          initial="hidden"
+          animate={compInView ? 'visible' : 'hidden'}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {competitions.map((c) => (
+            <motion.div key={c.id} variants={fadeUp} className="h-full">
+              <MinimalCard>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="px-3 py-1 text-[11px] font-mono font-medium tracking-wider uppercase bg-slate-800 text-slate-300 border border-slate-700 rounded-full">
+                    {c.year}
+                  </span>
+                </div>
+                <h3 className="font-display font-semibold text-slate-200 text-lg mb-1">
+                  {c.name}
                 </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">{d.description}</p>
-              </div>
-            </HoloCard>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Competitions we participate in */}
-      <SectionHeader
-        label="// WHERE WE COMPETE"
-        title="National Competitions"
-        subtitle="RTF teams regularly represent GCoEA at India's most prestigious technical events."
-      />
-
-      <motion.div
-        ref={compRef}
-        variants={staggerContainer}
-        initial="hidden"
-        animate={compInView ? 'visible' : 'hidden'}
-        className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-24"
-      >
-        {competitions.map((c) => (
-          <motion.div key={c.id} variants={fadeUp}>
-            <HoloCard glow="amber" className="p-6 h-full">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="px-2 py-0.5 text-[10px] font-mono font-semibold tracking-wider uppercase bg-amber-500/15 text-amber-400 border border-amber-500/30 rounded-badge">
-                  {c.year}
-                </span>
-              </div>
-              <h3 className="font-display font-semibold text-text-primary text-base mb-1">
-                {c.name}
-              </h3>
-              <p className="text-xs font-mono text-cyan-400 mb-2">{c.organizer}</p>
-              <p className="text-sm text-text-secondary leading-relaxed">{c.description}</p>
-            </HoloCard>
-          </motion.div>
-        ))}
-      </motion.div>
+                <p className="text-xs font-mono text-slate-500 mb-4">{c.organizer}</p>
+                <p className="text-sm text-slate-400 leading-relaxed font-light mt-auto">{c.description}</p>
+              </MinimalCard>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
 
       {/* CTA */}
-      <div className="text-center">
-        <h2 className="text-h2 text-text-primary mb-4">Want to Join the Team?</h2>
-        <p className="text-body text-text-secondary max-w-lg mx-auto mb-8">
+      <div className="text-center bg-slate-900/40 border border-slate-800/50 rounded-3xl p-10 md:p-14 max-w-4xl mx-auto">
+        <h2 className="text-3xl md:text-4xl font-display font-semibold text-slate-100 mb-4">Join the Team</h2>
+        <p className="text-slate-400 max-w-lg mx-auto mb-8 font-light">
           We recruit new members every academic year. No prior experience required — just a willingness to learn and build.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -341,7 +341,7 @@
 //         >
 //           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
 //           <span className="text-xs font-mono tracking-[0.3em] text-cyan-400 uppercase">
-//             // SYSTEM ONLINE — GCoEA AMRAVATI · EST. 2017
+//             // SYSTEM ONLINE — GCoEA AMRAVATI · EST. 2014
 //           </span>
 //           <Cpu size={12} className="text-cyan-500" />
 //         </motion.div>

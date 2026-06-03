@@ -23,7 +23,7 @@ export default function HeroSection() {
                               bg-cyan-500/10 dark:bg-cyan-500/5 backdrop-blur-sm mb-6">
                 <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
                 <span className="text-xs tracking-[0.2em] text-cyan-700 dark:text-cyan-400 font-mono uppercase font-bold dark:font-normal">
-                  GCoEA Amravati · Est. 2017
+                  GCoEA Amravati · Est. 2014
                 </span>
               </div>
               <p className="text-2xl md:text-3xl font-display font-bold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase mb-2 select-none leading-none">

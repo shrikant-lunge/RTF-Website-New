@@ -1,60 +1,129 @@
 import { motion } from 'framer-motion';
 import { pageTransition, fadeUp, staggerContainer } from '../lib/animations';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import SectionHeader from '../components/ui/SectionHeader';
-import HoloCard from '../components/ui/HoloCard';
-import { Quote } from 'lucide-react';
 import { FaLinkedinIn } from 'react-icons/fa';
+import { Quote } from 'lucide-react';
 import { teamMembers, getTeamByType, testimonials } from '../data/team';
 
 const typeLabels = {
-  faculty: { label: '// MENTORS', title: 'Faculty Advisors' },
-  lead: { label: '// LEADERSHIP', title: 'Core Leadership' },
-  core: { label: '// TEAM', title: 'Core Members' },
+  faculty: { label: '01 // MENTORS', title: 'FACULTY ADVISORS' },
+  lead: { label: '02 // LEADERSHIP', title: 'CORE LEADERSHIP' },
+  core: { label: '03 // TEAM', title: 'CORE MEMBERS' },
 };
 
-function MemberCard({ member }) {
-  const initials = member.name
-    .split(' ')
-    .map((w) => w[0])
-    .join('')
-    .slice(0, 2);
-
+function TeamHero() {
   return (
-    <motion.div variants={fadeUp}>
-      <HoloCard glow="cyan" className="p-6 h-full flex flex-col items-center text-center">
-        {/* Avatar */}
-        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border-2 border-cyan-500/30 flex items-center justify-center mb-4">
+    <div className="pt-32 pb-16 w-full relative overflow-hidden bg-[#060B12] border-b border-slate-800">
+      {/* Background ambient glows */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
+
+      {/* Top text row */}
+      <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 mb-12 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-cyan-400">
+        <div className="mb-6 md:mb-0 max-w-[200px] leading-relaxed">
+          EXPERIENCE MEETS <br /> PASSION
+        </div>
+        <div className="max-w-sm text-left md:text-right leading-relaxed text-slate-400">
+          SAY HELLO TO THE BRILLIANT MINDS AND INNOVATORS BEHIND RTF. WE BUILT A TEAM OF DEDICATED ENGINEERS TO PUSH THE BOUNDARIES OF ROBOTICS.
+        </div>
+      </div>
+
+      {/* Marquee Huge Text */}
+      <div className="w-full overflow-hidden flex items-center relative py-4">
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+          className="flex whitespace-nowrap font-display font-black text-[15vw] leading-none uppercase tracking-tighter"
+        >
+          <div className="flex gap-8 px-4 items-center">
+            <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(34,211,238,0.4)' }}>TEAM</span>
+            <span className="text-slate-100">MEET THE TEAM</span>
+            <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(168,85,247,0.4)' }}>TEAM</span>
+            <span className="text-slate-100">MEET THE TEAM</span>
+            <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(34,211,238,0.4)' }}>TEAM</span>
+            <span className="text-slate-100">MEET THE TEAM</span>
+            <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(168,85,247,0.4)' }}>TEAM</span>
+            <span className="text-slate-100">MEET THE TEAM</span>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+function BrutalistHeader({ label, title }) {
+  return (
+    <div className="mb-12 border-b border-slate-800 pb-4">
+      <p className="font-mono text-[10px] text-cyan-400 tracking-widest mb-2 uppercase">{label}</p>
+      <h2 className="font-display font-black text-4xl md:text-6xl text-slate-100 tracking-tighter uppercase">{title}</h2>
+    </div>
+  );
+}
+
+function MemberCard({ member }) {
+  return (
+    <motion.div variants={fadeUp} className="group h-full max-w-[320px] w-full mx-auto">
+      {/* Brutalist container themed */}
+      <div className="border border-slate-800 bg-[#0D1520] h-full flex flex-col relative overflow-hidden hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] transition-all duration-300">
+        
+        {/* Corner markers */}
+        <div className="absolute top-2 left-2 text-[8px] text-cyan-500/50 font-mono z-20">▲</div>
+        <div className="absolute top-2 right-2 text-[8px] text-purple-500/50 font-mono z-20">▼</div>
+        
+        <div className="w-full relative aspect-[3/4] bg-[#060B12] overflow-hidden border-b border-slate-800 group-hover:border-cyan-500/50 transition-colors">
           {member.photo ? (
-            <img
-              src={member.photo}
-              alt={member.name}
-              className="w-full h-full rounded-full object-cover"
+            <img 
+               src={member.photo} 
+               alt={member.name}
+               className="w-full h-full object-cover grayscale contrast-125 brightness-90 group-hover:grayscale-0 transition-all duration-500"
             />
           ) : (
-            <span className="font-display font-bold text-cyan-400 text-lg">{initials}</span>
+            <div className="w-full h-full flex items-center justify-center font-display font-black text-6xl text-slate-800">
+               {member.name.split(' ').map(n=>n[0]).join('')}
+            </div>
           )}
+          
+          {/* Halftone Pattern Overlay */}
+          <div className="absolute inset-0 opacity-[0.1] mix-blend-screen pointer-events-none" style={{
+            backgroundImage: `radial-gradient(circle, #22D3EE 1px, transparent 1px)`,
+            backgroundSize: '4px 4px'
+          }} />
+
+          {/* Name overlay at the bottom inside the image area */}
+          <div className="absolute bottom-0 left-0 w-full p-4 pt-16 bg-gradient-to-t from-[#0D1520] via-[#0D1520]/80 to-transparent flex items-end">
+            <h3 className="font-display font-black text-2xl uppercase tracking-tighter text-slate-100 leading-none group-hover:text-cyan-300 transition-colors">
+              {member.name}
+            </h3>
+          </div>
         </div>
 
-        <h3 className="font-display font-semibold text-text-primary text-base">{member.name}</h3>
-        <p className="text-xs font-mono text-cyan-400 mt-1">{member.role}</p>
-        <p className="text-xs text-text-muted mt-1">{member.department}</p>
-        {member.year && (
-          <p className="text-[10px] font-mono text-text-muted mt-1">{member.year}</p>
-        )}
-
-        {member.linkedin && (
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${member.name} LinkedIn`}
-            className="mt-3 w-8 h-8 rounded-lg bg-elevated border border-border flex items-center justify-center text-text-muted hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
-          >
-            <FaLinkedinIn />
-          </a>
-        )}
-      </HoloCard>
+        {/* Details section */}
+        <div className="p-5 flex flex-col flex-grow bg-[#0D1520]">
+          <div className="flex flex-col gap-1.5 mb-6">
+            {member.role?.split('\n').map((line, idx) => (
+              <p key={idx} className={`text-[10px] md:text-[11px] font-mono uppercase tracking-widest ${idx === 0 ? 'text-cyan-400 font-semibold' : 'text-slate-400'}`}>
+                {line.trim()}
+              </p>
+            ))}
+          </div>
+          
+          <div className="mt-auto pt-4 border-t border-slate-800 group-hover:border-cyan-500/30 flex justify-between items-center transition-colors">
+            <div className="flex flex-col">
+              <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-1">
+                DEPARTMENT
+              </span>
+              <span className="text-[10px] font-mono text-slate-300 uppercase tracking-widest">
+                {member.department}
+              </span>
+            </div>
+            {member.linkedin && (
+              <a href={member.linkedin} target="_blank" rel="noreferrer" className="w-8 h-8 flex items-center justify-center border border-slate-700 rounded-full text-slate-400 hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400 transition-colors z-20 shrink-0">
+                <FaLinkedinIn size={12} />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -67,21 +136,19 @@ function TeamSection({ type }) {
   if (members.length === 0) return null;
 
   return (
-    <div className="mb-20">
-      <SectionHeader label={label} title={title} />
+    <div className="mb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <BrutalistHeader label={label} title={title} />
       <motion.div
         ref={ref}
         variants={staggerContainer}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        className={`max-w-7xl mx-auto grid gap-6 ${
-          type === 'faculty'
-            ? 'grid-cols-1 sm:grid-cols-2 max-w-2xl'
-            : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-        }`}
+        className="flex flex-wrap gap-6"
       >
-        {members.map((member) => (
-          <MemberCard key={member.id} member={member} />
+        {members.map((member, index) => (
+          <div key={`${member.id}-${index}`} className="flex-1 min-w-[280px] max-w-[320px]">
+            <MemberCard member={member} />
+          </div>
         ))}
       </motion.div>
     </div>
@@ -92,33 +159,35 @@ function TestimonialsSection() {
   const [ref, isInView] = useScrollAnimation();
 
   return (
-    <div>
-      <SectionHeader
-        label="// WHAT MEMBERS SAY"
-        title="Testimonials"
-        subtitle="Hear from the engineers who built RTF."
-      />
+    <div className="mb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+      <BrutalistHeader label="04 // REVIEWS" title="WHAT MEMBERS SAY" />
       <motion.div
         ref={ref}
         variants={staggerContainer}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
         {testimonials.map((t) => (
-          <motion.div key={t.id} variants={fadeUp}>
-            <HoloCard glow="purple" className="p-6 h-full">
-              <Quote size={20} className="text-purple-400/50 mb-3" />
-              <p className="text-sm text-text-secondary leading-relaxed italic mb-4">
+          <motion.div key={t.id} variants={fadeUp} className="h-full">
+            <div className="p-8 h-full flex flex-col bg-[#0D1520] border border-slate-800 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)] transition-all relative group">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 group-hover:text-cyan-400 transition-all">
+                <Quote size={80} />
+              </div>
+              <p className="text-sm md:text-base text-slate-300 leading-relaxed font-mono uppercase tracking-wide mb-8 flex-grow z-10">
                 "{t.quote}"
               </p>
-              <div className="border-t border-border/50 pt-3">
-                <p className="font-display font-semibold text-text-primary text-sm">
-                  {t.author}
-                </p>
-                <p className="text-xs font-mono text-text-muted">{t.role}</p>
+              <div className="border-t border-slate-800 group-hover:border-cyan-500/30 pt-5 mt-auto flex items-center justify-between z-10 transition-colors">
+                <div>
+                  <p className="font-display font-black text-xl text-slate-100 tracking-tight uppercase group-hover:text-cyan-300 transition-colors">
+                    {t.author}
+                  </p>
+                  <p className="text-[10px] font-mono text-cyan-400 tracking-widest mt-1 uppercase">
+                    {t.role}
+                  </p>
+                </div>
               </div>
-            </HoloCard>
+            </div>
           </motion.div>
         ))}
       </motion.div>
@@ -134,12 +203,15 @@ export default function Team() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="pt-28 pb-24 px-6"
+      className="bg-[#060B12] min-h-screen"
     >
-      <TeamSection type="faculty" />
-      <TeamSection type="lead" />
-      <TeamSection type="core" />
-      <TestimonialsSection />
+      <TeamHero />
+      <div className="py-20">
+        <TeamSection type="faculty" />
+        <TeamSection type="lead" />
+        <TeamSection type="core" />
+        <TestimonialsSection />
+      </div>
     </motion.main>
   );
 }

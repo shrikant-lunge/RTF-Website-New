@@ -13,7 +13,7 @@ export const stats = {
   members: 120,
   projects: 50,
   competitions: 15,
-  founded: 2017,
+  founded: 2014,
 };
 
 /**

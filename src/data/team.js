@@ -1,7 +1,6 @@
 /**
  * RTF Team Members Data
  * Real members from The The Robo-Tech Forum, GCoEA Amravati
- * Source: therobotechforum.in
  *
  * How to update this file:
  * 1. To add a new person, copy one full block between { and }, paste it below,
@@ -21,7 +20,7 @@ export const teamMembers = [
   id: 1,
   name: 'Dr. A. M. Mahalle',
   role: 'Chief Patron \n Principal \n Govt. College of Engg., Amravati',
-  department: 'Mechanical Department',
+  department: 'Mechanical Engineering',
   type: 'faculty',
   photo: 'src/assets/img/faculty/PrincipalSir.jpg',
   linkedin: null,
@@ -30,7 +29,7 @@ export const teamMembers = [
    {
     id: 2,
     name: 'Dr P R Deshmukh',
-    role: 'Faculty Co-Advisor',
+    role: 'Department Patron \n Head of Department',
     department: 'Electronics and Telecommunication Engineering',
     type: 'faculty',
     photo: 'src/assets/img/faculty/deshmukhsir.png',
@@ -40,7 +39,7 @@ export const teamMembers = [
   {
     id: 3,
     name: 'Prof. A. M. Shah',
-    role: 'Faculty Co-Advisor',
+    role: 'Faculty Co-cordinator',
     department: 'Electronics and Telecommunication Engineering',
     type: 'faculty',
     photo: 'src/assets/img/faculty/shahsir.png',
@@ -50,7 +49,7 @@ export const teamMembers = [
    {
     id: 4,
     name: 'Dr. Rajesh B. Sharma',
-    role: 'Faculty Mentor',
+    role: 'Mentor',
     department: 'Electrical Engineering',
     type: 'faculty',
     photo: "src/assets/img/faculty/sharmasir.png",
@@ -63,10 +62,7 @@ export const teamMembers = [
   {
     id: 4,
     name: 'Umang Fule',
-    role: 'Student Lead',
-    // add same text style or and size 
-    // Team Captain - DD ROBOCON 2026
-    // Team Lead - ISRO Robotics Challenge (IRoC-U 2026)
+    role: 'Student Lead \n Team Captain - DD ROBOCON 2026 \n Team Lead - ISRO Robotics Challenge (IRoC-U 2026)',
     department: 'Information Technology',
     type: 'lead',
     photo: null,
@@ -79,7 +75,7 @@ export const teamMembers = [
     role: 'Student Coordinator',
     department: 'Electronics and Telecommunication Engineering',
     type: 'lead',
-    photo: 'https://drive.google.com/u/1/drive-viewer/AKGpihY5uEZ70_JoFTNaOJ5bL4lwGeJbgyebzORvm-nvo7lTRUghZis0iSCihdMB3UM2PeQ1W_Uz3BEPo7HsZpIwmB9F3nHfLJY09GE=s1600-rw-v1?auditContext=forDisplay',
+    photo: '',
     linkedin: 'https://linkedin.com/in/',
     year: '3rd Year',
   },
@@ -250,7 +246,7 @@ export const testimonials = [
     quote:
       'The only place in our college where people collectively think outside of the box, apply all the knowledge they have and put everything in real life. RTF provides you a platform where you can actually learn and apply your technical skills to make something out of your imagination.',
     author: 'Vishal Gaikwad',
-    role: 'Mechanical Head 2017',
+    role: 'Mechanical Head 2014',
   },
   {
     id: 3,
