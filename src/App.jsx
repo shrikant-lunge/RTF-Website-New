@@ -29,10 +29,14 @@ function AnimatedRoutes() {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Show the global loader on route change
-    showLoader("Loading assets...");
+    // Only apply the loader logic to routes that are known to be asset/image-heavy
+    const imageHeavyRoutes = ['/gallery', '/team', '/projects', '/achievement', '/sponsors'];
+    const requiresLoader = imageHeavyRoutes.some(route => location.pathname.startsWith(route));
+
+    if (!requiresLoader) return;
 
     let isMounted = true;
+    let loaderShown = false;
 
     // Small delay to allow React to paint the DOM with new <img> tags
     const mountTimer = setTimeout(() => {
@@ -42,9 +46,13 @@ function AnimatedRoutes() {
       const incompleteImages = images.filter(img => !img.complete);
 
       if (incompleteImages.length === 0) {
-        hideLoader();
+        // No incomplete images (cached or absent), don't show the loader
         return;
       }
+
+      // There are images to load, so show the loader
+      loaderShown = true;
+      showLoader("Loading assets...");
 
       let loadedCount = 0;
       let hasEnded = false;
@@ -52,7 +60,7 @@ function AnimatedRoutes() {
       // Fallback to ensure we never get stuck indefinitely
       const fallbackTimer = setTimeout(() => {
         hasEnded = true;
-        if (isMounted) hideLoader();
+        if (isMounted && loaderShown) hideLoader();
       }, 1500);
 
       const checkDone = () => {
@@ -61,7 +69,7 @@ function AnimatedRoutes() {
         if (loadedCount >= incompleteImages.length) {
           hasEnded = true;
           clearTimeout(fallbackTimer);
-          if (isMounted) hideLoader();
+          if (isMounted && loaderShown) hideLoader();
         }
       };
 
@@ -74,7 +82,7 @@ function AnimatedRoutes() {
     return () => {
       isMounted = false;
       clearTimeout(mountTimer);
-      hideLoader(); // Cleanup safely
+      if (loaderShown) hideLoader(); // Cleanup safely only if we showed it
     };
   }, [location.pathname, showLoader, hideLoader]);
 
