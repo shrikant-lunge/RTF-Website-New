@@ -495,32 +495,22 @@ function LazyImage({ src, alt, style }) {
 /* TILT WRAPPER */
 function TiltCard({ className, style, children, onClick, onKeyDown, tabIndex, role, ariaLabel }) {
   const ref = useRef(null);
+  
   const onMove = useCallback(e => {
-    const el = ref.current; if (!el) return;
+    const el = ref.current; 
+    if (!el) return;
     const r = el.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width  - 0.5;
     const y = (e.clientY - r.top)  / r.height - 0.5;
     el.style.transform = `perspective(1100px) rotateY(${x * 5}deg) rotateX(${-y * 4}deg) translateY(-4px)`;
   }, []);
 
-  /* ── Track Scroll for ClipPath ── */
-  useEffect(() => {
-        const handleScroll = () => { // <--- ADDED THIS LINE
-      if (!wrapperRef.current) return;
-      const rect = wrapperRef.current.getBoundingClientRect();
-      const centerView = window.innerHeight / 2;
-      const progressY = centerView - rect.top;
-      setClipHeight(Math.max(0, progressY));
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    handleScroll(); // initial measurement
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
+  const onLeave = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = `perspective(1100px) rotateY(0deg) rotateX(0deg) translateY(0)`;
   }, []);
+
   return (
     <div ref={ref} className={className}
       style={{ ...style, transition: 'transform 0.12s ease, box-shadow 0.4s ease, border-color 0.4s ease' }}
