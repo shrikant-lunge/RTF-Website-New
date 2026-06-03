@@ -24,10 +24,59 @@ import Login from './pages/Login';
 
 function AnimatedRoutes() {
   const location = useLocation();
+  const { showLoader, hideLoader } = useLoading();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+
+    // Show the global loader on route change
+    showLoader("Loading assets...");
+
+    let isMounted = true;
+
+    // Small delay to allow React to paint the DOM with new <img> tags
+    const mountTimer = setTimeout(() => {
+      if (!isMounted) return;
+
+      const images = Array.from(document.querySelectorAll('img'));
+      const incompleteImages = images.filter(img => !img.complete);
+
+      if (incompleteImages.length === 0) {
+        hideLoader();
+        return;
+      }
+
+      let loadedCount = 0;
+      let hasEnded = false;
+
+      // Fallback to ensure we never get stuck indefinitely
+      const fallbackTimer = setTimeout(() => {
+        hasEnded = true;
+        if (isMounted) hideLoader();
+      }, 1500);
+
+      const checkDone = () => {
+        if (hasEnded) return;
+        loadedCount++;
+        if (loadedCount >= incompleteImages.length) {
+          hasEnded = true;
+          clearTimeout(fallbackTimer);
+          if (isMounted) hideLoader();
+        }
+      };
+
+      incompleteImages.forEach(img => {
+        img.addEventListener('load', checkDone, { once: true });
+        img.addEventListener('error', checkDone, { once: true });
+      });
+    }, 50);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(mountTimer);
+      hideLoader(); // Cleanup safely
+    };
+  }, [location.pathname, showLoader, hideLoader]);
 
   return (
     <AnimatePresence mode="wait">
