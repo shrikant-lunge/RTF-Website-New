@@ -32,9 +32,16 @@ export default function StatsBar() {
         <motion.div variants={fadeUp} className="md:border-r md:border-border/50">
           <StatCounter end={stats.competitions} label="Competitions" suffix="+" />
         </motion.div>
-        <motion.div variants={fadeUp}>
+        {/* <motion.div variants={fadeUp}>
           <StatCounter end={new Date().getFullYear() - stats.founded} label="Years Strong" suffix="+" />
-        </motion.div>
+        </motion.div> */}
+        <motion.div variants={fadeUp}>
+  <StatCounter
+    end={stats.alumniCount}
+    label="Alumni Network"
+    suffix="+"
+  />
+</motion.div>
       </motion.div>
     </section>
   );

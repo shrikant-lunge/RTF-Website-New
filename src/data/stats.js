@@ -10,10 +10,12 @@
  */
 
 export const stats = {
-  members: 120,
-  projects: 50,
+  members: 60,
+  projects: 10,
   competitions: 15,
   founded: 2014,
+  alumniCount: 200,
+
 };
 
 /**

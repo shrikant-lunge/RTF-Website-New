@@ -49,8 +49,8 @@ export default function HeroSection() {
                 competing at national stages, and pushing limits.
               </p>
               <p className="text-sm font-mono text-text-muted">
-                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">120+</span> engineers ·{' '}
-                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">50+</span> projects ·{' '}
+                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">60+</span> engineers ·{' '}
+                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">10+</span> projects ·{' '}
                 <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">IITs, ISRO</span> &amp; beyond
               </p>
             </div>
