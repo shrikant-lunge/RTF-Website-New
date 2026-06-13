@@ -212,7 +212,7 @@ export default function Sponsors() {
         </div>
       )}
 
-      {/* ─── Final CTA — No prices, just a conversation ─── */}
+      {/* ─── Final CTA ─── */}
       <div className="relative py-20 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5" />
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />

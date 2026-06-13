@@ -181,7 +181,7 @@ export default function HorizontalTimeline() {
       className="relative w-full min-h-screen bg-deep overflow-hidden"
     >
       {/* Background grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] bg-[size:80px_80px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,32,32,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,32,32,0.03)_1px,transparent_1px)] bg-[size:80px_80px] pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-deep via-transparent to-deep pointer-events-none z-[1]" />
 
       {/* Floating glow orbs */}
@@ -195,7 +195,7 @@ export default function HorizontalTimeline() {
             // HALL OF FAME
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-wider mb-4">
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-300 bg-clip-text text-transparent">
               ACHIEVEMENTS TIMELINE
             </span>
           </h2>
@@ -228,7 +228,7 @@ export default function HorizontalTimeline() {
                       <div
                         className={`relative z-10 w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-500 ${
                           isActive
-                            ? 'border-cyan-400 bg-cyan-500/20 shadow-[0_0_15px_rgba(0,212,255,0.5)]'
+                            ? 'border-cyan-400 bg-cyan-500/20 shadow-[0_0_15px_rgba(255,32,32,0.5)]'
                             : 'border-border/50 bg-deep'
                         }`}
                       >
@@ -269,7 +269,7 @@ export default function HorizontalTimeline() {
                   ref={(el) => (cardRefs.current[index] = el)}
                   className="absolute inset-0 will-change-transform"
                 >
-                  <div className="backdrop-blur-md rounded-2xl bg-surface/50 border border-cyan-500/20 shadow-[0_0_30px_rgba(6,182,212,0.1)] overflow-hidden">
+                  <div className="backdrop-blur-md rounded-2xl bg-surface/50 border border-cyan-500/20 shadow-[0_0_30px_rgba(255,32,32,0.1)] overflow-hidden">
                     <div className="grid grid-cols-2 gap-0">
                       {/* Image */}
                       <div className="relative h-[420px] overflow-hidden">
@@ -395,11 +395,11 @@ function MobileTimelineCard({ item, index }) {
   return (
     <div ref={cardRef} className="relative pl-10 opacity-0">
       {/* Dot on the line */}
-      <div className="absolute left-[7px] top-6 w-[18px] h-[18px] rounded-full border-2 border-cyan-500/50 bg-deep z-10 flex items-center justify-center">
-        <div className="w-2 h-2 rounded-full bg-cyan-400" />
+      <div className="absolute left-[7px] top-6 w-[18px] h-[18px] rounded-full border-2 border-red-500/50 bg-deep z-10 flex items-center justify-center">
+        <div className="w-2 h-2 rounded-full bg-red-400" />
       </div>
 
-      <div className="backdrop-blur-md p-5 rounded-xl bg-surface/50 border border-cyan-400/30 shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+      <div className="backdrop-blur-md p-5 rounded-xl bg-surface/50 border border-red-400/30 shadow-[0_0_20px_rgba(255,32,32,0.15)]">
         {/* Image */}
         <div className="relative h-40 rounded-lg overflow-hidden mb-4">
           <img

@@ -155,8 +155,8 @@ function AppContent() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="fixed bottom-6 right-6 z-[999] w-12 h-12 rounded-full 
-                       bg-cyan-500 text-black shadow-[0_0_15px_rgba(6,182,212,0.8)] 
-                       hover:shadow-[0_0_25px_rgba(6,182,212,1)] 
+                       bg-cyan-500 text-black shadow-[0_0_15px_rgba(255,32,32,0.8)] 
+                       hover:shadow-[0_0_25px_rgba(255,32,32,1)] 
                        animate-pulse hover:animate-none transition-all 
                        duration-300 flex items-center justify-center 
                        border-2 border-cyan-300 cursor-pointer group"

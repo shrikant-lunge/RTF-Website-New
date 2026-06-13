@@ -95,7 +95,7 @@ export default function Gallery() {
               {/* Skeleton showing before image loads */}
               {!imagesLoaded[item.id] && (
                 <div className="absolute inset-0 z-10 bg-deep/40 rounded-card overflow-hidden">
-                  <div className="w-full h-full bg-gray-800/50 animate-pulse min-h-[250px]" />
+                  <div className="w-full h-full bg-elevated/50 animate-pulse min-h-[250px]" />
                 </div>
               )}
 

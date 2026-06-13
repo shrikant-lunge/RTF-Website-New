@@ -103,13 +103,13 @@ export default function Projects() {
 
           {/* Search Bar */}
           <div className="relative w-full max-w-[320px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#475569]" size={16} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" size={16} />
             <input
               type="text"
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#0D1520] border border-[#1E2D42] text-[#F1F5F9] font-mono text-[13px] py-[10px] pr-4 pl-10 rounded-md focus:outline-none focus:border-[#22D3EE] focus:ring-[3px] focus:ring-[rgba(34,211,238,0.1)] transition-all"
+              className="w-full bg-surface border border-border text-text-primary font-mono text-[13px] py-[10px] pr-4 pl-10 rounded-md focus:outline-none focus:border-cyan-400 focus:ring-[3px] focus:ring-cyan-400/10 transition-all"
             />
           </div>
 
@@ -120,8 +120,8 @@ export default function Projects() {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-[18px] py-[8px] text-[11px] font-mono tracking-[0.1em] rounded-[4px] border transition-all duration-200 ${activeCategory === cat
-                  ? 'bg-[rgba(34,211,238,0.1)] text-[#22D3EE] border-[#22D3EE] shadow-[0_0_16px_rgba(34,211,238,0.1)]'
-                  : 'bg-transparent text-[#475569] border-[#1E2D42] hover:text-[#94A3B8] hover:border-[rgba(34,211,238,0.3)]'
+                  ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400 shadow-[0_0_16px_rgba(255,32,32,0.1)]'
+                  : 'bg-transparent text-text-muted border-border hover:text-text-secondary hover:border-cyan-500/30'
                   }`}
               >
                 {cat} ({categoryCounts[cat] || 0})
@@ -133,7 +133,7 @@ export default function Projects() {
 
         {/* Results count text */}
         {!loading && projects.length > 0 && (
-          <div className="text-[12px] font-mono text-[#475569] mb-4">
+          <div className="text-[12px] font-mono text-text-muted mb-4">
             Showing {filtered.length} of {projects.length} projects
           </div>
         )}
@@ -143,52 +143,27 @@ export default function Projects() {
         // Loading State: Skeletons
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="bg-[#0D1520] rounded-xl border border-[#1E2D42] h-[400px] overflow-hidden flex flex-col">
+            <div key={i} className="bg-card rounded-xl border border-border h-[400px] overflow-hidden flex flex-col">
               <div
-                className="h-[200px] w-full relative"
-                style={{
-                  background: 'linear-gradient(90deg, #0D1520 0%, #141E2E 50%, #0D1520 100%)',
-                  backgroundSize: '200% 100%',
-                  animation: 'shimmer 1.5s infinite linear'
-                }}
+                className="h-[200px] w-full relative skeleton-shimmer"
               />
               <div className="p-5 flex flex-col flex-1 gap-4">
                 <div
-                  className="h-[20px] w-[70%] rounded-[4px]"
-                  style={{
-                    background: 'linear-gradient(90deg, #0D1520 0%, #141E2E 50%, #0D1520 100%)',
-                    backgroundSize: '200% 100%',
-                    animation: 'shimmer 1.5s infinite linear'
-                  }}
+                  className="h-[20px] w-[70%] rounded-[4px] skeleton-shimmer"
                 />
                 <div className="flex flex-col gap-2">
                   <div
-                    className="h-[14px] w-[90%] rounded-[2px]"
-                    style={{
-                      background: 'linear-gradient(90deg, #0D1520 0%, #141E2E 50%, #0D1520 100%)',
-                      backgroundSize: '200% 100%',
-                      animation: 'shimmer 1.5s infinite linear'
-                    }}
+                    className="h-[14px] w-[90%] rounded-[2px] skeleton-shimmer"
                   />
                   <div
-                    className="h-[14px] w-[60%] rounded-[2px]"
-                    style={{
-                      background: 'linear-gradient(90deg, #0D1520 0%, #141E2E 50%, #0D1520 100%)',
-                      backgroundSize: '200% 100%',
-                      animation: 'shimmer 1.5s infinite linear'
-                    }}
+                    className="h-[14px] w-[60%] rounded-[2px] skeleton-shimmer"
                   />
                 </div>
                 <div className="flex gap-2 mt-auto">
                   {Array.from({ length: 3 }).map((_, j) => (
                     <div
                       key={j}
-                      className="h-[20px] w-[50px] rounded-[3px]"
-                      style={{
-                        background: 'linear-gradient(90deg, #0D1520 0%, #141E2E 50%, #0D1520 100%)',
-                        backgroundSize: '200% 100%',
-                        animation: 'shimmer 1.5s infinite linear'
-                      }}
+                      className="h-[20px] w-[50px] rounded-[3px] skeleton-shimmer"
                     />
                   ))}
                 </div>
@@ -198,13 +173,13 @@ export default function Projects() {
         </div>
       ) : error && projects.length === 0 ? (
         // Error state (no fallback data)
-        <div className="flex flex-col items-center justify-center p-12 text-center rounded-xl bg-[#0D1520] border border-[#1E2D42] max-w-2xl mx-auto">
-          <AlertTriangle className="text-[#FBBF24] mb-4" size={40} />
-          <h3 className="font-['Space_Grotesk'] text-2xl text-[#F1F5F9] mb-2">Unable to load projects</h3>
-          <p className="font-mono text-[#94A3B8] mb-6">Please try again</p>
+        <div className="flex flex-col items-center justify-center p-12 text-center rounded-xl bg-card border border-border max-w-2xl mx-auto">
+          <AlertTriangle className="text-amber-400 mb-4" size={40} />
+          <h3 className="font-display text-2xl text-text-heading mb-2">Unable to load projects</h3>
+          <p className="font-mono text-text-secondary mb-6">Please try again</p>
           <button
             onClick={refetch}
-            className="flex items-center gap-2 px-6 py-2 bg-[rgba(34,211,238,0.1)] text-[#22D3EE] border border-[#22D3EE] rounded font-mono tracking-wider hover:bg-[rgba(34,211,238,0.2)]"
+            className="flex items-center gap-2 px-6 py-2 bg-cyan-500/10 text-cyan-400 border border-cyan-400 rounded font-mono tracking-wider hover:bg-cyan-500/20"
           >
             <RefreshCw size={16} />
             RETRY
@@ -246,10 +221,10 @@ export default function Projects() {
           {/* No results state */}
           {filtered.length === 0 && (
             <div className="flex flex-col items-center justify-center p-12 text-center mt-8">
-              <p className="text-xl text-[#F1F5F9] font-['Space_Grotesk'] mb-2">
+              <p className="text-xl text-text-heading font-display mb-2">
                 No projects found for "{searchQuery}"
               </p>
-              <p className="text-[#94A3B8] font-['Inter'] mb-6">
+              <p className="text-text-secondary font-body mb-6">
                 Try a different search or category
               </p>
               <button
@@ -257,7 +232,7 @@ export default function Projects() {
                   setSearchQuery('');
                   setActiveCategory('ALL');
                 }}
-                className="px-4 py-2 font-mono text-[13px] bg-transparent text-[#22D3EE] border border-[#22D3EE] rounded hover:bg-[rgba(34,211,238,0.1)] transition-colors"
+                className="px-4 py-2 font-mono text-[13px] bg-transparent text-cyan-400 border border-cyan-400 rounded hover:bg-cyan-500/10 transition-colors"
               >
                 Clear filters
               </button>
@@ -276,7 +251,7 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-[#060B12]/80 backdrop-blur-md"
+              className="absolute inset-0 bg-overlay backdrop-blur-md"
             />
 
             {/* Modal Content */}
@@ -285,19 +260,19 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl max-h-[90vh] bg-[#0D1520]/90 backdrop-blur-2xl border border-cyan-500/20 rounded-2xl shadow-[0_0_50px_rgba(34,211,238,0.15)] overflow-hidden flex flex-col md:flex-row z-10"
+              className="relative w-full max-w-5xl max-h-[90vh] bg-surface/90 backdrop-blur-2xl border border-cyan-500/20 rounded-2xl shadow-[0_0_50px_rgba(255,32,32,0.15)] overflow-hidden flex flex-col md:flex-row z-10"
             >
               {/* Close button */}
               <button
                 onClick={() => setSelectedProject(null)}
                 aria-label="Close project details"
-                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-[#0D1520]/80 backdrop-blur-md border border-[#1E2D42] flex items-center justify-center text-[#94A3B8] hover:text-[#22D3EE] hover:border-[#22D3EE]/40 transition-all hover:bg-[#22D3EE]/10 group"
+                className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-surface/80 backdrop-blur-md border border-border flex items-center justify-center text-text-secondary hover:text-cyan-400 hover:border-cyan-400/40 transition-all hover:bg-cyan-500/10 group"
               >
                 <X size={18} className="group-hover:rotate-90 transition-transform duration-300" />
               </button>
 
               {/* Left Column: Image Gallery */}
-              <div className="relative w-full md:w-1/2 h-72 md:h-auto min-h-[300px] bg-[#060B12] overflow-hidden shrink-0 group">
+              <div className="relative w-full md:w-1/2 h-72 md:h-auto min-h-[300px] bg-dark overflow-hidden shrink-0 group">
                 <AnimatePresence mode="wait">
                   {selectedProject.images && selectedProject.images.length > 0 ? (
                     <motion.img
@@ -311,7 +286,7 @@ export default function Projects() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#0D1520] to-[#141E2E] flex items-center justify-center">
+                    <div className="w-full h-full bg-gradient-to-br from-surface to-elevated flex items-center justify-center">
                       <div className="text-cyan-500/20">
                          <Search size={48} />
                       </div>
@@ -330,7 +305,7 @@ export default function Projects() {
                         );
                       }}
                       aria-label="Previous image"
-                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-[#22D3EE] hover:border-[#22D3EE]/50 hover:bg-black/60 transition-all opacity-0 group-hover:opacity-100"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-black/60 transition-all opacity-0 group-hover:opacity-100"
                     >
                       <ChevronLeft size={20} />
                     </button>
@@ -342,7 +317,7 @@ export default function Projects() {
                         );
                       }}
                       aria-label="Next image"
-                      className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-[#22D3EE] hover:border-[#22D3EE]/50 hover:bg-black/60 transition-all opacity-0 group-hover:opacity-100"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white/70 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-black/60 transition-all opacity-0 group-hover:opacity-100"
                     >
                       <ChevronRight size={20} />
                     </button>
@@ -361,7 +336,7 @@ export default function Projects() {
                         }}
                         aria-label={`Go to image ${i + 1}`}
                         className={`h-2 rounded-full transition-all duration-300 ${i === imageIndex
-                          ? 'bg-[#22D3EE] w-6 shadow-[0_0_10px_rgba(34,211,238,0.5)]'
+                          ? 'bg-cyan-400 w-6 shadow-[0_0_10px_rgba(255,32,32,0.5)]'
                           : 'bg-white/40 w-2 hover:bg-white/70'
                           }`}
                       />
@@ -371,13 +346,13 @@ export default function Projects() {
               </div>
 
               {/* Right Column: Content */}
-              <div className="p-8 md:p-10 w-full md:w-1/2 flex flex-col overflow-y-auto custom-scrollbar bg-[#0D1520]">
+              <div className="p-8 md:p-10 w-full md:w-1/2 flex flex-col overflow-y-auto custom-scrollbar bg-card">
                 {/* Category + Year */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+                  <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full shadow-[0_0_15px_rgba(255,32,32,0.1)]">
                     {selectedProject.category}
                   </span>
-                  <span className="text-xs font-mono text-slate-400 px-3 py-1 bg-white/5 rounded-full border border-white/5">
+                  <span className="text-xs font-mono text-text-secondary px-3 py-1 bg-white/5 rounded-full border border-white/5">
                     {selectedProject.year}
                   </span>
                   {String(selectedProject.status).toUpperCase() === 'ONGOING' && (
@@ -397,7 +372,7 @@ export default function Projects() {
                   {selectedProject.title}
                 </h2>
 
-                <p className="font-sans text-base text-slate-300 leading-relaxed mb-8">
+                <p className="font-body text-base text-text-body leading-relaxed mb-8">
                   {selectedProject.description}
                 </p>
 
@@ -420,10 +395,10 @@ export default function Projects() {
                 {/* Tech Stack */}
                 {selectedProject.techStack && selectedProject.techStack.length > 0 && (
                   <div className="mb-8">
-                    <h4 className="text-xs font-mono font-bold tracking-widest text-slate-500 mb-4 uppercase flex items-center gap-2">
-                      <div className="w-4 h-[1px] bg-slate-500/50"></div>
+                    <h4 className="text-xs font-mono font-bold tracking-widest text-text-muted mb-4 uppercase flex items-center gap-2">
+                      <div className="w-4 h-[1px] bg-text-muted/50"></div>
                       TECH STACK
-                      <div className="flex-grow h-[1px] bg-slate-500/20"></div>
+                      <div className="flex-grow h-[1px] bg-text-muted/20"></div>
                     </h4>
                     <div className="flex flex-wrap gap-2.5">
                       {selectedProject.techStack.map((tech) => (
@@ -440,8 +415,8 @@ export default function Projects() {
 
                 <div className="mt-auto">
                   {/* Team Size */}
-                  <div className="flex items-center gap-3 mb-8 text-slate-400 bg-white/5 w-fit px-4 py-2 rounded-xl border border-white/5">
-                    <Users size={18} className="text-slate-300" />
+                  <div className="flex items-center gap-3 mb-8 text-text-secondary bg-white/5 w-fit px-4 py-2 rounded-xl border border-white/5">
+                    <Users size={18} className="text-text-secondary" />
                     <span className="text-sm font-medium">
                       Built by <span className="text-cyan-400">{selectedProject.teamSize}</span> team members
                     </span>
@@ -454,7 +429,7 @@ export default function Projects() {
                         href={selectedProject.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-[#060B12] bg-cyan-400 border border-transparent rounded-xl hover:bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.4)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] transition-all transform hover:-translate-y-0.5"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-dark bg-cyan-400 border border-transparent rounded-xl hover:bg-cyan-300 shadow-[0_0_20px_rgba(255,32,32,0.4)] hover:shadow-[0_0_30px_rgba(255,32,32,0.6)] transition-all transform hover:-translate-y-0.5"
                       >
                         <ExternalLink size={18} />
                         LIVE DEMO
@@ -465,7 +440,7 @@ export default function Projects() {
                         href={selectedProject.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-slate-200 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-slate-800 transition-all transform hover:-translate-y-0.5"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-text-secondary bg-elevated/50 border border-border rounded-xl hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-elevated transition-all transform hover:-translate-y-0.5"
                       >
                         <FaGithub size={18} />
                         SOURCE

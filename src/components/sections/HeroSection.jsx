@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                    w-[600px] h-[600px] rounded-full pointer-events-none 
-                   bg-cyan-500/10 dark:bg-cyan-500/5 blur-[80px]"
+                   bg-cyan-500/10 blur-[80px]"
       />
       <ParticleCanvas />
 
@@ -19,15 +19,15 @@ export default function HeroSection() {
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-3 flex flex-col items-start">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/20 dark:border-cyan-500/30
-                              bg-cyan-500/10 dark:bg-cyan-500/5 backdrop-blur-sm mb-6">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-pulse" />
-                <span className="text-xs tracking-[0.2em] text-cyan-700 dark:text-cyan-400 font-mono uppercase font-bold dark:font-normal">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/20
+                              bg-cyan-500/10 backdrop-blur-sm mb-6">
+                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+                <span className="text-xs tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-mono uppercase font-semibold">
                   GCoEA Amravati · Est. 2014
                 </span>
               </div>
               <p className="text-2xl md:text-3xl font-display font-bold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase mb-2 select-none leading-none">
-                WE <span className="inline-block min-w-[240px] text-slate-900 dark:text-white">INNOVATE</span>
+                WE <span className="inline-block min-w-[240px] text-text-primary">INNOVATE</span>
               </p>
               <h1 className="text-[clamp(3rem,8vw,8rem)] font-display font-black leading-[0.9]
                              tracking-tight text-text-primary uppercase mb-6"
@@ -36,8 +36,8 @@ export default function HeroSection() {
                 <span className="block text-stroke-hollow">
                   TECH
                 </span>
-                <span className="bg-gradient-to-r from-cyan-600 via-cyan-500 to-purple-600 
-                                 dark:from-cyan-400 dark:via-cyan-300 dark:to-purple-400
+                <span className="bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-300 
+                                 dark:from-[#FF2020] dark:via-[#CC0000] dark:to-[#8B0000]
                                  bg-clip-text text-transparent">
                   FORUM
                 </span>
@@ -49,20 +49,18 @@ export default function HeroSection() {
                 competing at national stages, and pushing limits.
               </p>
               <p className="text-sm font-mono text-text-muted">
-                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">120+</span> engineers ·{' '}
-                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">50+</span> projects ·{' '}
-                <span className="text-cyan-700 dark:text-cyan-400 font-bold dark:font-normal">IITs, ISRO</span> &amp; beyond
+                <span className="text-cyan-600 dark:text-cyan-400 font-semibold">120+</span> engineers ·{' '}
+                <span className="text-cyan-600 dark:text-cyan-400 font-semibold">50+</span> projects ·{' '}
+                <span className="text-cyan-600 dark:text-cyan-400 font-semibold">IITs, ISRO</span> & beyond
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <NeoButton to="/projects" arrow>SEE OUR WORK</NeoButton>
               <NeoButton to="/about" variant="secondary">WHO WE ARE</NeoButton>
-                            {/* <NeoButton to="/sponsors" variant="secondary">Sponser</NeoButton> */}
-
             </div>
           </div>
           <div className="lg:col-span-2 hidden lg:flex items-center justify-center">
-            <div className="w-[180px] h-[180px] rounded-xl overflow-hidden border border-cyan-500/20 dark:border-cyan-500/40 shadow-xl dark:shadow-[0_0_30px_rgba(6,182,212,0.3)] bg-white dark:bg-transparent">
+            <div className="w-[180px] h-[180px] rounded-xl overflow-hidden border border-cyan-500/20 shadow-xl dark:shadow-[0_0_30px_rgba(255,32,32,0.3)] bg-white dark:bg-transparent">
               <img src={rtfLogo} alt="RTF Logo" className="w-full h-full object-cover invert dark:invert-0" />
             </div>
           </div>

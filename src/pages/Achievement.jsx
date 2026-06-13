@@ -36,8 +36,8 @@ const STYLES = `
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 50% 0%, rgba(34,211,238,0.065), transparent 42%),
-      linear-gradient(180deg, rgba(14,165,233,0.025), transparent 46%);
+      radial-gradient(circle at 50% 0%, rgba(255,32,32,0.065), transparent 42%),
+      linear-gradient(180deg, rgba(255,32,32,0.025), transparent 46%);
   }
 
   .achievement-page.light {
@@ -56,7 +56,7 @@ const STYLES = `
     background-image:
       linear-gradient(rgba(14,165,233,0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(14,165,233,0.05) 1px, transparent 1px),
-      radial-gradient(circle, rgba(6,182,212,0.46) 0 1.5px, transparent 2px);
+      radial-gradient(circle, rgba(255,32,32,0.46) 0 1.5px, transparent 2px);
     background-size: 64px 64px, 64px 64px, 180px 180px;
     background-position: center top, center top, 28px 36px;
     opacity: 0.34;
@@ -89,7 +89,7 @@ const STYLES = `
     font-weight: 700;
     letter-spacing: 0.42em;
     text-transform: uppercase;
-    color: rgba(34,211,238,0.72);
+    color: rgba(255,32,32,0.72);
   }
 
   .light .achievement-kicker { color: #087ea4; }
@@ -104,7 +104,7 @@ const STYLES = `
 
   .achievement-title span {
     display: inline-block;
-    background-image: linear-gradient(135deg, #eafaff 0%, #22d3ee 34%, #60a5fa 72%, #a78bfa 100%);
+    background-image: linear-gradient(135deg, #ffcccc 0%, #FF2020 34%, #CC0000 72%, #8B0000 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -166,7 +166,7 @@ const STYLES = `
     bottom: 24px;
     width: 2px;
     transform: translateX(-50%);
-    background: linear-gradient(180deg, transparent, rgba(34,211,238,0.22) 12%, rgba(34,211,238,0.22) 88%, transparent);
+    background: linear-gradient(180deg, transparent, rgba(255,32,32,0.22) 12%, rgba(255,32,32,0.22) 88%, transparent);
     border-radius: 2px;
     pointer-events: none;
   }
@@ -181,9 +181,9 @@ const STYLES = `
     top: 24px;
     width: 2px;
     transform: translateX(-50%);
-    background: linear-gradient(180deg, #22d3ee, #60a5fa);
+    background: linear-gradient(180deg, #FF2020, #CC0000);
     border-radius: 2px;
-    box-shadow: 0 0 12px rgba(34,211,238,0.55);
+    box-shadow: 0 0 12px rgba(255,32,32,0.55);
     pointer-events: none;
     transition: height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -221,32 +221,32 @@ const STYLES = `
     height: 8px;
     border-radius: 50%;
     transform: translate(-50%, -50%) scale(0.85);
-    background: rgba(34,211,238,0.35);
-    border: 2px solid rgba(34,211,238,0.2);
+    background: rgba(255,32,32,0.35);
+    border: 2px solid rgba(255,32,32,0.2);
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
 
   .year-timeline-item:hover {
-    color: rgba(34,211,238,0.85);
+    color: rgba(255,32,32,0.85);
     transform: scale(1.04);
   }
 
   .year-timeline-item:hover::before {
     transform: translate(-50%, -50%) scale(1.15);
-    box-shadow: 0 0 14px rgba(34,211,238,0.45);
+    box-shadow: 0 0 14px rgba(255,32,32,0.45);
   }
 
   .year-timeline-item.active {
-    color: #22d3ee;
+    color: #FF2020;
     transform: scale(1.08);
     font-weight: 700;
   }
 
   .year-timeline-item.active::before {
     transform: translate(-50%, -50%) scale(1.35);
-    background: #22d3ee;
-    border-color: rgba(34,211,238,0.5);
-    box-shadow: 0 0 18px rgba(34,211,238,0.75);
+    background: #FF2020;
+    border-color: rgba(255,32,32,0.5);
+    box-shadow: 0 0 18px rgba(255,32,32,0.75);
   }
 
   .year-timeline-item.active::after {
@@ -257,9 +257,9 @@ const STYLES = `
     width: 3px;
     height: 22px;
     transform: translateY(-50%);
-    background: linear-gradient(180deg, transparent, #22d3ee, transparent);
+    background: linear-gradient(180deg, transparent, #FF2020, transparent);
     border-radius: 0 2px 2px 0;
-    box-shadow: 0 0 12px rgba(34,211,238,0.6);
+    box-shadow: 0 0 12px rgba(255,32,32,0.6);
   }
 
   .year-timeline-item .year-label {
@@ -401,7 +401,7 @@ const STYLES = `
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(34,211,238,0.78);
+    color: rgba(255,32,32,0.78);
   }
 
   .light .card-eyebrow { color: #087ea4; }
@@ -470,7 +470,7 @@ const STYLES = `
       margin-bottom: 24px;
       background: rgba(1,9,18,0.88);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(34,211,238,0.15);
+      border-bottom: 1px solid rgba(255,32,32,0.15);
       border-radius: 0 0 12px 12px;
     }
 
