@@ -60,7 +60,7 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="lg:col-span-2 hidden lg:flex items-center justify-center">
-            <div className="w-[180px] h-[180px] rounded-xl overflow-hidden border border-cyan-500/20 shadow-xl dark:shadow-[0_0_30px_rgba(255,32,32,0.3)] bg-white dark:bg-transparent">
+            <div className="w-[180px] h-[180px] rounded-full bg-white dark:bg-transparent border-[3px] border-cyan-500 flex items-center justify-center shadow-xl dark:shadow-[0_0_30px_rgba(255,32,32,0.3)] transition-colors duration-300 overflow-hidden">
               <img src={rtfLogo} alt="RTF Logo" className="w-full h-full object-cover invert dark:invert-0" />
             </div>
           </div>

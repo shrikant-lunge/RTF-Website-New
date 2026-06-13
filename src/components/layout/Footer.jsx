@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { ArrowUpRight, Mail, MapPin, Clock } from 'lucide-react';
 import { contactInfo, socials, stats } from "../../data/stats";
+import rtfLogo from '../../assets/images/rtf-logo-img.jpg';
 
 const exploreLinks = [
   { path: "/projects", label: "Projects" },
@@ -58,10 +59,8 @@ export default function Footer() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.5fr] lg:gap-16">
             <div>
               <Link to="/" className="group inline-flex items-center gap-3 mb-6" aria-label="The Robo-Tech Forum home">
-                <div className="w-11 h-11 rounded-button bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-center transition-all duration-300 group-hover:bg-cyan-500/25 group-hover:shadow-glow-cyan">
-                  <span className="font-display font-bold text-cyan-300 text-sm">
-                    RTF
-                  </span>
+                <div className="w-11 h-11 rounded-full bg-white dark:bg-transparent border-2 border-cyan-500 flex items-center justify-center transition-all duration-300 group-hover:shadow-glow-cyan overflow-hidden">
+                  <img src={rtfLogo} alt="RTF Logo" className="w-full h-full object-cover invert dark:invert-0" />
                 </div>
                 <div>
                   <span className="block font-display font-semibold text-text-primary text-xl leading-tight">
