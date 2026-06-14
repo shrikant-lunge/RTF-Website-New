@@ -146,7 +146,7 @@ function AppContent() {
       <LoadingScreen show={isLoading} message={loadingMessage} />
 
       {/* Main Content */}
-      <div className="relative min-h-screen text-text-primary transition-colors duration-300" style={{ overflowX: 'clip' }}>
+      <div className="relative min-h-screen bg-deep text-text-primary transition-colors duration-300" style={{ overflowX: 'clip' }}>
         {/* Global DotGrid Background */}
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
           <DotGrid

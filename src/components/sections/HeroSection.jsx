@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import NeoButton from '../ui/NeoButton';
-import ParticleCanvas from '../ui/ParticleCanvas';
 import rtfLogo from '../../assets/images/rtf-logo-img.jpg';
 
 export default function HeroSection() {
@@ -15,7 +14,6 @@ export default function HeroSection() {
                    bg-cyan-500/10 blur-[80px]"
         style={{ zIndex: 1 }}
       />
-      <ParticleCanvas />
 
       <div className="relative z-10 flex items-center justify-center w-full px-6">
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
