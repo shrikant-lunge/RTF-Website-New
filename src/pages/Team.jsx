@@ -63,14 +63,14 @@ function BrutalistHeader({ label, title }) {
 function MemberCard({ member }) {
   return (
     <motion.div variants={fadeUp} className="group h-full max-w-[320px] w-full mx-auto">
-      {/* Brutalist container themed */}
-      <div className="border border-border bg-card h-full flex flex-col relative overflow-hidden hover:border-red-500/50 hover:shadow-[0_0_30px_rgba(239,68,68,0.1)] transition-all duration-300">
+      {/* Card container themed */}
+      <div className="border border-border bg-card h-full flex flex-col relative overflow-hidden hover:border-cyan-500/30 hover:shadow-sm transition-all duration-300 rounded-sm">
         
         {/* Corner markers */}
-        <div className="absolute top-2 left-2 text-[8px] text-red-500/50 font-mono z-20">▲</div>
-        <div className="absolute top-2 right-2 text-[8px] text-purple-500/50 font-mono z-20">▼</div>
+        <div className="absolute top-2 left-2 text-[8px] text-text-muted/50 font-mono z-20">▲</div>
+        <div className="absolute top-2 right-2 text-[8px] text-text-muted/50 font-mono z-20">▼</div>
         
-        <div className="w-full relative aspect-[3/4] bg-dark overflow-hidden border-b border-border group-hover:border-red-500/50 transition-colors">
+        <div className="w-full relative aspect-[3/4] bg-dark overflow-hidden border-b border-border group-hover:border-cyan-500/30 transition-colors">
           {member.photo ? (
             <img 
                src={member.photo} 
@@ -82,12 +82,6 @@ function MemberCard({ member }) {
                {member.name.split(' ').map(n=>n[0]).join('')}
             </div>
           )}
-          
-          {/* Halftone Pattern Overlay */}
-          <div className="absolute inset-0 opacity-[0.1] mix-blend-screen pointer-events-none" style={{
-            backgroundImage: `radial-gradient(circle, #FF2020 1px, transparent 1px)`,
-            backgroundSize: '4px 4px'
-          }} />
 
           {/* Name overlay at the bottom inside the image area */}
           <div className="absolute bottom-0 left-0 w-full p-4 pt-16 bg-gradient-to-t from-card via-card/80 to-transparent flex items-end">
@@ -117,7 +111,7 @@ function MemberCard({ member }) {
               </span>
             </div>
             {member.linkedin && (
-              <a href={member.linkedin} target="_blank" rel="noreferrer" className="w-8 h-8 flex items-center justify-center border border-border rounded-full text-text-muted hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400 transition-colors z-20 shrink-0">
+              <a href={member.linkedin} target="_blank" rel="noreferrer" className="w-8 h-8 flex items-center justify-center border border-border rounded-sm text-text-muted hover:bg-cyan-500/20 hover:text-cyan-400 hover:border-cyan-400 transition-colors z-20 shrink-0">
                 <FaLinkedinIn size={12} />
               </a>
             )}
@@ -170,7 +164,7 @@ function TestimonialsSection() {
       >
         {testimonials.map((t) => (
           <motion.div key={t.id} variants={fadeUp} className="h-full">
-            <div className="p-8 h-full flex flex-col bg-card border border-border hover:border-red-500/50 hover:shadow-[0_0_30px_rgba(255,32,32,0.1)] transition-all relative group">
+            <div className="p-8 h-full flex flex-col bg-card border border-border hover:border-cyan-500/30 hover:shadow-sm transition-all relative group rounded-sm">
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 group-hover:text-cyan-400 transition-all">
                 <Quote size={80} />
               </div>

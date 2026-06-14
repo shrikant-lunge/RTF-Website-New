@@ -28,7 +28,7 @@ export default function Home() {
       </div>
 
       <div className="relative bg-deep z-20">
-        <StatsBar />
+        {/* <StatsBar /> */}
 
         {/* Parallax break — workshop / lab image */}
         <ParallaxImage
@@ -41,7 +41,7 @@ export default function Home() {
           height={95}
         />
 
-        <FeaturedProjects />
+        {/* <FeaturedProjects /> */}
 
         <SponsorShowcase />
 

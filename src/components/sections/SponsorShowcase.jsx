@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight, BadgeCheck, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../../lib/animations';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { sponsors } from '../../data/stats';
@@ -58,9 +58,8 @@ export default function SponsorShowcase() {
               {['Website presence', 'Event visibility', 'Student reach'].map((item) => (
                 <span
                   key={item}
-                  className="inline-flex items-center gap-2 rounded-button border border-cyan-500/20 bg-cyan-500/10 px-3 py-2 text-xs font-mono uppercase tracking-wider text-cyan-300 whitespace-nowrap"
+                  className="inline-flex items-center gap-2 rounded-sm border border-border bg-elevated px-3 py-2 text-xs font-mono uppercase tracking-wider text-text-primary whitespace-nowrap"
                 >
-                  <BadgeCheck size={14} />
                   {item}
                 </span>
               ))}

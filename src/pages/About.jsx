@@ -1,30 +1,22 @@
 import { motion } from 'framer-motion';
-import { pageTransition, fadeUp, fadeLeft, fadeRight, staggerContainer } from '../lib/animations';
+import { pageTransition, fadeUp, staggerContainer } from '../lib/animations';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import NeoButton from '../components/ui/NeoButton';
 import StatCounter from '../components/ui/StatCounter';
-import { Cpu, Wrench, GraduationCap, Target, Trophy, Rocket, Lightbulb, Palette, Cog, Users, FolderOpen, Star, UserCheck, Award } from 'lucide-react';
 import { stats, competitions } from '../data/stats';
-
-/* ── images ── */
-import heroImg from '../assets/img/Robocon 2025/20250713_181824.webp';
-import teamImg from '../assets/img/College Programs/20241012_085453.webp';
 
 const values = [
   {
-    icon: GraduationCap,
     title: 'We Learn',
     description:
       'Every member starts from scratch — Arduino workshops, SolidWorks training, ROS bootcamps. No prior experience required, just curiosity.',
   },
   {
-    icon: Wrench,
     title: 'We Create',
     description:
       'From Robocon competition bots to ISRO rovers and VTOL aircraft — we design, fabricate, and program real engineering systems.',
   },
   {
-    icon: Cpu,
     title: 'We Teach',
     description:
       'Seniors mentor juniors. Knowledge transfers through workshops, documentation, and hands-on lab sessions — creating a self-sustaining cycle of innovation.',
@@ -32,34 +24,21 @@ const values = [
 ];
 
 const domains = [
-  { icon: Target, name: 'Mechanical Design & CAD', description: 'SolidWorks, CNC machining, 3D printing, sheet metal fabrication' },
-  { icon: Cpu, name: 'Electronics & Embedded', description: 'Arduino, STM32, PCB design, motor drivers, sensor integration' },
-  { icon: Rocket, name: 'Aero & Drone Systems', description: 'Quadcopters, VTOL, RC planes, Pixhawk, ArduPilot, FPV' },
-  { icon: Trophy, name: 'Software & AI', description: 'ROS/ROS2, Python, OpenCV, path planning, SLAM, inverse kinematics' },
+  { name: 'Mechanical Design & CAD', description: 'SolidWorks, CNC machining, 3D printing, sheet metal fabrication' },
+  { name: 'Electronics & Embedded', description: 'Arduino, STM32, PCB design, motor drivers, sensor integration' },
+  { name: 'Aero & Drone Systems', description: 'Quadcopters, VTOL, RC planes, Pixhawk, ArduPilot, FPV' },
+  { name: 'Software & AI', description: 'ROS/ROS2, Python, OpenCV, path planning, SLAM, inverse kinematics' },
 ];
-
-const highlights = [
-  { icon: Lightbulb, title: 'Innovation', description: 'Pioneering solutions that push the boundaries of robotics engineering.' },
-  { icon: Palette, title: 'Modern Design', description: 'Sleek, functional designs that merge form with performance.' },
-  { icon: Cog, title: 'Engineering Excellence', description: 'Precision-built systems from concept to competition.' },
-  { icon: Users, title: 'Team Spirit', description: 'Collaborative culture where every member\'s voice matters.' },
-];
-
-function MinimalCard({ children, className = '' }) {
-  return (
-    <div className={`p-8 h-full bg-surface/50 border border-border rounded-2xl hover:bg-elevated/80 hover:border-[var(--bg-border)] transition-all duration-300 flex flex-col ${className}`}>
-      {children}
-    </div>
-  );
-}
 
 export default function About() {
   const [heroRef, heroInView] = useScrollAnimation(0.2);
-  const [highlightsRef, highlightsInView] = useScrollAnimation(0.2);
+  const [missionRef, missionInView] = useScrollAnimation(0.2);
   const [statsRef, statsInView] = useScrollAnimation(0.2);
   const [valuesRef, valuesInView] = useScrollAnimation();
+  const [livingRef, livingInView] = useScrollAnimation(0.2);
   const [domainsRef, domainsInView] = useScrollAnimation();
   const [compRef, compInView] = useScrollAnimation();
+  const [ctaRef, ctaInView] = useScrollAnimation(0.2);
 
   return (
     <motion.main
@@ -68,386 +47,288 @@ export default function About() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="pt-28 pb-24"
+      className="pt-32 pb-24"
     >
       {/* ═══════════════════════════════════════════════
-          SECTION 1 — "WHO ARE WE?" Hero
+          HERO — Large Title
           ═══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden mb-24 md:mb-32">
-        {/* Large faded background letter */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
-          <span className="text-[20rem] md:text-[30rem] font-display font-black leading-none text-text-heading/[0.02] dark:text-white/[0.02]">
-            R
-          </span>
-        </div>
-
-        <div ref={heroRef} className="relative max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left — Text */}
-            <motion.div
-              variants={fadeLeft}
-              initial="hidden"
-              animate={heroInView ? 'visible' : 'hidden'}
-            >
-              <span className="inline-block px-4 py-1.5 text-xs font-mono tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded-full mb-6 uppercase">
-                About Us
-              </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-heading mb-6 tracking-tight leading-[1.1]">
-                WHO ARE{' '}
-                <span className="text-gradient-red inline-block">WE?</span>
-              </h1>
-              <p className="text-base md:text-lg text-text-body leading-relaxed font-light mb-8 max-w-xl">
-                Founded in 2014, The Robo-Tech Forum (RTF) is the premier robotics club at Government College of Engineering, Amravati. We are a student-driven technical club dedicated to fostering innovation through hands-on robotics, embedded systems, and aero engineering.
-              </p>
-              <p className="text-sm text-text-muted leading-relaxed font-light max-w-xl">
-                From national-level competitions like DD Robocon and E-Yantra to ISRO's IRoC-U challenge — our members design, build, and compete with cutting-edge robotic systems.
-              </p>
-            </motion.div>
-
-            {/* Right — Artistic Photo */}
-            <motion.div
-              variants={fadeRight}
-              initial="hidden"
-              animate={heroInView ? 'visible' : 'hidden'}
-              className="relative flex justify-center lg:justify-end"
-            >
-              <div className="relative">
-                {/* Glow behind image */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-cyan-400/20 via-cyan-500/10 to-transparent rounded-3xl blur-2xl" />
-                {/* Main image */}
-                <div className="relative w-72 h-80 md:w-80 md:h-96 lg:w-[22rem] lg:h-[28rem] rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-2xl">
-                  <img
-                    src={heroImg}
-                    alt="RTF Team at Robocon 2025"
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Red gradient overlay at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  {/* Accent border glow */}
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-cyan-400/20" />
-                </div>
-                {/* Decorative corner accent */}
-                <div className="absolute -bottom-3 -right-3 w-24 h-24 border-r-2 border-b-2 border-cyan-400/40 rounded-br-2xl" />
-                <div className="absolute -top-3 -left-3 w-24 h-24 border-l-2 border-t-2 border-cyan-400/40 rounded-tl-2xl" />
-              </div>
-            </motion.div>
-          </div>
+      <section className="relative mb-24 md:mb-32">
+        <div ref={heroRef} className="max-w-5xl mx-auto px-6 md:px-12 text-center">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate={heroInView ? 'visible' : 'hidden'}
+          >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black text-text-heading tracking-tight leading-[1] mb-8">
+              The Robo-Tech{' '}
+              <span className="text-gradient-red">Forum</span>
+            </h1>
+            <p className="text-lg md:text-xl text-text-body font-light leading-relaxed max-w-3xl mx-auto">
+              Founded in {stats.founded} at Government College of Engineering, Amravati — we are a student-driven technical community dedicated to fostering innovation through hands-on robotics, embedded systems, and aero engineering.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 2 — Feature Highlights (like reference)
+          MISSION
+          ═══════════════════════════════════════════════ */}
+      <section className="mb-24 md:mb-32">
+        <div ref={missionRef} className="max-w-6xl mx-auto px-6 md:px-12">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate={missionInView ? 'visible' : 'hidden'}
+          >
+            <motion.div variants={fadeUp} className="mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-text-heading tracking-tight leading-[1.15] max-w-4xl">
+                We're on a mission to empower students to{' '}
+                <span className="text-gradient-red">build real-world</span>{' '}
+                engineering systems and compete at the highest level.
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+              <motion.div variants={fadeUp}>
+                <h3 className="text-xl font-display font-semibold text-text-heading mb-6">
+                  Why hands-on engineering?
+                </h3>
+                <div className="space-y-6 text-text-body font-light leading-relaxed">
+                  <p>
+                    <strong className="text-text-heading font-medium">For the individual,</strong> hands-on robotics means learning by doing — soldering circuits, debugging code, machining parts. Students gain skills that textbooks alone can never teach. The ability to design, prototype, and iterate builds confidence that carries far beyond the workshop.
+                  </p>
+                  <p>
+                    <strong className="text-text-heading font-medium">For the college,</strong> having an active, competition-driven robotics club elevates the institution's technical profile. RTF members consistently represent GCoEA at IIT Bombay, ISRO, and national-level stages — showcasing that world-class engineering talent comes from every campus.
+                  </p>
+                  <p>
+                    <strong className="text-text-heading font-medium">For the industry,</strong> students trained in real hardware, embedded systems, and team-based engineering projects become immediately productive. Our alumni work at leading tech companies and research labs, carrying forward the maker mindset.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp}>
+                <h3 className="text-xl font-display font-semibold text-text-heading mb-6">
+                  It's more urgent than ever to rethink how engineering is taught.
+                </h3>
+                <div className="space-y-6 text-text-body font-light leading-relaxed">
+                  <p>
+                    We're here to reimagine the way engineering education works, and make it more accessible. Our model allows anyone — regardless of branch or year — to dive into robotics, aero systems, and intelligent machines.
+                  </p>
+                  <p>
+                    Traditional engineering curricula often separate theory from practice. At RTF, we bridge that gap. Instead of waiting for lab sessions, our members get immediate access to components, tools, and mentorship. This means first-year students can start building from day one.
+                  </p>
+                  <p>
+                    In practice, we build everything ourselves: competition robots capable of autonomous navigation, drones with custom flight controllers, and embedded systems powering real-world solutions — from breadboards to national stages, built by students.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <div className="h-px bg-border/50" />
+      </div>
+
+      {/* ═══════════════════════════════════════════════
+          STATS ROW
           ═══════════════════════════════════════════════ */}
       <section className="mb-24 md:mb-32">
         <motion.div
-          ref={highlightsRef}
+          ref={statsRef}
           variants={staggerContainer}
           initial="hidden"
-          animate={highlightsInView ? 'visible' : 'hidden'}
-          className="max-w-7xl mx-auto px-6 md:px-12"
+          animate={statsInView ? 'visible' : 'hidden'}
+          className="max-w-5xl mx-auto px-6 md:px-12"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {highlights.map((item) => (
-              <motion.div
-                key={item.title}
-                variants={fadeUp}
-                className="group relative p-6 rounded-2xl border border-border/60 bg-surface/40 backdrop-blur-sm hover:border-cyan-400/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,68,68,0.1)]"
-              >
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-400/15 to-cyan-500/5 border border-cyan-400/20 flex items-center justify-center mb-5 group-hover:border-cyan-400/40 transition-colors duration-300">
-                  <item.icon size={24} className="text-cyan-400" />
-                </div>
-                <h3 className="font-display font-semibold text-text-heading text-lg mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-text-body leading-relaxed font-light">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <motion.div variants={fadeUp} className="text-center">
+              <StatCounter end={stats.projects} label="Projects Built" suffix="+" />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="text-center">
+              <StatCounter end={stats.competitions} label="Competitions" suffix="+" />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="text-center">
+              <StatCounter end={stats.members} label="Active Members" suffix="+" />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="text-center">
+              <StatCounter end={new Date().getFullYear() - stats.founded} label="Years Strong" suffix="+" />
+            </motion.div>
           </div>
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          SECTION 3 — Stats Counter Row (like reference bottom)
-          ═══════════════════════════════════════════════ */}
-      <section className="mb-24 md:mb-32">
-        <div className="relative">
-          {/* Subtle divider line */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-          <motion.div
-            ref={statsRef}
-            variants={staggerContainer}
-            initial="hidden"
-            animate={statsInView ? 'visible' : 'hidden'}
-            className="max-w-6xl mx-auto px-6 md:px-12 pt-16"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-              {/* Each stat with icon above */}
-              <motion.div variants={fadeUp} className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-surface/60 border border-border/60 flex items-center justify-center">
-                  <FolderOpen size={24} className="text-cyan-400" />
-                </div>
-                <StatCounter end={stats.projects} label="Projects Built" suffix="+" />
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-surface/60 border border-border/60 flex items-center justify-center">
-                  <Star size={24} className="text-cyan-400" />
-                </div>
-                <StatCounter end={stats.competitions} label="Competitions" suffix="+" />
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-surface/60 border border-border/60 flex items-center justify-center">
-                  <UserCheck size={24} className="text-cyan-400" />
-                </div>
-                <StatCounter end={stats.members} label="Active Members" suffix="+" />
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="text-center">
-                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-surface/60 border border-border/60 flex items-center justify-center">
-                  <Award size={24} className="text-cyan-400" />
-                </div>
-                <StatCounter end={new Date().getFullYear() - stats.founded} label="Years Strong" suffix="+" />
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Bottom divider line */}
-          <div className="mt-16 mx-auto w-4/5 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        </div>
-      </section>
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mb-24 md:mb-32">
+        <div className="h-px bg-border/50" />
+      </div>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 4 — Philosophy (Values)
+          PHILOSOPHY / VALUES
           ═══════════════════════════════════════════════ */}
       <section className="px-6 md:px-12 max-w-6xl mx-auto mb-32">
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 text-xs font-mono tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded-full mb-6 uppercase">
-            Our Philosophy
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-4">
+        <div className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-6">
             What Drives{' '}
             <span className="text-gradient-red">Us</span>
           </h2>
-          <p className="text-text-body font-light max-w-2xl mx-auto">The core principles that drive our community forward.</p>
+          <p className="text-text-body font-light max-w-3xl text-lg">
+            The core principles that drive our community forward.
+          </p>
         </div>
         <motion.div
           ref={valuesRef}
           variants={staggerContainer}
           initial="hidden"
           animate={valuesInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-12"
         >
           {values.map((v) => (
-            <motion.div key={v.title} variants={fadeUp} className="h-full">
-              <MinimalCard>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/15 to-cyan-500/5 border border-cyan-400/20 flex items-center justify-center mb-6 text-cyan-400">
-                  <v.icon size={22} />
-                </div>
-                <h3 className="font-display font-semibold text-text-heading text-xl mb-3">
-                  {v.title}
-                </h3>
-                <p className="text-text-body leading-relaxed font-light">{v.description}</p>
-              </MinimalCard>
+            <motion.div key={v.title} variants={fadeUp}>
+              <h3 className="font-display font-semibold text-text-heading text-xl mb-4">
+                {v.title}
+              </h3>
+              <p className="text-text-body leading-relaxed font-light">{v.description}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 5 — Team Photo + Description
+          "LIVING IT"
           ═══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden mb-24 md:mb-32">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
-          <span className="text-[15rem] md:text-[22rem] font-display font-black leading-none text-text-heading/[0.02] dark:text-white/[0.02]">
-            T
-          </span>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left — Photo */}
-            <motion.div
-              variants={fadeLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              className="relative flex justify-center lg:justify-start order-2 lg:order-1"
-            >
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-tr from-cyan-400/15 via-cyan-500/5 to-transparent rounded-3xl blur-2xl" />
-                <div className="relative w-full max-w-md h-72 md:h-80 lg:h-96 rounded-2xl overflow-hidden border-2 border-cyan-400/20 shadow-2xl">
-                  <img
-                    src={teamImg}
-                    alt="RTF Team at College Programs"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-cyan-400/10" />
-                </div>
-                <div className="absolute -bottom-3 -left-3 w-20 h-20 border-l-2 border-b-2 border-cyan-400/30 rounded-bl-2xl" />
-              </div>
-            </motion.div>
-
-            {/* Right — Content */}
-            <motion.div
-              variants={fadeRight}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              className="order-1 lg:order-2"
-            >
-              <span className="inline-block px-4 py-1.5 text-xs font-mono tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded-full mb-6 uppercase">
-                Our Team
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-text-heading mb-6 tracking-tight">
-                Built by{' '}
-                <span className="text-gradient-red">Students</span>,{' '}
-                for the Future
+      <section className="mb-24 md:mb-32">
+        <div ref={livingRef} className="max-w-6xl mx-auto px-6 md:px-12">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate={livingInView ? 'visible' : 'hidden'}
+          >
+            <motion.div variants={fadeUp} className="mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-text-heading tracking-tight">
+                Living It
               </h2>
-              <p className="text-base text-text-body leading-relaxed font-light mb-6">
-                Our team comprises passionate engineering students from mechanical, electrical, computer science, and electronics backgrounds. Together, we bring diverse skills to tackle complex robotics challenges.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Wrench size={14} className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-semibold text-text-heading text-sm">Hands-On</h4>
-                    <p className="text-xs text-text-muted font-light">Real hardware, real builds</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <GraduationCap size={14} className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-semibold text-text-heading text-sm">Mentorship</h4>
-                    <p className="text-xs text-text-muted font-light">Seniors guide juniors</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Target size={14} className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-semibold text-text-heading text-sm">Goal-Driven</h4>
-                    <p className="text-xs text-text-muted font-light">Competition-focused work</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Rocket size={14} className="text-cyan-400" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-semibold text-text-heading text-sm">Innovation</h4>
-                    <p className="text-xs text-text-muted font-light">Push technical limits</p>
-                  </div>
-                </div>
-              </div>
             </motion.div>
-          </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+              <motion.div variants={fadeUp}>
+                <h3 className="text-xl font-display font-semibold text-text-heading mb-6">
+                  We are a fully student-run team that works every day to make engineering accessible and hands-on.
+                </h3>
+                <div className="space-y-6 text-text-body font-light leading-relaxed">
+                  <p>
+                    Our team operates across multiple domains — mechanical, electronics, software, and aero — yet works side by side. Every major project involves cross-functional collaboration, mirroring how professional engineering teams operate in industry.
+                  </p>
+                  <p>
+                    We don't wait for permission to innovate. When a competition is announced, our members self-organize into teams, assign roles, set deadlines, and start building within days. This autonomy is what makes RTF unique.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp}>
+                <div className="space-y-6 text-text-body font-light leading-relaxed mt-1 lg:mt-0">
+                  <p>
+                    Our workspace at GCoEA is open to members throughout the day. It's equipped with 3D printers, soldering stations, CNC machines, oscilloscopes, and a library of components — everything needed to go from idea to prototype.
+                  </p>
+                  <p>
+                    Everyone in our team enjoys the immense benefits that a hands-on engineering culture brings, and not by forcing members into rigid schedules — but because they genuinely want to build.
+                  </p>
+                  <p>
+                    We choose to work from the workshop because that's where ideas become machines, where circuits come alive, and where a group of students becomes an engineering team.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 6 — Technical Domains
+          TECHNICAL DOMAINS
           ═══════════════════════════════════════════════ */}
       <section className="px-6 md:px-12 max-w-6xl mx-auto mb-32">
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 text-xs font-mono tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded-full mb-6 uppercase">
-            Our Expertise
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-4">Technical Domains</h2>
-          <p className="text-text-body font-light">Our expertise spans across four core engineering areas.</p>
+        <div className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-6">Technical Domains</h2>
+          <p className="text-text-body font-light text-lg">Our expertise spans across four core engineering areas.</p>
         </div>
         <motion.div
           ref={domainsRef}
           variants={staggerContainer}
           initial="hidden"
           animate={domainsInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-12"
         >
           {domains.map((d) => (
-            <motion.div key={d.name} variants={fadeUp} className="h-full">
-              <MinimalCard className="flex-row items-start gap-5 p-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400/15 to-cyan-500/5 border border-cyan-400/20 flex items-center justify-center shrink-0 text-cyan-400">
-                  <d.icon size={20} />
-                </div>
-                <div>
-                  <h3 className="font-display font-semibold text-text-heading text-lg mb-2">
-                    {d.name}
-                  </h3>
-                  <p className="text-sm text-text-body leading-relaxed font-light">{d.description}</p>
-                </div>
-              </MinimalCard>
+            <motion.div key={d.name} variants={fadeUp}>
+              <h3 className="font-display font-semibold text-text-heading text-xl mb-4">
+                {d.name}
+              </h3>
+              <p className="text-text-body leading-relaxed font-light">{d.description}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 7 — Competitions
+          COMPETITIONS
           ═══════════════════════════════════════════════ */}
       <section className="px-6 md:px-12 max-w-6xl mx-auto mb-32">
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 text-xs font-mono tracking-[0.25em] text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded-full mb-6 uppercase">
-            Competitions
-          </span>
-          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-4">National Competitions</h2>
-          <p className="text-text-body font-light">Where we put our skills to the test.</p>
+        <div className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-6">National Competitions</h2>
+          <p className="text-text-body font-light text-lg">Where we put our skills to the test.</p>
         </div>
         <motion.div
           ref={compRef}
           variants={staggerContainer}
           initial="hidden"
           animate={compInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
         >
           {competitions.map((c) => (
-            <motion.div key={c.id} variants={fadeUp} className="h-full">
-              <MinimalCard>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="px-3 py-1 text-[11px] font-mono font-medium tracking-wider uppercase bg-cyan-400/10 text-cyan-400 border border-cyan-400/20 rounded-full">
-                    {c.year}
-                  </span>
-                </div>
-                <h3 className="font-display font-semibold text-text-heading text-lg mb-1">
-                  {c.name}
-                </h3>
-                <p className="text-xs font-mono text-text-muted mb-4">{c.organizer}</p>
-                <p className="text-sm text-text-body leading-relaxed font-light mt-auto">{c.description}</p>
-              </MinimalCard>
+            <motion.div key={c.id} variants={fadeUp}>
+              <h3 className="font-display font-semibold text-text-heading text-xl mb-2">
+                {c.name}
+              </h3>
+              <p className="text-sm font-mono text-text-muted mb-4">{c.organizer} • {c.year}</p>
+              <p className="text-text-body leading-relaxed font-light">{c.description}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════
-          SECTION 8 — CTA
+          CTA
           ═══════════════════════════════════════════════ */}
       <section className="px-6 md:px-12 max-w-6xl mx-auto">
-        <div className="relative text-center bg-surface/40 border border-border/50 rounded-3xl p-10 md:p-14 max-w-4xl mx-auto overflow-hidden">
-          {/* Subtle glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
-          <h2 className="text-3xl md:text-4xl font-display font-semibold text-text-heading mb-4">Join the Team</h2>
-          <p className="text-text-body max-w-lg mx-auto mb-8 font-light">
-            We recruit new members every academic year. No prior experience required — just a willingness to learn and build.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <NeoButton to="/contact" arrow>
-              GET IN TOUCH
-            </NeoButton>
-            <NeoButton to="/projects" variant="secondary" arrow>
-              SEE OUR WORK
-            </NeoButton>
+        <motion.div
+          ref={ctaRef}
+          variants={fadeUp}
+          initial="hidden"
+          animate={ctaInView ? 'visible' : 'hidden'}
+        >
+          <div className="relative text-center bg-surface/40 border border-border/50 rounded-3xl p-10 md:p-14 max-w-4xl mx-auto overflow-hidden">
+            {/* Subtle glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-text-heading mb-4">
+              Want to be part of the{' '}
+              <span className="text-gradient-red">journey</span>?
+            </h2>
+            <p className="text-text-body max-w-lg mx-auto mb-8 font-light">
+              We are passionate about our work and love to connect with people who want to shape the future of engineering. We recruit new members every academic year — no prior experience required.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <NeoButton to="/contact" arrow>
+                GET IN TOUCH
+              </NeoButton>
+              <NeoButton to="/projects" variant="secondary" arrow>
+                SEE OUR WORK
+              </NeoButton>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </motion.main>
   );

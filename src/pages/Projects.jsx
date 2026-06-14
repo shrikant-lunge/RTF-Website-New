@@ -349,30 +349,30 @@ export default function Projects() {
               <div className="p-8 md:p-10 w-full md:w-1/2 flex flex-col overflow-y-auto custom-scrollbar bg-card">
                 {/* Category + Year */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full shadow-[0_0_15px_rgba(255,32,32,0.1)]">
+                  <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-sm">
                     {selectedProject.category}
                   </span>
-                  <span className="text-xs font-mono text-text-secondary px-3 py-1 bg-white/5 rounded-full border border-white/5">
+                  <span className="text-xs font-mono text-text-secondary px-3 py-1 bg-white/5 rounded-sm border border-white/5">
                     {selectedProject.year}
                   </span>
                   {String(selectedProject.status).toUpperCase() === 'ONGOING' && (
-                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-full flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-sm flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-sm bg-amber-400 animate-pulse" />
                       ONGOING
                     </span>
                   )}
                   {String(selectedProject.status).toUpperCase() === 'PROTOTYPE' && (
-                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-slate-500/10 text-slate-400 border border-slate-500/30 rounded-full">
+                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-slate-500/10 text-slate-400 border border-slate-500/30 rounded-sm">
                       PROTOTYPE
                     </span>
                   )}
                 </div>
 
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-6 drop-shadow-lg">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-6 drop-shadow-sm">
                   {selectedProject.title}
                 </h2>
 
-                <p className="font-body text-base text-text-body leading-relaxed mb-8">
+                <p className="font-body text-base text-text-secondary leading-relaxed mb-8">
                   {selectedProject.description}
                 </p>
 
@@ -380,11 +380,9 @@ export default function Projects() {
                 {selectedProject.achievements && selectedProject.achievements.length > 0 && (
                   <div className="mb-8 flex flex-col gap-3">
                     {selectedProject.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-4 p-4 bg-cyan-500/5 border border-cyan-500/20 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 transition-colors">
-                        <div className="p-2 bg-cyan-500/10 rounded-lg shrink-0">
-                          <Trophy size={18} className="text-cyan-400" />
-                        </div>
-                        <p className="text-sm text-cyan-100 font-medium leading-relaxed mt-1">
+                      <div key={idx} className="flex items-start gap-4 p-4 bg-elevated border border-border rounded-sm">
+                        <div className="mt-1 w-1.5 h-1.5 rounded-none bg-text-primary shrink-0" />
+                        <p className="text-sm text-text-primary font-medium leading-relaxed">
                           {achievement}
                         </p>
                       </div>
