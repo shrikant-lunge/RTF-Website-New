@@ -9,6 +9,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import VideoIntroEnhanced from './components/layout/VideoIntroEnhanced';
 import LoadingScreen from './components/layout/LoadingScreen';
+import DotGrid from './components/ui/DotGrid';
 
 // Pages
 import Home from './pages/Home';
@@ -145,10 +146,27 @@ function AppContent() {
       <LoadingScreen show={isLoading} message={loadingMessage} />
 
       {/* Main Content */}
-      <div className="relative min-h-screen bg-deep text-text-primary transition-colors duration-300" style={{ overflowX: 'clip' }}>
-        <Navbar />
-        <AnimatedRoutes />
-        <Footer />
+      <div className="relative min-h-screen text-text-primary transition-colors duration-300" style={{ overflowX: 'clip' }}>
+        {/* Global DotGrid Background */}
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
+          <DotGrid
+            dotSize={4}
+            gap={18}
+            baseColor="#333333"
+            activeColor="#CC0000"
+            proximity={120}
+            shockRadius={250}
+            shockStrength={5}
+            resistance={750}
+            returnDuration={1.5}
+          />
+        </div>
+
+        <div className="relative z-10">
+          <Navbar />
+          <AnimatedRoutes />
+          <Footer />
+        </div>
 
         {/* Scroll to Top Button */}
         {showButton && (

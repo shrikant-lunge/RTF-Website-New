@@ -5,13 +5,15 @@ import rtfLogo from '../../assets/images/rtf-logo-img.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-void flex items-center justify-center pt-20">
-      <div className="absolute inset-0 bg-grid opacity-5 pointer-events-none" />
-      
+    <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center pt-20">
+
+      <div className="absolute inset-0 bg-grid opacity-5 pointer-events-none" style={{ zIndex: 1 }} />
+
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                    w-[600px] h-[600px] rounded-full pointer-events-none 
                    bg-cyan-500/10 blur-[80px]"
+        style={{ zIndex: 1 }}
       />
       <ParticleCanvas />
 
@@ -31,7 +33,7 @@ export default function HeroSection() {
               </p>
               <h1 className="text-[clamp(3rem,8vw,8rem)] font-display font-black leading-[0.9]
                              tracking-tight text-text-primary uppercase mb-6"
-                  style={{ letterSpacing: '-0.02em' }}>
+                style={{ letterSpacing: '-0.02em' }}>
                 THE ROBO
                 <span className="block text-stroke-hollow">
                   TECH
