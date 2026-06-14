@@ -28,10 +28,8 @@ export default function SponsorShowcase() {
   const [ref, isInView] = useScrollAnimation();
 
   return (
-    <section className="relative overflow-hidden border-y border-border/30 bg-deep px-4 py-20 sm:px-8 lg:py-24">
-      <div className="absolute inset-0 bg-grid opacity-80 pointer-events-none" />
+    <section className="relative overflow-hidden border-y border-border/30 px-4 py-20 sm:px-8 lg:py-24 bg-transparent">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
-      <div className="absolute left-1/2 top-20 h-64 w-[min(88vw,760px)] -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
 
       <MotionDiv
         ref={ref}
@@ -71,8 +69,6 @@ export default function SponsorShowcase() {
           </MotionDiv>
 
           <MotionDiv variants={fadeUp} className="relative min-w-0">
-            <div className="absolute -inset-6 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-
             <div className="relative overflow-hidden rounded-card border border-cyan-500/20 bg-surface/70 py-8 shadow-card backdrop-blur-xl">
               <div className="mb-7 flex items-center justify-between gap-4 px-5 sm:px-7">
                 <div>

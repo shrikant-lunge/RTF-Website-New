@@ -5,6 +5,7 @@ import StatsBar from '../components/sections/StatsBar';
 import FeaturedProjects from '../components/sections/FeaturedProjects';
 import SponsorShowcase from '../components/sections/SponsorShowcase';
 import ParallaxImage from '../components/ui/ParallaxImage';
+import ImageFrame from '../components/ui/ImageFrame';
 // import TerminalContact from '../components/sections/TerminalContact';
 // import CyberpunkHero from '../components/sections/CyberpunkHero';
 // import roboconWorkshopImage from '../assets/img/Robocon 2025/20250713_183423 - Copy.webp';
@@ -27,19 +28,11 @@ export default function Home() {
         <HeroSection />
       </div>
 
-      <div className="relative bg-deep z-20">
+      <div className="relative z-20">
         {/* <StatsBar /> */}
 
-        {/* Parallax break — workshop / lab image */}
-        <ParallaxImage
-          src={rtfteam}
-          // images={[roboconWorkshopImage, collegeWorkshopImage]}
-          images={[rtfteam]}
-
-          alt="Robotics workshop"
-          overlay="We don't just study engineering — we live it."
-          height={95}
-        />
+        {/* Image Frame — Team image */}
+        <ImageFrame imageSrc={rtfteam} alt="RTF Team" />
 
         {/* <FeaturedProjects /> */}
 

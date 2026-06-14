@@ -6,15 +6,6 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center pt-20">
 
-      <div className="absolute inset-0 bg-grid opacity-5 pointer-events-none" style={{ zIndex: 1 }} />
-
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                   w-[600px] h-[600px] rounded-full pointer-events-none 
-                   bg-cyan-500/10 blur-[80px]"
-        style={{ zIndex: 1 }}
-      />
-
       <div className="relative z-10 flex items-center justify-center w-full px-6">
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-3 flex flex-col items-start">
