@@ -13,10 +13,8 @@ const typeLabels = {
 
 function TeamHero() {
   return (
-    <div className="pt-32 pb-16 w-full relative overflow-hidden bg-dark border-b border-border">
-      {/* Background ambient glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
+    <div className="pt-32 pb-16 w-full relative overflow-hidden border-b border-border">
+
 
       {/* Top text row */}
       <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 mb-12 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-cyan-400">
@@ -197,7 +195,7 @@ export default function Team() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="bg-dark min-h-screen"
+      className="min-h-screen"
     >
       <TeamHero />
       <div className="py-20">

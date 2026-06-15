@@ -28,8 +28,8 @@ export default function SponsorShowcase() {
   const [ref, isInView] = useScrollAnimation();
 
   return (
-    <section className="relative overflow-hidden border-y border-border/30 px-4 py-20 sm:px-8 lg:py-24 bg-transparent">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+    <section className="relative overflow-hidden px-4 py-20 sm:px-8 lg:py-24 bg-transparent">
+      {/* <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" /> */}
 
       <MotionDiv
         ref={ref}
@@ -40,10 +40,10 @@ export default function SponsorShowcase() {
       >
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14 min-w-0">
           <MotionDiv variants={fadeUp} className="min-w-0">
-            <span className="text-label text-cyan-400 mb-4 block whitespace-nowrap">
+            {/* <span className="text-label text-cyan-400 mb-4 block whitespace-nowrap">
               // PARTNER VISIBILITY
-            </span>
-            <h2 className="text-h2 text-text-primary mb-5 font-display font-bold leading-tight">
+            </span> */}
+            <h2 className="text-h2 text-red-500 mb-5 font-display font-bold leading-tight">
               Your brand should move with the machines we build.
             </h2>
             <p className="max-w-xl text-sm sm:text-base text-text-secondary leading-relaxed mb-8">

@@ -20,48 +20,20 @@ const STYLES = `
 
   *, *::before, *::after { box-sizing: border-box; }
 
+  /* Keep achievement layout styling, but do NOT override the global animated background. */
   .achievement-page {
     min-height: 100vh;
     position: relative;
     overflow-x: clip;
-    background: #010912;
-    color: #eef7fb;
-    font-family: 'Inter', sans-serif;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
   }
 
-  .achievement-page.dark::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 50% 0%, rgba(255,32,32,0.065), transparent 42%),
-      linear-gradient(180deg, rgba(255,32,32,0.025), transparent 46%);
-  }
 
-  .achievement-page.light {
-    background:
-      radial-gradient(circle at 50% 8%, rgba(14,165,233,0.16), transparent 44%),
-      linear-gradient(180deg, #f8fcff 0%, #ffffff 58%, #f7fbff 100%);
-    color: #0f172a;
-  }
 
-  .achievement-page.light::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(14,165,233,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(14,165,233,0.05) 1px, transparent 1px),
-      radial-gradient(circle, rgba(255,32,32,0.46) 0 1.5px, transparent 2px);
-    background-size: 64px 64px, 64px 64px, 180px 180px;
-    background-position: center top, center top, 28px 36px;
-    opacity: 0.34;
-    mask-image: linear-gradient(180deg, black 0%, rgba(0,0,0,0.72) 54%, transparent 100%);
-  }
+
+
 
   .achievement-shell {
     position: relative;

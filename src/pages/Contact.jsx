@@ -29,11 +29,9 @@ export default function Contact() {
           {/* Left Sidebar - Contact Info */}
           <motion.div 
             variants={fadeUp}
-            className="w-full lg:w-1/3 bg-gradient-to-br from-surface via-elevated to-deep rounded-xl p-8 text-white relative overflow-hidden flex flex-col justify-between border border-border/50"
+            className="w-full lg:w-1/3 rounded-xl p-8 text-white relative overflow-hidden flex flex-col justify-between border border-border/50"
           >
-            {/* Background design elements */}
-            <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute top-12 -left-12 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none"></div>
+
 
             <div>
               <h3 className="text-3xl font-display font-semibold mb-10 relative z-10">

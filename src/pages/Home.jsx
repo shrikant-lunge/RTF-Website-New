@@ -31,8 +31,21 @@ export default function Home() {
       <div className="relative z-20">
         {/* <StatsBar /> */}
 
-        {/* Image Frame — Team image */}
+      <div className="max-w-6xl mx-auto mt-52 mb-2">  
+        <div className="text-center mb-1">
+
+          <h2 className="text-5xl md:text-6xl font-display font-bold text-red-500">
+            The Robo-Tech Forum Team
+          </h2>
+
+          <p className="mt-2 text-lg text-text-secondary max-w-2xl mx-auto">
+            A community of innovators, builders, and future engineers at
+            Government College of Engineering, Amravati.
+          </p>
+        </div>
+
         <ImageFrame imageSrc={rtfteam} alt="RTF Team" />
+      </div>
 
         {/* <FeaturedProjects /> */}
 
