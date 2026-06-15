@@ -16,7 +16,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Team from './pages/Team';
-import Sponsors from './pages/Sponsors';
+// import Sponsors from './pages/Sponsors';
 import Timeline from './pages/Timeline';
 import Achievement from './pages/Achievement';
 import Gallery from './pages/Gallery';
@@ -31,7 +31,7 @@ function AnimatedRoutes() {
     window.scrollTo(0, 0);
 
     // Only apply the loader logic to routes that are known to be asset/image-heavy
-    const imageHeavyRoutes = ['/gallery', '/team', '/projects', '/achievement', '/sponsors'];
+    const imageHeavyRoutes = ['/gallery', '/team', '/projects', '/achievement'];
     const requiresLoader = imageHeavyRoutes.some(route => location.pathname.startsWith(route));
 
     if (!requiresLoader) return;
@@ -94,7 +94,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/team" element={<Team />} />
-        <Route path="/sponsors" element={<Sponsors />} />
+        {/* <Route path="/sponsors" element={<Sponsors />} /> */}
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/achievement" element={<Achievement />} />
         <Route path="/gallery" element={<Gallery />} />

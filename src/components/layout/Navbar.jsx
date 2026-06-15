@@ -11,7 +11,7 @@ const navLinks = [
   { path: '/about', label: 'About' },
   { path: '/projects', label: 'Projects' },
   { path: '/team', label: 'Team' },
-  { path: '/sponsors', label: 'Sponsors' },
+  // { path: '/sponsors', label: 'Sponsors' },
   // { path: '/timeline', label: 'Timeline' },
   { path: '/achievement', label: 'Achievement' },
   { path: '/gallery', label: 'Gallery' },

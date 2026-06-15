@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@use-gesture/react": "^10.3.1",
     "autoprefixer": "^10.4.27",
     "face-api.js": "^0.22.2",
     "framer-motion": "^12.40.0",

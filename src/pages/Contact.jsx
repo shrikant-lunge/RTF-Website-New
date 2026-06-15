@@ -42,8 +42,8 @@ export default function Contact() {
                 {/* Address */}
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="text-cyan-400" size={18} />
+                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="text-white" size={18} />
                     </div>
                     <h4 className="font-medium text-lg">Visit us</h4>
                   </div>
@@ -56,8 +56,8 @@ export default function Contact() {
                 {/* Email */}
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                      <Mail className="text-cyan-400" size={18} />
+                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0">
+                      <Mail className="text-white" size={18} />
                     </div>
                     <h4 className="font-medium text-lg">Chat to us</h4>
                   </div>
@@ -70,8 +70,8 @@ export default function Contact() {
                 {/* Hours */}
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                      <Clock className="text-cyan-400" size={18} />
+                    <div className="w-9 h-9 flex items-center justify-center flex-shrink-0">
+                      <Clock className="text-white" size={18} />
                     </div>
                     <h4 className="font-medium text-lg">Working hours</h4>
                   </div>
