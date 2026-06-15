@@ -85,7 +85,6 @@ export default function Projects() {
       className="pt-28 pb-24 px-6 min-h-screen"
     >
       <SectionHeader
-        label="// OUR PORTFOLIO"
         title="Projects"
         subtitle="From autonomous rovers to competition-winning robots — explore projects built by RTF engineers."
       />

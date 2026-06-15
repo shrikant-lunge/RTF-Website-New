@@ -268,7 +268,12 @@ const STYLES = `
     align-items: end;
     margin-bottom: 28px;
     padding-bottom: 12px;
+    padding-top: 8px;
     pointer-events: none;
+    max-width: 100%;
+    overflow: hidden;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(8px);
   }
 
   .year-heading strong {
@@ -277,8 +282,12 @@ const STYLES = `
     font-weight: 700;
     line-height: 0.86;
     letter-spacing: -0.025em;
-    color: rgba(248,250,252,0.94);
+    color: #FF2020;
+    min-width: 0;
+    white-space: nowrap;
   }
+
+  .light .year-heading { background: rgba(248,252,255,0.92); }
 
   .light .year-heading strong { color: #0f172a; }
 
@@ -286,9 +295,9 @@ const STYLES = `
     display: block;
     max-width: 600px;
     padding-bottom: 6px;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 1.75;
-    color: rgba(148,163,184,0.74);
+    color: rgba(248,250,252,0.92);
   }
 
   .light .year-heading span { color: #52637a; }
@@ -315,9 +324,9 @@ const STYLES = `
     min-height: clamp(380px, 50vh, 480px);
     overflow: hidden;
     border-radius: 18px;
-    border: 1px solid rgba(148,163,184,0.16);
-    background: rgba(3,8,18,0.94);
-    box-shadow: 0 30px 90px rgba(0,0,0,0.38);
+    border: 1px solid rgba(255,32,32,0.18);
+    background: linear-gradient(135deg, rgba(10,0,0,0.96) 0%, rgba(3,3,3,0.97) 100%);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.5), 0 0 60px rgba(255,32,32,0.06);
     transform-origin: center top;
     transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform, opacity;
@@ -350,7 +359,7 @@ const STYLES = `
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent 42%, rgba(3,8,18,0.88));
+    background: linear-gradient(90deg, rgba(255,32,32,0.06) 0%, transparent 42%, rgba(5,0,0,0.92));
   }
 
   .light .card-photo::after {
@@ -495,7 +504,7 @@ const STYLES = `
 
     .card-photo { min-height: 220px; }
     .card-photo::after {
-      background: linear-gradient(180deg, transparent 45%, rgba(3,8,18,0.78));
+      background: linear-gradient(180deg, rgba(255,32,32,0.06) 0%, transparent 45%, rgba(5,0,0,0.86));
     }
     .light .card-photo::after {
       background: linear-gradient(180deg, transparent 45%, rgba(255,255,255,0.74));

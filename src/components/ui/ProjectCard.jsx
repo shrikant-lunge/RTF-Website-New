@@ -80,9 +80,9 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
         <div className="absolute bottom-0 left-0 right-0 h-[80px] bg-gradient-to-t from-card to-transparent pointer-events-none" />
         
         {/* Top-Left Category Badge */}
-        <span className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] uppercase font-mono font-semibold tracking-[0.1em] rounded border ${badgeClass}`}>
-          {category}
-        </span>
+      <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] uppercase font-mono font-semibold tracking-[0.1em] rounded bg-black/40 backdrop-blur-sm text-text-primary">
+        {category}
+      </span>
 
         {/* Top-Right Status Badge */}
         <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded bg-[rgba(15,23,42,0.6)] backdrop-blur-[2px] border border-[rgba(30,41,59,0.8)]">
