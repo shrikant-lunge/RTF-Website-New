@@ -89,15 +89,15 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
         <div className="flex-1"></div>
 
         {/* FOOTER ROW */}
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
-          <div className="flex items-center gap-[6px] text-[11px] font-mono text-text-muted">
+        <div className="flex items-center justify-between gap-3 mt-auto pt-2">
+          <div className="flex min-w-0 items-center gap-[6px] rounded-md border border-border/70 bg-elevated/40 px-3 py-2 text-[11px] font-mono text-text-muted">
             <Users size={12} className="shrink-0" />
-            <span>{teamSize} members</span>
-            <span className="mx-0.5">·</span>
-            <span>{year}</span>
+            <span className="whitespace-nowrap">{teamSize} members</span>
+            <span className="text-border" aria-hidden="true">&middot;</span>
+            <span className="whitespace-nowrap">{year}</span>
           </div>
 
-          <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200">
+          <div className="flex shrink-0 items-center gap-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200">
             {github && (
               <a
                 href={github}
@@ -106,7 +106,7 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
                 onClick={(e) => e.stopPropagation()}
                 title="GitHub Repo"
                 aria-label={`${title} GitHub repository`}
-                className="text-text-muted hover:text-cyan-400 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-md border border-border/70 bg-elevated/40 text-text-muted transition-colors hover:border-cyan-500/40 hover:text-cyan-400"
               >
                 <FaGithub size={16} />
               </a>
@@ -119,7 +119,7 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
                 onClick={(e) => e.stopPropagation()}
                 title="Live Demo"
                 aria-label={`${title} live demo`}
-                className="text-text-muted hover:text-cyan-400 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-md border border-border/70 bg-elevated/40 text-text-muted transition-colors hover:border-cyan-500/40 hover:text-cyan-400"
               >
                 <ExternalLink size={16} />
               </a>
@@ -127,7 +127,7 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
             <div 
               title="View Details"
               aria-label={`View details for ${title}`}
-              className="text-text-muted group-hover:text-cyan-400 transition-colors"
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-border/70 bg-elevated/40 text-text-muted transition-colors group-hover:border-cyan-500/40 group-hover:text-cyan-400"
             >
               <ArrowRight size={16} />
             </div>
