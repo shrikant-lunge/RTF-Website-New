@@ -351,7 +351,7 @@ export default function Projects() {
                   <span className="px-3 py-1.5 text-[11px] font-mono font-bold tracking-widest uppercase bg-red-500/10 text-red-300 border border-red-500/30 rounded-md">
                     {selectedProject.category}
                   </span>
-                  <span className="text-[11px] font-mono font-semibold tracking-wider text-text-secondary px-3 py-1.5 bg-elevated/70 rounded-md border border-border/70">
+                  <span className="text-[11px] font-mono font-semibold tracking-wider text-white px-3 py-1.5 bg-black border border-white/35 rounded-md">
                     {selectedProject.year}
                   </span>
                   {String(selectedProject.status).toUpperCase() === 'ONGOING' && (
@@ -371,26 +371,30 @@ export default function Projects() {
                   {selectedProject.title}
                 </h2>
 
-                <div className="mb-6 rounded-lg border border-border/70 bg-black/20 p-4">
-                  <p className="font-body text-base text-text-secondary leading-relaxed">
+                <section className="mb-6 rounded-lg border border-white/35 bg-black p-4">
+                  <h4 className="mb-3 flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-red-300 uppercase">
+                    <span className="h-2 w-2 rounded-sm bg-red-400" />
+                    Overview
+                  </h4>
+                  <p className="font-body text-base text-white leading-relaxed">
                     {selectedProject.description}
                   </p>
-                </div>
+                </section>
 
                 {/* Achievements */}
                 {selectedProject.achievements && selectedProject.achievements.length > 0 && (
-                  <section className="mb-7">
-                    <h4 className="mb-3 flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-text-muted uppercase">
-                      <span className="h-2 w-2 rounded-sm bg-red-400/80" />
+                  <section className="mb-7 rounded-lg border border-white/35 bg-black p-4">
+                    <h4 className="mb-4 flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-red-300 uppercase">
+                      <span className="h-2 w-2 rounded-sm bg-red-400" />
                       Highlights
                     </h4>
                     <div className="grid gap-3">
                     {selectedProject.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-3 rounded-lg border border-border/80 bg-elevated/70 p-4 shadow-[inset_3px_0_0_rgba(248,113,113,0.65)]">
-                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-red-500/10 text-[11px] font-mono font-bold text-red-300">
+                      <div key={idx} className="flex items-start gap-3 rounded-md border border-red-500/35 bg-black p-4 shadow-[inset_3px_0_0_rgba(248,113,113,0.75)]">
+                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-red-500/15 text-[11px] font-mono font-bold text-red-300">
                           {idx + 1}
                         </div>
-                        <p className="text-sm text-text-primary font-medium leading-relaxed">
+                        <p className="text-sm text-white font-medium leading-relaxed">
                           {achievement}
                         </p>
                       </div>
@@ -401,16 +405,16 @@ export default function Projects() {
 
                 {/* Tech Stack */}
                 {selectedProject.techStack && selectedProject.techStack.length > 0 && (
-                  <section className="mb-7 rounded-lg border border-border/70 bg-black/20 p-4">
-                    <h4 className="text-[11px] font-mono font-bold tracking-widest text-text-muted mb-4 uppercase flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-sm bg-cyan-400/80" />
+                  <section className="mb-7 rounded-lg border border-white/35 bg-black p-4">
+                    <h4 className="text-[11px] font-mono font-bold tracking-widest text-red-300 mb-4 uppercase flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-sm bg-red-400" />
                       TECH STACK
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedProject.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3.5 py-2 text-[12px] font-mono font-semibold text-cyan-200 bg-cyan-500/10 border border-cyan-500/30 rounded-md hover:bg-cyan-500/15 hover:border-cyan-400/50 transition-colors cursor-default"
+                          className="px-3.5 py-2 text-[12px] font-mono font-semibold text-white bg-black border border-red-500/35 rounded-md hover:border-red-400/70 hover:text-red-100 transition-colors cursor-default"
                         >
                           {tech}
                         </span>
@@ -419,12 +423,16 @@ export default function Projects() {
                   </section>
                 )}
 
-                <div className="mt-auto space-y-4 rounded-lg border border-border/70 bg-elevated/40 p-4">
+                <section className="mt-auto space-y-4 rounded-lg border border-white/35 bg-black p-4">
+                  <h4 className="flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-red-300 uppercase">
+                    <span className="h-2 w-2 rounded-sm bg-red-400" />
+                    Team & Links
+                  </h4>
                   {/* Team Size */}
-                  <div className="flex w-fit items-center gap-3 text-text-secondary bg-black/25 px-4 py-2.5 rounded-md border border-border/70">
-                    <Users size={18} className="text-cyan-300" />
-                    <span className="text-sm font-medium">
-                      Built by <span className="text-cyan-400">{selectedProject.teamSize}</span> team members
+                  <div className="flex w-fit items-center gap-3 text-white bg-black px-4 py-2.5 rounded-md border border-red-500/35">
+                    <Users size={18} className="text-red-300" />
+                    <span className="text-sm font-medium text-white">
+                      Built by <span className="text-red-300">{selectedProject.teamSize}</span> team members
                     </span>
                   </div>
 
@@ -435,7 +443,7 @@ export default function Projects() {
                         href={selectedProject.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-w-[150px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] font-mono font-bold tracking-widest text-dark bg-cyan-400 border border-transparent rounded-md hover:bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.18)] transition-all transform hover:-translate-y-0.5"
+                        className="min-w-[150px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] font-mono font-bold tracking-widest text-white bg-red-500/20 border border-red-500/45 rounded-md hover:bg-red-500/30 hover:border-red-400/70 transition-all transform hover:-translate-y-0.5"
                       >
                         <ExternalLink size={18} />
                         LIVE DEMO
@@ -446,14 +454,14 @@ export default function Projects() {
                         href={selectedProject.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-w-[150px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] font-mono font-bold tracking-widest text-text-secondary bg-black/25 border border-border/80 rounded-md hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-elevated transition-all transform hover:-translate-y-0.5"
+                        className="min-w-[150px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] font-mono font-bold tracking-widest text-white bg-black border border-red-500/35 rounded-md hover:border-red-400/70 hover:text-red-100 transition-all transform hover:-translate-y-0.5"
                       >
                         <FaGithub size={18} />
                         SOURCE
                       </a>
                     )}
                   </div>
-                </div>
+                </section>
               </div>
             </motion.div>
           </div>
