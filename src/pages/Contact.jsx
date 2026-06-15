@@ -18,7 +18,6 @@ export default function Contact() {
       className="pt-28 pb-24 px-6 relative"
     >
       <SectionHeader
-        label="// GET IN TOUCH"
         title="Contact Us"
         subtitle="Have a question, sponsorship inquiry, or just want to say hello? We'd love to hear from you."
       />

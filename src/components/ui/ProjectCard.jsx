@@ -6,36 +6,14 @@ import { getCardImage } from '../../lib/cloudinary';
 export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
   const {
     title,
-    category,
     description,
     techStack,
     teamSize,
     year,
-    status,
     images,
     github,
-    demo,
-    featured
+    demo
   } = project;
-
-  const categoryColors = {
-    ROBOTICS:    'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
-    ELECTRONICS: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
-    'AI/ML':     'bg-amber-500/15 text-amber-400 border-amber-500/30',
-    AUTOMATION:  'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
-    SOFTWARE:    'bg-purple-500/15 text-purple-300 border-purple-500/30',
-    DEFAULT:     'bg-slate-500/15 text-slate-400 border-slate-500/30'
-  };
-
-  const statusConfig = {
-    COMPLETED: { bgColor: 'bg-green-500' },
-    ONGOING:   { bgColor: 'bg-amber-500', pulse: true },
-    PROTOTYPE: { bgColor: 'bg-slate-500' }
-  };
-
-  const badgeClass = categoryColors[category] || categoryColors.DEFAULT;
-  const normalizedStatus = String(status).toUpperCase();
-  const statusDisplay = statusConfig[normalizedStatus] || statusConfig.COMPLETED;
 
   return (
     <motion.article
@@ -49,7 +27,7 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
         delay: index * 0.06
       }}
       onClick={() => onOpenDetail?.(project)}
-      className="group relative bg-card border border-border rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-cyan-500/40 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(255,32,32,0.15),0_20px_40px_rgba(0,0,0,0.4),0_0_60px_rgba(255,32,32,0.05)] flex flex-col h-full"
+      className="group relative bg-black border border-border rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-cyan-500/40 hover:-translate-y-1 hover:shadow-[0_0_0_1px_rgba(255,32,32,0.15),0_20px_40px_rgba(0,0,0,0.4),0_0_60px_rgba(255,32,32,0.05)] flex flex-col h-full"
     >
       {/* IMAGE SECTION */}
       <div className="relative overflow-hidden h-[200px] shrink-0">
@@ -77,35 +55,12 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
         )}
         
         {/* Overlay gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-[80px] bg-gradient-to-t from-card to-transparent pointer-events-none" />
-        
-        {/* Top-Left Category Badge */}
-      <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] uppercase font-mono font-semibold tracking-[0.1em] rounded bg-black/40 backdrop-blur-sm text-text-primary">
-        {category}
-      </span>
-
-        {/* Top-Right Status Badge */}
-        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded bg-[rgba(15,23,42,0.6)] backdrop-blur-[2px] border border-[rgba(30,41,59,0.8)]">
-          <span 
-            className={`w-[6px] h-[6px] rounded-full ${statusDisplay.bgColor} ${statusDisplay.pulse ? 'animate-pulse' : ''}`}
-            style={{ opacity: statusDisplay.pulse ? undefined : 0.8 }}
-          />
-          <span className="text-[9px] uppercase font-mono tracking-[0.08em] text-text-primary">
-            {normalizedStatus}
-          </span>
-        </div>
-
-        {/* Top-Center Featured Badge */}
-        {featured && (
-          <span className="absolute top-3 left-1/2 -translate-x-1/2 px-2 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[9px] uppercase font-mono rounded whitespace-nowrap">
-            ★ FEATURED
-          </span>
-        )}
+        <div className="absolute bottom-0 left-0 right-0 h-[80px] bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
       </div>
 
       {/* CONTENT SECTION */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-display text-[18px] font-semibold text-text-heading mb-2 group-hover:text-cyan-400 transition-colors duration-200">
+        <h3 className="font-display text-[18px] font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-200">
           {title}
         </h3>
         
@@ -124,7 +79,7 @@ export default function ProjectCard({ project, onOpenDetail, index = 0 }) {
             </span>
           ))}
           {techStack.length > 4 && (
-            <span className="font-mono text-[11px] text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-[3px] rounded-[3px]">
+            <span className="font-mono text-[11px] text-text-tag bg-elevated/60 border border-border px-2 py-[3px] rounded-[3px]">
               +{techStack.length - 4} more
             </span>
           )}
