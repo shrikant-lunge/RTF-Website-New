@@ -591,9 +591,31 @@ function DomeGallery({
 
 // ─── Gallery page ──────────────────────────────────────────────────────────────
 
+function GalleryLoadingAssets() {
+  return (
+    <div className="h-full w-full flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-5">
+        <div className="flex items-center gap-3">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <span
+              key={idx}
+              className="h-3 w-3 rounded-full bg-red-500 animate-bounce"
+              style={{ animationDelay: `${idx * 140}ms` }}
+            />
+          ))}
+        </div>
+        <p className="font-mono text-xs font-bold tracking-[0.24em] text-white uppercase">
+          Loading gallery
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('ALL');
   const [lightbox, setLightbox] = useState(null);
+  const [galleryReady, setGalleryReady] = useState(false);
 
   const filtered =
     activeCategory === 'ALL'
@@ -611,6 +633,39 @@ export default function Gallery() {
     })),
     [filtered]
   );
+
+  useEffect(() => {
+    let cancelled = false;
+    const sources = [...new Set(filtered.map((item) => item.image).filter(Boolean))];
+
+    setGalleryReady(sources.length === 0);
+    if (sources.length === 0) return () => { cancelled = true; };
+
+    let loaded = 0;
+    const markLoaded = () => {
+      loaded += 1;
+      if (!cancelled && loaded >= sources.length) {
+        setGalleryReady(true);
+      }
+    };
+
+    const imageElements = sources.map((src) => {
+      const img = new Image();
+      img.onload = markLoaded;
+      img.onerror = markLoaded;
+      img.src = src;
+      if (img.complete) markLoaded();
+      return img;
+    });
+
+    return () => {
+      cancelled = true;
+      imageElements.forEach((img) => {
+        img.onload = null;
+        img.onerror = null;
+      });
+    };
+  }, [filtered]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -752,6 +807,8 @@ background: 'rgba(30,0,0,0.6)',    border: '1px solid rgba(255,255,255,0.06)',
           <p className="text-center text-text-muted font-mono mt-16">
             No photos in this category yet.
           </p>
+        ) : !galleryReady ? (
+          <GalleryLoadingAssets />
         ) : (
           <DomeGallery
             images={domeImages}
