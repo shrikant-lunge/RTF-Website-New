@@ -1,6 +1,6 @@
-import { useRef } from 'react';
 import NeoButton from '../ui/NeoButton';
 import rtfLogo from '../../assets/images/rtf-logo-img.jpg';
+import gcoeaLogo from '../../assets/images/gcoea-logo.jpeg';
 
 export default function HeroSection() {
   return (
@@ -10,11 +10,16 @@ export default function HeroSection() {
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           <div className="lg:col-span-3 flex flex-col items-start">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/20
-                              bg-cyan-500/10 backdrop-blur-sm mb-6">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                <span className="text-xs tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-mono uppercase font-semibold">
-                  GCoEA Amravati · Est. 2014
+              <div className="inline-flex items-center gap-3 px-3.5 py-2 rounded-full border border-red-500/40 bg-black/90 shadow-[0_0_18px_rgba(255,32,32,0.16)] backdrop-blur-sm mb-6">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/25 bg-black">
+                  <img
+                    src={gcoeaLogo}
+                    alt="GCoEA logo"
+                    className="h-full w-full object-cover"
+                  />
+                </span>
+                <span className="text-xs tracking-[0.22em] text-white font-mono uppercase font-black">
+                  GCoEA Amravati &middot; Est. 2014
                 </span>
               </div>
               <p className="text-2xl md:text-3xl font-display font-bold tracking-widest text-cyan-600 dark:text-cyan-400 uppercase mb-2 select-none leading-none">
@@ -60,3 +65,4 @@ export default function HeroSection() {
     </section>
   );
 }
+

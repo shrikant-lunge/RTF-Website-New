@@ -102,13 +102,13 @@ export default function Projects() {
 
           {/* Search Bar */}
           <div className="relative w-full max-w-[320px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" size={16} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-black" size={16} />
             <input
               type="text"
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-surface border border-border text-text-primary font-mono text-[13px] py-[10px] pr-4 pl-10 rounded-md focus:outline-none focus:border-cyan-400 focus:ring-[3px] focus:ring-cyan-400/10 transition-all"
+              className="w-full bg-white border border-white text-black placeholder:text-black font-mono text-[13px] py-[10px] pr-4 pl-10 rounded-md focus:outline-none focus:border-cyan-400 focus:ring-[3px] focus:ring-cyan-400/10 transition-all"
             />
           </div>
 
@@ -118,9 +118,9 @@ export default function Projects() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-[18px] py-[8px] text-[11px] font-mono tracking-[0.1em] rounded-[4px] border transition-all duration-200 ${activeCategory === cat
-                  ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400 shadow-[0_0_16px_rgba(255,32,32,0.1)]'
-                  : 'bg-transparent text-text-muted border-border hover:text-text-secondary hover:border-cyan-500/30'
+                className={`px-[18px] py-[8px] text-[11px] font-mono font-semibold tracking-[0.1em] rounded-[4px] border transition-all duration-200 ${activeCategory === cat
+                  ? 'bg-white text-black border-white shadow-[0_0_16px_rgba(255,255,255,0.16)]'
+                  : 'bg-white text-black border-white hover:bg-zinc-100 hover:border-white'
                   }`}
               >
                 {cat} ({categoryCounts[cat] || 0})
@@ -132,7 +132,7 @@ export default function Projects() {
 
         {/* Results count text */}
         {!loading && projects.length > 0 && (
-          <div className="text-[12px] font-mono text-text-muted mb-4">
+          <div className="text-[12px] font-mono text-white mb-4">
             Showing {filtered.length} of {projects.length} projects
           </div>
         )}
