@@ -680,7 +680,7 @@ export default function Gallery() {
     transition={{ duration: 0.5, delay: 0.3 }}
     style={{
       fontSize: '20px',
-      color: 'rgba(148,163,184,0.8)',
+      color: '#ffffff',
       maxWidth: '480px',
       margin: '0 auto 32px',
       lineHeight: 1.6,
