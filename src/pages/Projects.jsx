@@ -345,88 +345,97 @@ export default function Projects() {
               </div>
 
               {/* Right Column: Content */}
-              <div className="p-8 md:p-10 w-full md:w-1/2 flex flex-col overflow-y-auto custom-scrollbar bg-card">
+              <div className="p-6 sm:p-8 md:p-10 w-full md:w-1/2 flex flex-col overflow-y-auto custom-scrollbar bg-card">
                 {/* Category + Year */}
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-sm">
+                <div className="flex flex-wrap items-center gap-2.5 mb-5">
+                  <span className="px-3 py-1.5 text-[11px] font-mono font-bold tracking-widest uppercase bg-red-500/10 text-red-300 border border-red-500/30 rounded-md">
                     {selectedProject.category}
                   </span>
-                  <span className="text-xs font-mono text-text-secondary px-3 py-1 bg-white/5 rounded-sm border border-white/5">
+                  <span className="text-[11px] font-mono font-semibold tracking-wider text-text-secondary px-3 py-1.5 bg-elevated/70 rounded-md border border-border/70">
                     {selectedProject.year}
                   </span>
                   {String(selectedProject.status).toUpperCase() === 'ONGOING' && (
-                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-sm flex items-center gap-2">
+                    <span className="px-3 py-1.5 text-[11px] font-mono font-semibold tracking-widest uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-sm bg-amber-400 animate-pulse" />
                       ONGOING
                     </span>
                   )}
                   {String(selectedProject.status).toUpperCase() === 'PROTOTYPE' && (
-                    <span className="px-3 py-1 text-xs font-mono font-semibold tracking-widest uppercase bg-slate-500/10 text-slate-400 border border-slate-500/30 rounded-sm">
+                    <span className="px-3 py-1.5 text-[11px] font-mono font-semibold tracking-widest uppercase bg-slate-500/10 text-slate-300 border border-slate-500/30 rounded-md">
                       PROTOTYPE
                     </span>
                   )}
                 </div>
 
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-6 drop-shadow-sm">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-5 leading-tight drop-shadow-sm">
                   {selectedProject.title}
                 </h2>
 
-                <p className="font-body text-base text-text-secondary leading-relaxed mb-8">
-                  {selectedProject.description}
-                </p>
+                <div className="mb-6 rounded-lg border border-border/70 bg-black/20 p-4">
+                  <p className="font-body text-base text-text-secondary leading-relaxed">
+                    {selectedProject.description}
+                  </p>
+                </div>
 
                 {/* Achievements */}
                 {selectedProject.achievements && selectedProject.achievements.length > 0 && (
-                  <div className="mb-8 flex flex-col gap-3">
+                  <section className="mb-7">
+                    <h4 className="mb-3 flex items-center gap-2 text-[11px] font-mono font-bold tracking-widest text-text-muted uppercase">
+                      <span className="h-2 w-2 rounded-sm bg-red-400/80" />
+                      Highlights
+                    </h4>
+                    <div className="grid gap-3">
                     {selectedProject.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-4 p-4 bg-elevated border border-border rounded-sm">
-                        <div className="mt-1 w-1.5 h-1.5 rounded-none bg-text-primary shrink-0" />
+                      <div key={idx} className="flex items-start gap-3 rounded-lg border border-border/80 bg-elevated/70 p-4 shadow-[inset_3px_0_0_rgba(248,113,113,0.65)]">
+                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-red-500/10 text-[11px] font-mono font-bold text-red-300">
+                          {idx + 1}
+                        </div>
                         <p className="text-sm text-text-primary font-medium leading-relaxed">
                           {achievement}
                         </p>
                       </div>
                     ))}
-                  </div>
+                    </div>
+                  </section>
                 )}
 
                 {/* Tech Stack */}
                 {selectedProject.techStack && selectedProject.techStack.length > 0 && (
-                  <div className="mb-8">
-                    <h4 className="text-xs font-mono font-bold tracking-widest text-text-muted mb-4 uppercase flex items-center gap-2">
-                      <div className="w-4 h-[1px] bg-text-muted/50"></div>
+                  <section className="mb-7 rounded-lg border border-border/70 bg-black/20 p-4">
+                    <h4 className="text-[11px] font-mono font-bold tracking-widest text-text-muted mb-4 uppercase flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-sm bg-cyan-400/80" />
                       TECH STACK
-                      <div className="flex-grow h-[1px] bg-text-muted/20"></div>
                     </h4>
-                    <div className="flex flex-wrap gap-2.5">
+                    <div className="flex flex-wrap gap-2">
                       {selectedProject.techStack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3.5 py-1.5 text-[13px] font-mono font-medium text-cyan-300 bg-cyan-900/20 border border-cyan-800/50 rounded-lg hover:bg-cyan-900/40 hover:border-cyan-500/50 transition-colors cursor-default"
+                          className="px-3.5 py-2 text-[12px] font-mono font-semibold text-cyan-200 bg-cyan-500/10 border border-cyan-500/30 rounded-md hover:bg-cyan-500/15 hover:border-cyan-400/50 transition-colors cursor-default"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </section>
                 )}
 
-                <div className="mt-auto">
+                <div className="mt-auto space-y-4 rounded-lg border border-border/70 bg-elevated/40 p-4">
                   {/* Team Size */}
-                  <div className="flex items-center gap-3 mb-8 text-text-secondary bg-white/5 w-fit px-4 py-2 rounded-xl border border-white/5">
-                    <Users size={18} className="text-text-secondary" />
+                  <div className="flex w-fit items-center gap-3 text-text-secondary bg-black/25 px-4 py-2.5 rounded-md border border-border/70">
+                    <Users size={18} className="text-cyan-300" />
                     <span className="text-sm font-medium">
                       Built by <span className="text-cyan-400">{selectedProject.teamSize}</span> team members
                     </span>
                   </div>
 
                   {/* Links */}
-                  <div className="flex flex-wrap gap-4 pt-6 border-t border-white/10">
+                  <div className="flex flex-wrap gap-3">
                     {selectedProject.demo && (
                       <a
                         href={selectedProject.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-dark bg-cyan-400 border border-transparent rounded-xl hover:bg-cyan-300 shadow-[0_0_20px_rgba(255,32,32,0.4)] hover:shadow-[0_0_30px_rgba(255,32,32,0.6)] transition-all transform hover:-translate-y-0.5"
+                        className="min-w-[150px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] font-mono font-bold tracking-widest text-dark bg-cyan-400 border border-transparent rounded-md hover:bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.18)] transition-all transform hover:-translate-y-0.5"
                       >
                         <ExternalLink size={18} />
                         LIVE DEMO
@@ -437,7 +446,7 @@ export default function Projects() {
                         href={selectedProject.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-mono font-bold tracking-widest text-text-secondary bg-elevated/50 border border-border rounded-xl hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-elevated transition-all transform hover:-translate-y-0.5"
+                        className="min-w-[150px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 text-[12px] font-mono font-bold tracking-widest text-text-secondary bg-black/25 border border-border/80 rounded-md hover:border-cyan-500/50 hover:text-cyan-400 hover:bg-elevated transition-all transform hover:-translate-y-0.5"
                       >
                         <FaGithub size={18} />
                         SOURCE
