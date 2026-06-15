@@ -269,11 +269,14 @@ const STYLES = `
     margin-bottom: 28px;
     padding-bottom: 12px;
     padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
     pointer-events: none;
     max-width: 100%;
     overflow: hidden;
     background: rgba(10,10,10,0.92);
     backdrop-filter: blur(8px);
+    border-radius: 20px;
   }
 
   .year-heading strong {
