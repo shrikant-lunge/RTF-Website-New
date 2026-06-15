@@ -390,10 +390,7 @@ export default function Projects() {
                     </h4>
                     <div className="grid gap-3">
                     {selectedProject.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start gap-3 rounded-md border border-red-500/35 bg-black p-4 shadow-[inset_3px_0_0_rgba(248,113,113,0.75)]">
-                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-red-500/15 text-[11px] font-mono font-bold text-red-300">
-                          {idx + 1}
-                        </div>
+                      <div key={idx} className="flex items-start gap-3 rounded-md border border-red-500/35 bg-black p-4">
                         <p className="text-sm text-white font-medium leading-relaxed">
                           {achievement}
                         </p>
