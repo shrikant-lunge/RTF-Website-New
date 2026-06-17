@@ -17,7 +17,7 @@ function TeamHero() {
 
 
       {/* Top text row */}
-      <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 mb-12 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-cyan-400">
+      <div className="flex flex-col md:flex-row justify-between px-6 md:px-12 mb-12 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-cyan-600 dark:text-cyan-400">
         <div className="mb-6 md:mb-0 max-w-[200px] leading-relaxed">
           EXPERIENCE MEETS <br /> PASSION
         </div>
@@ -174,7 +174,7 @@ function TestimonialsSection() {
                   <p className="font-display font-black text-xl text-text-heading tracking-tight uppercase group-hover:text-cyan-300 transition-colors">
                     {t.author}
                   </p>
-                  <p className="text-[10px] font-mono text-cyan-400 tracking-widest mt-1 uppercase">
+                  <p className="text-[10px] font-mono text-cyan-600 dark:text-cyan-400 tracking-widest mt-1 uppercase">
                     {t.role}
                   </p>
                 </div>
