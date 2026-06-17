@@ -4,13 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { staggerContainer, fadeUp } from '../../lib/animations';
 import ThemeToggle from '../ui/ThemeToggle';
+import rtfLogo from '../../assets/images/rtf-logo-img.jpg';
 
 const navLinks = [
   { path: '/', label: 'Home' },
   { path: '/about', label: 'About' },
   { path: '/projects', label: 'Projects' },
   { path: '/team', label: 'Team' },
-  { path: '/sponsors', label: 'Sponsors' },
+  // { path: '/sponsors', label: 'Sponsors' },
   // { path: '/timeline', label: 'Timeline' },
   { path: '/achievement', label: 'Achievement' },
   { path: '/gallery', label: 'Gallery' },
@@ -50,8 +51,8 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group" aria-label="RTF Home">
-          <div className="w-9 h-9 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center group-hover:shadow-glow-cyan transition-shadow duration-300">
-            <span className="font-display font-bold text-cyan-400 text-sm">RTF</span>
+          <div className="w-9 h-9 rounded-full bg-white dark:bg-transparent border-[1.5px] border-cyan-500 flex items-center justify-center group-hover:shadow-glow-cyan transition-colors duration-300 overflow-hidden">
+            <img src={rtfLogo} alt="RTF Logo" className="w-full h-full object-cover invert dark:invert-0" />
           </div>
           <span className="font-display font-semibold text-text-primary text-lg hidden sm:block">
             The Robo-Tech Forum
