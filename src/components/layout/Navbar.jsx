@@ -48,7 +48,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <nav className="relative z-50 max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group" aria-label="RTF Home">
           <div className="w-9 h-9 rounded-full bg-white dark:bg-transparent border-[1.5px] border-cyan-500 flex items-center justify-center group-hover:shadow-glow-cyan transition-colors duration-300 overflow-hidden">
@@ -89,7 +89,7 @@ export default function Navbar() {
 
         {/* Desktop Controls */}
         <div className="hidden lg:flex items-center gap-4">
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
           <Link
             to="/login"
             className="flex items-center gap-2 px-4 py-2 text-sm font-mono font-medium text-cyan-400 border border-cyan-500/30 rounded-button hover:bg-cyan-500/10 hover:border-cyan-400/50 transition-all duration-200"
@@ -142,7 +142,7 @@ export default function Navbar() {
                 );
               })}
               <motion.div variants={fadeUp} className="mt-6 flex flex-col items-center gap-6">
-                <ThemeToggle />
+                {/* <ThemeToggle /> */}
                 <Link
                   to="/login"
                   onClick={() => setMobileOpen(false)}
